@@ -1,1 +1,169 @@
-test
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+%Template version as of 6/27/2024
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{comment}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Conference Paper Title*\\
+{\footnotesize \textsuperscript{*}Note: Sub-titles are not captured for https://ieeexplore.ieee.org  and
+should not be used}
+\thanks{Identify applicable funding agency here. If none, delete this.}
+}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+\and
+\IEEEauthorblockN{2\textsuperscript{nd} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+\and
+\IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+\and
+\IEEEauthorblockN{4\textsuperscript{th} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+\and
+\IEEEauthorblockN{5\textsuperscript{th} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+\and
+\IEEEauthorblockN{6\textsuperscript{th} Given Name Surname}
+\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+\textit{name of organization (of Aff.)}\\
+City, Country \\
+email address or ORCID}
+}
+
+\maketitle
+
+\begin{abstract}
+This document is a model and instructions for \LaTeX.
+This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
+or Math in Paper Title or Abstract.
+\end{abstract}
+
+\begin{IEEEkeywords}
+component, formatting, style, styling, insert.
+\end{IEEEkeywords}
+
+\section{Introduction}
+This document is a model and instructions for \LaTeX.
+Please observe the conference page limits. For more information about how to become an IEEE Conference author or how to write your paper, please visit   IEEE Conference Author Center website: https://conferences.ieeeauthorcenter.ieee.org/.
+
+\section{Literature Review}
+
+\subsection{Evolution of Speech Representation Learning}
+
+Speech representation learning has evolved from fixed acoustic features to models pretrained on unlabeled audio \cite{gales2008hmm,hinton2012dnn,baevski2020wav2vec2}. Self-supervised methods can also be organized according to the targets that they learn to predict \cite{liu2021tera,baevski2020wav2vec2,hsu2021hubert,chen2022wavlm,baevski2022data2vec}.
+
+\subsubsection{Handcrafted and Statistical Models}
+
+Early speech-recognition systems divided audio into short frames and used fixed mathematical transformations to extract salient features \cite{davis1980mfcc,hermansky1990plp,rabiner1989hmm,gales2008hmm}. Mel-frequency cepstral coefficients (MFCCs) compressed the signal according to properties of human hearing, producing compact feature representations \cite{davis1980mfcc}. Perceptual linear prediction (PLP) incorporated further auditory characteristics, improving robustness across speakers and recording conditions \cite{hermansky1990plp}. Researchers also captured temporal changes in speech by computing differences between adjacent features \cite{davis1980mfcc,hermansky1990plp}. These features were passed to statistical models: hidden Markov models (HMMs) represented speech timing and sequence \cite{rabiner1989hmm}, whereas Gaussian mixture models estimated acoustic likelihoods \cite{gales2008hmm}. Although computationally efficient, this pipeline separated feature extraction, acoustic modeling, and language modeling, preventing joint optimization \cite{rabiner1989hmm,gales2008hmm}.
+
+\subsubsection{Supervised Methods}
+
+Supervised methods learn directly from transcribed speech \cite{hinton2012dnn,abdelhamid2014cnn,graves2013rnn,graves2006ctc,chan2016las,gulati2020conformer}. Deep neural networks replaced many older statistical components and improved recognition accuracy \cite{hinton2012dnn}. Convolutional neural networks captured local acoustic patterns \cite{abdelhamid2014cnn}, while recurrent neural networks modeled temporal context \cite{graves2013rnn}. Connectionist temporal classification (CTC) enabled training without exact frame-level alignments \cite{graves2006ctc}. Listen, Attend and Spell mapped audio directly to text using attention \cite{chan2016las}, and the Conformer combined self-attention with convolution to model both global context and local detail \cite{gulati2020conformer}. Despite simplifying the recognition pipeline and improving accuracy, these methods still required substantial quantities of labeled audio \cite{hinton2012dnn,chan2016las,gulati2020conformer}.
+
+\subsubsection{Self-Supervised Methods}
+
+Self-supervised methods learn from raw audio without transcripts by deriving training objectives from the signal itself \cite{oord2018cpc,chung2020apc,liu2020mockingjay,liu2021tera,baevski2020wav2vec2,hsu2021hubert,chen2022wavlm,baevski2022data2vec}. Contrastive predictive coding (CPC) selected the correct future representation from negative candidates \cite{oord2018cpc}, whereas autoregressive predictive coding (APC) predicted future acoustic frames directly \cite{chung2020apc}. Mockingjay \cite{liu2020mockingjay} and TERA \cite{liu2021tera} masked or altered portions of the input and learned to reconstruct them. Later, wav2vec~2.0 applied contrastive prediction to quantized speech representations \cite{baevski2020wav2vec2}; HuBERT predicted cluster assignments for masked regions \cite{hsu2021hubert}; and data2vec predicted teacher-network representations \cite{baevski2022data2vec}. These models can pretrain on unlabeled audio and then adapt to downstream tasks with substantially less labeled data \cite{baevski2020wav2vec2,hsu2021hubert}.
+
+\subsection{Self-Supervised Learning Paradigms}
+
+Self-supervised speech-learning methods can be grouped into four categories according to their prediction targets \cite{liu2021tera,baevski2020wav2vec2,hsu2021hubert,chen2022wavlm,baevski2022data2vec}.
+
+\subsubsection{Reconstruction}
+
+Reconstruction methods mask or corrupt parts of an audio input and train the model to recover the missing information \cite{liu2020mockingjay,liu2021tera,ling2020decoar}. Mockingjay masks acoustic frames and uses a Transformer encoder to reconstruct them \cite{liu2020mockingjay}. DeCoAR uses bidirectional context to reconstruct acoustic frames \cite{ling2020decoar}, while TERA applies alterations along the time, frequency, and magnitude dimensions to improve robustness \cite{liu2021tera}. This objective is straightforward and requires neither negative sampling nor clustering \cite{liu2020mockingjay,liu2021tera}. However, the model may devote capacity to background noise and low-level acoustic details that are less relevant to speech recognition \cite{liu2021tera,ling2020decoar}.
+
+\subsubsection{Contrastive Learning}
+
+Contrastive learning trains a model to distinguish the correct latent target from negative candidates \cite{oord2018cpc,baevski2020wav2vec2}. CPC uses the current context to identify the true future representation among distractors \cite{oord2018cpc}. Wav2vec~2.0 masks portions of the latent speech sequence and selects the corresponding quantized representation from distractors sampled from the same utterance \cite{baevski2020wav2vec2}. Predicting high-level latent representations can be more useful than reconstructing raw acoustic input \cite{oord2018cpc,baevski2020wav2vec2}. However, performance depends on negative-sampling choices, and the quantization codebook adds training complexity \cite{baevski2020wav2vec2}.
+
+\subsubsection{Discrete Unit Prediction}
+
+Discrete-unit prediction converts continuous speech into categorical targets and trains the model to predict those targets \cite{hsu2021hubert,chen2022wavlm}. HuBERT clusters acoustic features, masks portions of the input, and predicts cluster assignments for the masked regions \cite{hsu2021hubert}. WavLM builds on masked speech prediction and augments training with noise and overlapping speech to improve performance under challenging acoustic conditions \cite{chen2022wavlm}. Categorical prediction aligns well with speech recognition and avoids explicit negative sampling \cite{hsu2021hubert,chen2022wavlm}. Its quality nevertheless depends on the initial clustering or pseudo-labeling process; noisy targets can limit the learned representations \cite{hsu2021hubert,chen2022wavlm}.
+
+\subsubsection{Representation Prediction}
+
+Representation-prediction methods train a model to predict continuous feature vectors rather than reconstructing raw audio or predicting discrete labels \cite{baevski2022data2vec,lecun2022path,assran2023ijepa,tuncay2025audiojepa}. In data2vec, a student network predicts contextualized representations produced by a teacher network that observes the complete input \cite{baevski2022data2vec}. Joint-embedding predictive architectures (JEPAs) \cite{lecun2022path,assran2023ijepa} and Audio-JEPA \cite{tuncay2025audiojepa} use a context encoder to predict target-network representations of masked input regions. This approach avoids reconstructing low-level noise, selecting negative examples, and relying on externally generated cluster assignments, while retaining information useful for downstream tasks \cite{baevski2020wav2vec2,hsu2021hubert,tuncay2025audiojepa}.
+
+\subsection{Maintaining the Integrity of the Specifications}
+
+\subsection{Identify the Headings}\label{ITH}
+
+\section*{Acknowledgment}
+
+The preferred spelling of the word ``acknowledgment'' in America is without 
+an ``e'' after the ``g''. Avoid the stilted expression ``one of us (R. B. 
+G.) thanks $\ldots$''. Instead, try ``R. B. G. thanks$\ldots$''. Put sponsor 
+acknowledgments in the unnumbered footnote on the first page.
+
+\begin{comment}
+\section*{References}
+
+Please number citations consecutively within brackets \cite{b1}. The 
+sentence punctuation follows the bracket \cite{b2}. Refer simply to the reference 
+number, as in \cite{b3}---do not use ``Ref. \cite{b3}'' or ``reference \cite{b3}'' except at 
+the beginning of a sentence: ``Reference \cite{b3} was the first $\ldots$''
+
+Number footnotes separately in superscripts. Place the actual footnote at 
+the bottom of the column in which it was cited. Do not put footnotes in the 
+abstract or reference list. Use letters for table footnotes.
+
+Unless there are six authors or more give all authors' names; do not use 
+``et al.''. Papers that have not been published, even if they have been 
+submitted for publication, should be cited as ``unpublished'' \cite{b4}. Papers 
+that have been accepted for publication should be cited as ``in press'' \cite{b5}. 
+Capitalize only the first word in a paper title, except for proper nouns and 
+element symbols.
+
+For papers published in translation journals, please give the English 
+citation first, followed by the original foreign-language citation \cite{b6}.
+
+\begin{thebibliography}{00}
+\bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
+\bibitem{b2} J. Clerk Maxwell, A Treatise on Electricity and Magnetism, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp.68--73.
+\bibitem{b3} I. S. Jacobs and C. P. Bean, ``Fine particles, thin films and exchange anisotropy,'' in Magnetism, vol. III, G. T. Rado and H. Suhl, Eds. New York: Academic, 1963, pp. 271--350.
+\bibitem{b4} K. Elissa, ``Title of paper if known,'' unpublished.
+\bibitem{b5} R. Nicole, ``Title of paper with only first word capitalized,'' J. Name Stand. Abbrev., in press.
+\bibitem{b6} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ``Electron spectroscopy studies on magneto-optical media and plastic substrate interface,'' IEEE Transl. J. Magn. Japan, vol. 2, pp. 740--741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].
+\bibitem{b7} M. Young, The Technical Writer's Handbook. Mill Valley, CA: University Science, 1989.
+\bibitem{b8} D. P. Kingma and M. Welling, ``Auto-encoding variational Bayes,'' 2013, arXiv:1312.6114. [Online]. Available: https://arxiv.org/abs/1312.6114
+\bibitem{b9} S. Liu, ``Wi-Fi Energy Detection Testbed (12MTC),'' 2023, gitHub repository. [Online]. Available: https://github.com/liustone99/Wi-Fi-Energy-Detection-Testbed-12MTC
+\bibitem{b10} ``Treatment episode data set: discharges (TEDS-D): concatenated, 2006 to 2009.'' U.S. Department of Health and Human Services, Substance Abuse and Mental Health Services Administration, Office of Applied Studies, August, 2013, DOI:10.3886/ICPSR30122.v2
+\bibitem{b11} K. Eves and J. Valasek, ``Adaptive control for singularly perturbed systems examples,'' Code Ocean, Aug. 2023. [Online]. Available: https://codeocean.com/capsule/4989235/tree
+\end{thebibliography}
+\end{comment}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\vspace{12pt}
+\color{red}
+IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
+
+\end{document}
