@@ -7,8 +7,7 @@
 \providecommand{\BIBentrySTDinterwordspacing}{\spaceskip=0pt\relax}
 \providecommand{\BIBentryALTinterwordstretchfactor}{4}
 \providecommand{\BIBentryALTinterwordspacing}{\spaceskip=\fontdimen2\font plus
-\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
-  \fontdimen4\font\relax}
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus \fontdimen4\font\relax}
 \providecommand{\BIBforeignlanguage}[2]{{%
 \expandafter\ifx\csname l@#1\endcsname\relax
 \typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
@@ -21,116 +20,121 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{gales2008hmm}
-M.~J.~F. Gales and S.~J. Young, ``The application of hidden {Markov} models in
-  speech recognition,'' \emph{Foundations and Trends in Signal Processing},
-  vol.~1, no.~3, pp. 195--304, 2008.
+\bibitem{conneau2021xlsr}
+A.~Conneau, A.~Baevski, R.~Collobert, A.~Mohamed, and M.~Auli, ``Unsupervised cross-lingual representation learning for speech recognition,'' in \emph{Proceedings of Interspeech}, 2021, pp. 2426--2430.
 
-\bibitem{hinton2012dnn}
-G.~Hinton \emph{et~al.}, ``Deep neural networks for acoustic modeling in speech
-  recognition: The shared views of four research groups,'' \emph{IEEE Signal
-  Processing Magazine}, vol.~29, no.~6, pp. 82--97, 2012.
-
-\bibitem{baevski2020wav2vec2}
-A.~Baevski, H.~Zhou, A.~Mohamed, and M.~Auli, ``wav2vec 2.0: A framework for
-  self-supervised learning of speech representations,'' in \emph{Advances in
-  Neural Information Processing Systems}, vol.~33, 2020, pp. 12\,449--12\,460.
-
-\bibitem{liu2021tera}
-A.~T. Liu, S.-W. Li, and H.~yi~Lee, ``{TERA}: Self-supervised learning of
-  transformer encoder representation for speech,'' \emph{IEEE/ACM Transactions
-  on Audio, Speech, and Language Processing}, vol.~29, pp. 2351--2366, 2021.
-
-\bibitem{hsu2021hubert}
-W.-N. Hsu \emph{et~al.}, ``{HuBERT}: Self-supervised speech representation
-  learning by masked prediction of hidden units,'' \emph{IEEE/ACM Transactions
-  on Audio, Speech, and Language Processing}, vol.~29, pp. 3451--3460, 2021.
-
-\bibitem{chen2022wavlm}
-S.~Chen \emph{et~al.}, ``{WavLM}: Large-scale self-supervised pre-training for
-  full stack speech processing,'' \emph{IEEE Journal of Selected Topics in
-  Signal Processing}, vol.~16, no.~6, pp. 1505--1518, 2022.
-
-\bibitem{baevski2022data2vec}
-A.~Baevski, W.-N. Hsu, Q.~Xu, A.~Babu, J.~Gu, and M.~Auli, ``data2vec: A
-  general framework for self-supervised learning in speech, vision and
-  language,'' in \emph{Proceedings of ICML}, vol. 162, 2022, pp. 1298--1312.
+\bibitem{shao2025xlsrthai}
+\BIBentryALTinterwordspacing
+M.~Shao, B.~Mu, C.~Wang, H.~Li, Y.~Yan, Z.~Fu, and L.~Xie, ``Towards building speech large language models for multitask understanding in low-resource languages,'' \emph{arXiv preprint arXiv:2509.14804}, 2025. [Online]. Available: \url{https://arxiv.org/abs/2509.14804}
+\BIBentrySTDinterwordspacing
 
 \bibitem{davis1980mfcc}
-S.~B. Davis and P.~Mermelstein, ``Comparison of parametric representations for
-  monosyllabic word recognition in continuously spoken sentences,'' \emph{IEEE
-  Transactions on Acoustics, Speech, and Signal Processing}, vol.~28, no.~4,
-  pp. 357--366, 1980.
+S.~B. Davis and P.~Mermelstein, ``Comparison of parametric representations for monosyllabic word recognition in continuously spoken sentences,'' \emph{IEEE Transactions on Acoustics, Speech, and Signal Processing}, vol.~28, no.~4, pp. 357--366, 1980.
 
-\bibitem{hermansky1990plp}
-H.~Hermansky, ``Perceptual linear predictive analysis of speech,'' \emph{The
-  Journal of the Acoustical Society of America}, vol.~87, no.~4, pp.
-  1738--1752, 1990.
+\bibitem{berrebbi2022spectral}
+\BIBentryALTinterwordspacing
+D.~Berrebbi, J.~Shi, B.~Yan, O.~Lopez-Francisco, J.~D. Amith, and S.~Watanabe, ``Combining spectral and self-supervised features for low resource speech recognition and translation,'' \emph{arXiv preprint arXiv:2204.02470}, 2022. [Online]. Available: \url{https://arxiv.org/abs/2204.02470}
+\BIBentrySTDinterwordspacing
 
-\bibitem{rabiner1989hmm}
-L.~R. Rabiner, ``A tutorial on hidden {Markov} models and selected applications
-  in speech recognition,'' \emph{Proceedings of the IEEE}, vol.~77, no.~2, pp.
-  257--286, 1989.
+\bibitem{baevski2020wav2vec2}
+A.~Baevski, H.~Zhou, A.~Mohamed, and M.~Auli, ``wav2vec 2.0: A framework for self-supervised learning of speech representations,'' in \emph{Advances in Neural Information Processing Systems}, vol.~33, 2020, pp. 12\,449--12\,460.
 
-\bibitem{abdelhamid2014cnn}
-O.~Abdel-Hamid, A.~rahman Mohamed, H.~Jiang, L.~Deng, G.~Penn, and D.~Yu,
-  ``Convolutional neural networks for speech recognition,'' \emph{IEEE/ACM
-  Transactions on Audio, Speech, and Language Processing}, vol.~22, no.~10, pp.
-  1533--1545, 2014.
-
-\bibitem{graves2013rnn}
-A.~Graves, A.~rahman Mohamed, and G.~Hinton, ``Speech recognition with deep
-  recurrent neural networks,'' in \emph{Proceedings of IEEE ICASSP}, 2013, pp.
-  6645--6649.
-
-\bibitem{graves2006ctc}
-A.~Graves, S.~Fern{\'a}ndez, F.~Gomez, and J.~Schmidhuber, ``Connectionist
-  temporal classification: Labelling unsegmented sequence data with recurrent
-  neural networks,'' in \emph{Proceedings of ICML}, 2006, pp. 369--376.
-
-\bibitem{chan2016las}
-W.~Chan, N.~Jaitly, Q.~V. Le, and O.~Vinyals, ``Listen, attend and spell: A
-  neural network for large vocabulary conversational speech recognition,'' in
-  \emph{Proceedings of IEEE ICASSP}, 2016, pp. 4960--4964.
-
-\bibitem{gulati2020conformer}
-A.~Gulati \emph{et~al.}, ``Conformer: Convolution-augmented transformer for
-  speech recognition,'' in \emph{Proceedings of Interspeech}, 2020, pp.
-  5036--5040.
-
-\bibitem{oord2018cpc}
-A.~van~den Oord, Y.~Li, and O.~Vinyals, ``Representation learning with
-  contrastive predictive coding,'' \emph{arXiv preprint arXiv:1807.03748},
-  2018.
-
-\bibitem{chung2020apc}
-Y.-A. Chung and J.~Glass, ``Generative pre-training for speech with
-  autoregressive predictive coding,'' in \emph{Proceedings of IEEE ICASSP},
-  2020, pp. 3497--3501.
-
-\bibitem{liu2020mockingjay}
-A.~T. Liu, S.~wen Yang, P.-H. Chi, P.~chun Hsu, and H.~yi~Lee, ``Mockingjay:
-  Unsupervised speech representation learning with deep bidirectional
-  transformer encoders,'' in \emph{Proceedings of IEEE ICASSP}, 2020, pp.
-  6419--6423.
-
-\bibitem{ling2020decoar}
-S.~Ling, Y.~Liu, J.~Salazar, and K.~Kirchhoff, ``Deep contextualized acoustic
-  representations for semi-supervised speech recognition,'' in
-  \emph{Proceedings of IEEE ICASSP}, 2020, pp. 6429--6433.
-
-\bibitem{lecun2022path}
-Y.~LeCun, ``A path towards autonomous machine intelligence,'' OpenReview, 2022,
-  version 0.9.2.
-
-\bibitem{assran2023ijepa}
-M.~Assran \emph{et~al.}, ``Self-supervised learning from images with a
-  joint-embedding predictive architecture,'' in \emph{Proceedings of IEEE/CVF
-  CVPR}, 2023, pp. 15\,619--15\,629.
+\bibitem{baevski2022data2vec}
+A.~Baevski, W.-N. Hsu, Q.~Xu, A.~Babu, J.~Gu, and M.~Auli, ``data2vec: A general framework for self-supervised learning in speech, vision and language,'' in \emph{Proceedings of ICML}, vol. 162, 2022, pp. 1298--1312.
 
 \bibitem{tuncay2025audiojepa}
-L.~Tuncay, E.~Labb{\'e}, E.~Benetos, and T.~Pellegrini, ``Audio-{JEPA}:
-  Joint-embedding predictive architecture for audio representation learning,''
-  \emph{arXiv preprint arXiv:2507.02915}, 2025.
+\BIBentryALTinterwordspacing
+L.~Tuncay, E.~Labb{\'e}, E.~Benetos, and T.~Pellegrini, ``Audio-{JEPA}: Joint-embedding predictive architecture for audio representation learning,'' in \emph{Proceedings of IEEE International Conference on Multimedia and Expo (ICME)}, 2025. [Online]. Available: \url{https://arxiv.org/abs/2507.02915}
+\BIBentrySTDinterwordspacing
+
+\bibitem{gales2008hmm}
+M.~J.~F. Gales and S.~J. Young, ``The application of hidden {Markov} models in speech recognition,'' \emph{Foundations and Trends in Signal Processing}, vol.~1, no.~3, pp. 195--304, 2008.
+
+\bibitem{hinton2012dnn}
+G.~Hinton \emph{et~al.}, ``Deep neural networks for acoustic modeling in speech recognition: The shared views of four research groups,'' \emph{IEEE Signal Processing Magazine}, vol.~29, no.~6, pp. 82--97, 2012.
+
+\bibitem{liu2021tera}
+A.~T. Liu, S.-W. Li, and H.~yi~Lee, ``{TERA}: Self-supervised learning of transformer encoder representation for speech,'' \emph{IEEE/ACM Transactions on Audio, Speech, and Language Processing}, vol.~29, pp. 2351--2366, 2021.
+
+\bibitem{hsu2021hubert}
+W.-N. Hsu \emph{et~al.}, ``{HuBERT}: Self-supervised speech representation learning by masked prediction of hidden units,'' \emph{IEEE/ACM Transactions on Audio, Speech, and Language Processing}, vol.~29, pp. 3451--3460, 2021.
+
+\bibitem{chen2022wavlm}
+S.~Chen \emph{et~al.}, ``{WavLM}: Large-scale self-supervised pre-training for full stack speech processing,'' \emph{IEEE Journal of Selected Topics in Signal Processing}, vol.~16, no.~6, pp. 1505--1518, 2022.
+
+\bibitem{hermansky1990plp}
+H.~Hermansky, ``Perceptual linear predictive analysis of speech,'' \emph{The Journal of the Acoustical Society of America}, vol.~87, no.~4, pp. 1738--1752, 1990.
+
+\bibitem{rabiner1989hmm}
+L.~R. Rabiner, ``A tutorial on hidden {Markov} models and selected applications in speech recognition,'' \emph{Proceedings of the IEEE}, vol.~77, no.~2, pp. 257--286, 1989.
+
+\bibitem{abdelhamid2014cnn}
+O.~Abdel-Hamid, A.~rahman Mohamed, H.~Jiang, L.~Deng, G.~Penn, and D.~Yu, ``Convolutional neural networks for speech recognition,'' \emph{IEEE/ACM Transactions on Audio, Speech, and Language Processing}, vol.~22, no.~10, pp. 1533--1545, 2014.
+
+\bibitem{graves2013rnn}
+A.~Graves, A.~rahman Mohamed, and G.~Hinton, ``Speech recognition with deep recurrent neural networks,'' in \emph{Proceedings of IEEE ICASSP}, 2013, pp. 6645--6649.
+
+\bibitem{graves2006ctc}
+A.~Graves, S.~Fern{\'a}ndez, F.~Gomez, and J.~Schmidhuber, ``Connectionist temporal classification: Labelling unsegmented sequence data with recurrent neural networks,'' in \emph{Proceedings of ICML}, 2006, pp. 369--376.
+
+\bibitem{chan2016las}
+W.~Chan, N.~Jaitly, Q.~V. Le, and O.~Vinyals, ``Listen, attend and spell: A neural network for large vocabulary conversational speech recognition,'' in \emph{Proceedings of IEEE ICASSP}, 2016, pp. 4960--4964.
+
+\bibitem{gulati2020conformer}
+A.~Gulati \emph{et~al.}, ``Conformer: Convolution-augmented transformer for speech recognition,'' in \emph{Proceedings of Interspeech}, 2020, pp. 5036--5040.
+
+\bibitem{oord2018cpc}
+A.~van~den Oord, Y.~Li, and O.~Vinyals, ``Representation learning with contrastive predictive coding,'' \emph{arXiv preprint arXiv:1807.03748}, 2018.
+
+\bibitem{chung2020apc}
+Y.-A. Chung and J.~Glass, ``Generative pre-training for speech with autoregressive predictive coding,'' in \emph{Proceedings of IEEE ICASSP}, 2020, pp. 3497--3501.
+
+\bibitem{liu2020mockingjay}
+A.~T. Liu, S.~wen Yang, P.-H. Chi, P.~chun Hsu, and H.~yi~Lee, ``Mockingjay: Unsupervised speech representation learning with deep bidirectional transformer encoders,'' in \emph{Proceedings of IEEE ICASSP}, 2020, pp. 6419--6423.
+
+\bibitem{ling2020decoar}
+S.~Ling, Y.~Liu, J.~Salazar, and K.~Kirchhoff, ``Deep contextualized acoustic representations for semi-supervised speech recognition,'' in \emph{Proceedings of IEEE ICASSP}, 2020, pp. 6429--6433.
+
+\bibitem{lecun2022path}
+Y.~LeCun, ``A path towards autonomous machine intelligence,'' OpenReview, 2022, version 0.9.2.
+
+\bibitem{assran2023ijepa}
+M.~Assran \emph{et~al.}, ``Self-supervised learning from images with a joint-embedding predictive architecture,'' in \emph{Proceedings of IEEE/CVF CVPR}, 2023, pp. 15\,619--15\,629.
+
+\bibitem{fei2023ajepa}
+\BIBentryALTinterwordspacing
+Z.~Fei, M.~Fan, and J.~Huang, ``{A-JEPA}: Joint-embedding predictive architecture can listen,'' \emph{arXiv preprint arXiv:2311.15830}, 2023, revised January 2024. [Online]. Available: \url{https://arxiv.org/abs/2311.15830}
+\BIBentrySTDinterwordspacing
+
+\bibitem{riou2024audiojepa}
+\BIBentryALTinterwordspacing
+A.~Riou, S.~Lattner, G.~Hadjeres, and G.~Peeters, ``Investigating design choices in joint-embedding predictive architectures for general audio representation learning,'' \emph{arXiv preprint arXiv:2405.08679}, 2024. [Online]. Available: \url{https://arxiv.org/abs/2405.08679}
+\BIBentrySTDinterwordspacing
+
+\bibitem{ioannides2026gmmjepa}
+\BIBentryALTinterwordspacing
+G.~Ioannides, A.~Kieback, J.~Goldfeder, L.~Pang, A.~Chadha, A.~Elkins, Y.~LeCun, and R.~Shwartz-Ziv, ``Soft clustering anchors for self-supervised speech representation learning in joint embedding prediction architectures,'' \emph{arXiv preprint arXiv:2602.09040}, 2026. [Online]. Available: \url{https://arxiv.org/abs/2602.09040}
+\BIBentrySTDinterwordspacing
+
+\bibitem{ioannides2026sjepa}
+\BIBentryALTinterwordspacing
+------, ``{S-JEPA}: Soft clustering anchors for self-supervised speech representation learning,'' \emph{arXiv preprint arXiv:2606.19398}, 2026. [Online]. Available: \url{https://arxiv.org/abs/2606.19398}
+\BIBentrySTDinterwordspacing
+
+\bibitem{mohamed2022sslreview}
+A.~Mohamed, H.~yi~Lee, L.~Borgholt, J.~D. Havtorn, J.~Edin, C.~Igel, K.~Kirchhoff, S.-W. Li, K.~Livescu, L.~Maal{\o}e, T.~N. Sainath, and S.~Watanabe, ``Self-supervised speech representation learning: A review,'' \emph{IEEE Journal of Selected Topics in Signal Processing}, 2022.
+
+\bibitem{babu2022xlsr}
+A.~Babu, C.~Wang, A.~Tjandra, K.~Lakhotia, Q.~Xu, N.~Goyal, K.~Singh, P.~von Platen, Y.~Saraf, J.~Pino, A.~Baevski, A.~Conneau, and M.~Auli, ``{XLS-R}: Self-supervised cross-lingual speech representation learning at scale,'' in \emph{Proceedings of Interspeech}, 2022, pp. 2278--2282.
+
+\bibitem{pratap2023mms}
+\BIBentryALTinterwordspacing
+V.~Pratap, A.~Tjandra, B.~Shi, P.~Tomasello, A.~Babu, S.~Kundu, A.~Elkahky, Z.~Ni, A.~Vyas, M.~Fazel-Zarandi, A.~Baevski, Y.~Adi, X.~Zhang, W.-N. Hsu, A.~Conneau, and M.~Auli, ``Scaling speech technology to 1,000+ languages,'' \emph{arXiv preprint arXiv:2305.13516}, 2023. [Online]. Available: \url{https://arxiv.org/abs/2305.13516}
+\BIBentrySTDinterwordspacing
+
+\bibitem{sirichotedumrong2026typhoon}
+\BIBentryALTinterwordspacing
+W.~Sirichotedumrong, A.~Na-Thalang, P.~Manakul, P.~Taveekitworachai, S.~Sripaisarnmongkol, and K.~Pipatanakul, ``Typhoon {ASR} real-time: {FastConformer-Transducer} for {Thai} automatic speech recognition,'' \emph{arXiv preprint arXiv:2601.13044}, 2026. [Online]. Available: \url{https://arxiv.org/abs/2601.13044}
+\BIBentrySTDinterwordspacing
 
 \end{thebibliography}
