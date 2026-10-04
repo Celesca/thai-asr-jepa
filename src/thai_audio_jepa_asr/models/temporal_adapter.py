@@ -44,8 +44,8 @@ def compute_ctc_min_required_length(tokens: Union[List[int], torch.Tensor]) -> i
 
 def validate_ctc_feasibility(
     input_lengths: torch.Tensor,
-    targets: Optional[torch.Tensor] = None,
     target_lengths: Optional[torch.Tensor] = None,
+    targets: Optional[torch.Tensor] = None,
     raise_on_failure: bool = False,
 ) -> Dict[str, Any]:
     """Verify that output sequence length T is sufficient for target transcript length.
@@ -55,16 +55,28 @@ def validate_ctc_feasibility(
 
     Args:
         input_lengths: Tensor of output time frame lengths [B].
-        targets: Optional target token matrix [B, max_len] to inspect repeated adjacent tokens.
         target_lengths: Tensor of target token sequence lengths [B].
+        targets: Optional target token matrix [B, max_len] to inspect repeated adjacent tokens.
         raise_on_failure: If True, raises ValueError when any sample violates feasibility.
 
     Returns:
         Dictionary summarizing feasibility statistics and percentage.
     """
+    # Handle case where user passed 2D targets as second argument positionally
+    if target_lengths is not None and target_lengths.ndim > 1:
+        targets = target_lengths
+        target_lengths = None
+
     total_samples = len(input_lengths)
     if total_samples == 0:
-        return {"is_feasible": True, "feasible_percentage": 100.0, "total_samples": 0}
+        return {
+            "is_feasible": True,
+            "feasible_percentage": 100.0,
+            "total_samples": 0,
+            "num_valid": 0,
+            "num_violations": 0,
+            "violation_rate": 0.0,
+        }
 
     # Calculate exact minimum length required per sample
     min_required_lengths = []
@@ -84,12 +96,15 @@ def validate_ctc_feasibility(
     num_violations = int(violations.sum().item())
     num_feasible = total_samples - num_violations
     feasible_percentage = (num_feasible / total_samples) * 100.0
+    violation_rate = float(num_violations / total_samples)
 
     stats = {
         "is_feasible": (num_violations == 0),
         "total_samples": total_samples,
+        "num_valid": num_feasible,
         "num_feasible": num_feasible,
         "num_violations": num_violations,
+        "violation_rate": round(violation_rate, 4),
         "feasible_percentage": round(feasible_percentage, 2),
         "min_input_len": int(input_lengths.min().item()),
         "max_input_len": int(input_lengths.max().item()),
@@ -100,7 +115,7 @@ def validate_ctc_feasibility(
 
     if num_violations > 0:
         msg = (
-            f"CTC Feasibility: {num_feasible}/{total_samples} samples ({feasible_percentage:.1f}%) "
+            f"CTC Feasibility Warning: {num_feasible}/{total_samples} samples ({feasible_percentage:.1f}%) "
             f"feasible. {num_violations} violations! (T_out min: {stats['min_input_len']}, "
             f"Required max: {stats['max_required_len']})"
         )

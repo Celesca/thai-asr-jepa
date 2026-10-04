@@ -64,9 +64,9 @@ def main() -> int:
 
     # Datasets
     manifest_dir = Path(data_cfg.get("manifest_dir", "data_cache/porjai/manifests"))
-    train_manifest = manifest_dir / "train.jsonl"
-    val_manifest = manifest_dir / "val.jsonl"
-    test_manifest = manifest_dir / "test.jsonl"
+    train_manifest = Path(data_cfg.get("train_manifest", manifest_dir / "train.jsonl"))
+    val_manifest = Path(data_cfg.get("val_manifest", manifest_dir / "val.jsonl"))
+    test_manifest = Path(data_cfg.get("test_manifest", manifest_dir / "test.jsonl"))
 
     if not train_manifest.is_file():
         logger.error("Train manifest not found: %s. Run prepare_data first!", train_manifest)
@@ -116,32 +116,42 @@ def main() -> int:
         collate_fn=collator,
     ) if test_dataset else None
 
-    # Build model
+    # Build model with asymmetric or baseline patch size
+    patch_size_cfg = model_cfg.get("patch_size", {"time": 1, "frequency": 16})
+    if isinstance(patch_size_cfg, dict):
+        patch_h = int(patch_size_cfg.get("time", 1))
+        patch_w = int(patch_size_cfg.get("frequency", 16))
+    else:
+        patch_h = int(patch_size_cfg[0])
+        patch_w = int(patch_size_cfg[1])
+
     ckpt_source = model_cfg.get("pretrained_checkpoint", "ltuncay/Audio-JEPA")
     adapted_weights = model_cfg.get("adapted_checkpoint", None)
 
     if adapted_weights and Path(adapted_weights).is_file():
         logger.info("Initializing encoder from Thai SSL adapted weights: %s", adapted_weights)
-        encoder = AudioJEPAEncoder()
+        encoder = AudioJEPAEncoder(patch_size=(patch_h, patch_w))
         encoder_sd = torch.load(adapted_weights, map_location="cpu", weights_only=False)
         encoder.load_state_dict(encoder_sd, strict=False)
+        report = None
     else:
-        logger.info("Initializing encoder from pretrained Audio-JEPA: %s", ckpt_source)
-        try:
-            encoder = AudioJEPAEncoder.from_pretrained(ckpt_source)
-        except Exception as e:
-            logger.warning("Could not download/load checkpoint (%s); initializing scratch ViT encoder.", e)
-            encoder = AudioJEPAEncoder()
+        logger.info("Initializing encoder via transfer learning from %s (patch_size=%s)", ckpt_source, (patch_h, patch_w))
+        encoder, report = AudioJEPAEncoder.from_pretrained_transfer(
+            model_name_or_path=ckpt_source,
+            patch_size=(patch_h, patch_w),
+        )
+        report.save(output_dir / "checkpoint_loading_report.json")
 
     model = AudioJEPACTCAudioModel(
         encoder=encoder,
         vocab_size=tokenizer.vocab_size,
-        temporal_adapter_mode=model_cfg.get("temporal_adapter_mode", "upsample_conv"),
-        upsample_factor=model_cfg.get("upsample_factor", 4),
+        temporal_adapter_mode=model_cfg.get("temporal_adapter_mode", "native_pooling"),
+        upsample_factor=model_cfg.get("upsample_factor", 1),
         freeze_encoder=model_cfg.get("freeze_encoder", False),
         unfreeze_last_n_blocks=model_cfg.get("unfreeze_last_n_blocks", None),
         head_dropout=model_cfg.get("head_dropout", 0.1),
         pad_token_id=tokenizer.pad_token_id,
+        loading_report=report.to_dict() if report else None,
     )
 
     params_info = model.count_parameters()

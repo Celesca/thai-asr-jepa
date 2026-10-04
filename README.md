@@ -3,150 +3,150 @@
 [![Python 3.12](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
 [![PyTorch 2.x](https://img.shields.io/badge/PyTorch-2.x-orange.svg)](https://pytorch.org)
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+[![Branch](https://img.shields.io/badge/Branch-feat%2Faudio--jepa--thai--asr--temporal-green.svg)](https://github.com)
 
-A reproducible research codebase investigating downstream Thai Automatic Speech Recognition (ASR) transfer and Thai-specific self-supervised continued pretraining of **Audio-JEPA** ([ICME 2025](https://arxiv.org/abs/2507.02915), `ltuncay/Audio-JEPA`) using the **Porjai Central Thai** speech corpus (`CMKL/Porjai-Thai-voice-dataset-central`).
+A reproducible research codebase adapting **Audio-JEPA** ([ICME 2025](https://arxiv.org/abs/2507.02915), `ltuncay/Audio-JEPA`) for Thai Automatic Speech Recognition (ASR) with Connectionist Temporal Classification (CTC) on the **Porjai Central Thai** speech corpus (`CMKL/Porjai-Thai-voice-dataset-central`).
 
----
-
-## 📌 Project Objective
-
-**Research Question:**
-> *“Can Thai-specific self-supervised adaptation of Audio-JEPA improve Thai ASR under limited labeled-data conditions?”*
-
-This project implements:
-1. **Audio-JEPA ViT Speech Encoder Adapter** with native PyTorch 2.x SDPA attention and checkpoint loading from Hugging Face Hub (`ltuncay/Audio-JEPA`).
-2. **Temporal Resolution Adaptation** resolving the native 1.6 fps ($16 \times 8$ patch) bottleneck for CTC alignment on Thai characters ($T_{\text{out}} \ge L_{\text{target}}$).
-3. **Deterministic Leakage-Free Dataset Preparation** of the Porjai Central Thai speech corpus with Unicode NFKC normalization and character-level CTC tokenization.
-4. **Thai-Specific Continued Self-Supervised Adaptation** using Audio-JEPA's masked latent prediction objective on unlabeled Thai audio.
-5. **Low-Resource Comparative Benchmarking** across labeled budgets (10%, 25%, 50%, 100%) and baselines.
+Detailed architectural rationale and layer-by-layer transfer details are documented in [`docs/architecture_change.md`](file:///home/inteoty/Documents/ThaiAudioJEPA/docs/architecture_change.md).
 
 ---
 
-## ⚙️ Installation (via `uv`)
+## 📌 Architectural Modification Overview
 
-This project strictly uses [`uv`](https://github.com/astral-sh/uv) for reproducible dependency and environment management.
+### Why Finer Temporal Patching?
+The original Audio-JEPA uses coarse `(16, 16)` square patches on a $256 \times 128$ mel-spectrogram. Across a 10-second audio clip, this creates only **16 temporal positions** (**1.6 frames/sec**, 625 ms/token).
+
+In CTC speech recognition, the alignment condition strictly requires:
+$$T_{\text{output}} \ge \text{target\_length} + \text{adjacent\_repeated\_token\_count}$$
+
+Under the coarse 16-frame grid, more than 95% of Thai utterances cannot physically align. Rather than interpolating tokens *after* the encoder, this project modifies the **input patch embedding stage** before Transformer encoding:
+- **Asymmetric Patch Size:** `patch_size: {time: 1, frequency: 16}`
+- **Temporal Resolution:** **25.6 frames/second** (~39 ms/token, 256 temporal tokens per 10s clip).
+- **Feasibility:** **100.0%** of Porjai Thai speech utterances are alignable.
+- **Pretrained Transfer:** **99.99%** of model weights transfer directly from `ltuncay/Audio-JEPA` (86,629,632 / 86,641,920 parameters), reinitializing only the patch projection layer and interpolating 2D positional embeddings bicubically.
+
+---
+
+## 🔬 Experimental Configurations
+
+| ID | Configuration | Patch Size | Temporal Rate | Initialization | Feasibility | Purpose |
+|---|---|---|---|---|---|---|
+| **A** | Original Audio-JEPA + CTC | `(16, 16)` | 1.6 fps | `JEPA.ckpt` (100%) | <5.0% | Diagnostic baseline |
+| **B** | Modified Audio-JEPA + CTC | `(1, 16)` | 25.6 fps | `JEPA.ckpt` (99.99%) | 100.0% | Core Transfer |
+| **C** | Modified Audio-JEPA + Thai SSL + CTC | `(1, 16)` | 25.6 fps | `JEPA.ckpt` $\rightarrow$ Thai SSL | 100.0% | Domain adaptation |
+
+---
+
+## ⚙️ Installation & Setup (via `uv`)
+
+All dependencies are locked and managed with `uv`:
 
 ```bash
-# 1. Install uv if not already present
+# 1. Install uv
 curl -LsSf https://astral.sh/uv/install.sh | sh
 export PATH="$HOME/.local/bin:$PATH"
 
-# 2. Sync dependencies and create locked virtual environment
+# 2. Sync dependencies
 uv sync
-```
 
-### Hardware Requirements
-- **GPU:** NVIDIA GPU with $\ge 8$ GB VRAM recommended (RTX 3080/4080/5080, A100, L4).
-- **CPU:** Fully supported (all models automatically run on CPU if CUDA is unavailable).
-- **Disk:** ~1 GB for smoke test / pilot subset; ~15 GB for full dataset and model weights.
+# 3. Check Git branch status
+uv run python -c "from thai_audio_jepa_asr.utils.git_info import get_git_info; print(get_git_info())"
+```
 
 ---
 
-## 🚀 Exact Execution Commands
+## 🚀 Execution Commands
 
-All commands run through `uv run`:
-
-### 1. Inspect Raw Dataset & Audio-JEPA Checkpoint
+### 1. Inspect Checkpoint Transfer & Temporal Rate
+Inspects original (1.6 fps) vs modified (25.6 fps) token rates and generates `outputs/checkpoint_loading_report.json`:
 ```bash
-# Inspect Porjai dataset schema and sample audio
-uv run python -m thai_audio_jepa_asr.cli.inspect_data
-
-# Inspect Audio-JEPA ViT encoder specifications and checkpoint keys
 uv run python -m thai_audio_jepa_asr.cli.inspect_audio_jepa
 ```
 
-### 2. Prepare Porjai Thai Dataset
-Streams and preprocesses audio, generating deterministic 80/10/10 train/validation/test manifests and vocabulary:
+### 2. Run Thai SSL Adaptation
+Performs continued self-supervised pretraining with contiguous temporal masking:
 ```bash
-# Process verification subset (500 samples, fast)
-uv run python -m thai_audio_jepa_asr.cli.prepare_data --config configs/data/porjai.yaml
-
-# For full 700-hour dataset preparation:
-uv run python -m thai_audio_jepa_asr.cli.prepare_data --config configs/data/porjai.yaml --max-samples 0
-```
-
-### 3. Run Tiny Smoke Test (CPU or GPU)
-Runs an immediate end-to-end check of normalizer, tokenizer, mel-extractor, ViT forward/backward pass, CTC loss, and prediction:
-```bash
-uv run python -m thai_audio_jepa_asr.cli.smoke_test --config configs/experiment/smoke.yaml
-```
-
-### 4. Train Supervised CTC ASR
-Trains the Audio-JEPA encoder + CTC head on Thai speech:
-```bash
-uv run python -m thai_audio_jepa_asr.cli.train_asr --config configs/experiment/audio_jepa_ctc.yaml
-```
-
-### 5. Continued Thai Self-Supervised Adaptation (SSL)
-Performs masked latent prediction on unlabeled Thai audio to adapt Audio-JEPA before ASR fine-tuning:
-```bash
+# Full Thai SSL continued pretraining
 uv run python -m thai_audio_jepa_asr.cli.adapt_ssl --config configs/experiment/audio_jepa_thai_ssl.yaml
-```
-*The adapted checkpoint is automatically saved to `outputs/runs/audio_jepa_thai_ssl/checkpoints/adapted_encoder.pt` and can be loaded via `configs/model/audio_jepa_adapted.yaml`.*
 
-### 6. Evaluate Model Checkpoint
-Evaluates a checkpoint on validation or test split, computing CER and Thai WER:
+# Fast smoke test (1 epoch, verified)
+uv run python -m thai_audio_jepa_asr.cli.adapt_ssl --config configs/experiment/smoke_ssl.yaml
+```
+Saves adapted encoder checkpoint to `outputs/runs/audio_jepa_thai_ssl/checkpoints/adapted_encoder.pt`.
+
+### 3. Train Supervised CTC ASR
+Trains the modified Audio-JEPA encoder + CTC head:
 ```bash
-uv run python -m thai_audio_jepa_asr.cli.evaluate --config configs/experiment/evaluate.yaml --checkpoint outputs/runs/smoke_test/checkpoints/best_checkpoint.pt --split test
+# Full dataset supervised training
+uv run python -m thai_audio_jepa_asr.cli.train_asr --config configs/experiment/audio_jepa_ctc.yaml
+
+# Fast CTC smoke test (1 epoch, verified)
+uv run python -m thai_audio_jepa_asr.cli.train_asr --config configs/experiment/smoke.yaml
 ```
 
-### 7. Predict from a Single Audio File
-Transcribes a WAV or MP3 file:
+### 4. Evaluate Checkpoint & Generate Predictions
+Computes Character Error Rate (CER), Thai Word Error Rate (WER via PyThaiNLP), and prints sample transcriptions:
 ```bash
-uv run python -m thai_audio_jepa_asr.cli.predict --checkpoint outputs/runs/smoke_test/checkpoints/best_checkpoint.pt --audio data_cache/porjai/audio/sample_000000.wav
+uv run python -m thai_audio_jepa_asr.cli.evaluate \
+  --checkpoint outputs/runs/smoke_ctc/checkpoints/best_checkpoint.pt \
+  --split val
 ```
 
-### 8. Compare Completed Experiments
-Collects summaries from `outputs/runs` and generates Markdown/CSV comparison tables:
+### 5. Compare Completed Runs
+Generates comparative Markdown tables across configurations:
 ```bash
 uv run python -m thai_audio_jepa_asr.cli.compare --runs-dir outputs/runs
 ```
 
 ---
 
-## 🧪 Running Unit Tests
+## 🧪 Comprehensive Unit Test Suite
 
-Run the complete test suite with `pytest`:
+Run all 27 unit tests:
 ```bash
 uv run pytest tests/ -v
 ```
+
+Tests cover:
+- Checkpoint parameter loading percentage (>99.98%)
+- Asymmetric patching tensor dimensions `(B, 1, 256, 128) -> (B, 2048, 768) -> (B, 256, 768)`
+- 2D positional embedding grid interpolation `(16, 8) -> (256, 8)`
+- CTC feasibility validation ($T_{\text{output}} \ge L_{\text{target}} + \text{repeats}$)
+- End-to-end forward, backward, and optimization step
+- Thai text normalization, char tokenization, collators, and splits.
 
 ---
 
 ## 📁 Repository Structure
 
-```
+```text
 thai-audio-jepa-asr/
 ├── README.md
 ├── pyproject.toml
 ├── uv.lock
 ├── configs/
-│   ├── data/porjai.yaml
-│   ├── model/audio_jepa.yaml, audio_jepa_adapted.yaml, wav2vec2.yaml
-│   └── experiment/smoke.yaml, audio_jepa_ctc.yaml, audio_jepa_thai_ssl.yaml, low_resource_*.yaml
+│   ├── model/
+│   │   ├── audio_jepa_original.yaml  # Config A: coarse (16, 16) baseline
+│   │   ├── audio_jepa.yaml           # Config B: asymmetric (1, 16) native pooling
+│   │   └── audio_jepa_adapted.yaml   # Config C: SSL-adapted encoder
+│   └── experiment/
+│       ├── smoke_ssl.yaml            # Fast SSL adaptation check
+│       ├── smoke.yaml                # Fast CTC training check
+│       ├── audio_jepa_thai_ssl.yaml  # Full Thai SSL pretraining
+│       └── audio_jepa_ctc.yaml       # Full supervised ASR
+├── docs/
+│   ├── architecture_change.md        # Comprehensive design rationale & report
+│   ├── research_plan.md
+│   └── dataset_card_notes.md
 ├── src/thai_audio_jepa_asr/
-│   ├── cli/             # 8 command-line interfaces
-│   ├── data/            # Dataset, Porjai loader, collators
-│   ├── models/          # ViT encoder, temporal adapter, CTC head, SSL module
-│   ├── preprocessing/   # Normalizer, tokenizer, Kaldi fbank mel-spec
-│   ├── training/        # ASR trainer, SSL trainer, optimizer, scheduler
-│   ├── evaluation/      # CER, Thai WER, evaluator runner
-│   └── utils/           # Seeds, logging, config loader, checkpointing, git info
-├── tests/               # 6 comprehensive unit tests
-├── outputs/             # Local experiment outputs & metrics
-└── docs/
-    ├── research_plan.md
-    ├── experiment_protocol.md
-    └── dataset_card_notes.md
+│   ├── cli/                          # Command-line interfaces
+│   ├── data/                         # Dataset, collator (contiguous temporal masking)
+│   ├── models/                       # ViT encoder, temporal adapter, CTC head, SSL module
+│   ├── preprocessing/                # Normalizer, char tokenizer, Kaldi fbank
+│   ├── training/                     # ASR trainer, SSL trainer, optimizer
+│   └── utils/                        # Seeds, config, logging, git info, checkpoint report
+└── tests/                            # 27 automated unit tests
 ```
-
----
-
-## 🔍 The Audio-JEPA Temporal Resolution Bottleneck
-- Pretrained Audio-JEPA uses $(16, 16)$ patches on $256 \times 128$ mel-spectrograms.
-- This produces 16 temporal positions across 10 seconds of speech (**1.6 frames/second**).
-- Because CTC mathematically requires $T_{\text{frames}} \ge L_{\text{characters}}$, any Thai sentence with $>16$ characters cannot be aligned directly.
-- **Our Solution:** Configurable `temporal_adapter_mode: upsample_conv` ($4\times \rightarrow 64$ frames / 6.4 fps) which permits 100% CTC alignment, while keeping the unmodified baseline for scientific comparison.
 
 ---
 

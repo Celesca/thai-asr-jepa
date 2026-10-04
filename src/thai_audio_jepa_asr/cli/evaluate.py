@@ -26,7 +26,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Evaluate Thai ASR model checkpoint.")
     parser.add_argument("--config", default="configs/experiment/evaluate.yaml", help="Evaluation configuration YAML.")
     parser.add_argument("--checkpoint", default=None, help="Path to checkpoint .pt file.")
-    parser.add_argument("--split", default="test", choices=["train", "val", "test"], help="Dataset split to evaluate.")
+    parser.add_argument("--manifest", default=None, help="Direct path to manifest JSONL.")
+    parser.add_argument("--split", default="val", choices=["train", "val", "test"], help="Dataset split to evaluate.")
     parser.add_argument("--output-dir", default=None, help="Directory to save evaluation results.")
     args = parser.parse_args()
 
@@ -49,12 +50,20 @@ def main() -> int:
     tokenizer = ThaiCharTokenizer.load(vocab_path)
 
     # Model
-    encoder = AudioJEPAEncoder()
+    patch_size_cfg = model_cfg.get("patch_size", {"time": 1, "frequency": 16})
+    if isinstance(patch_size_cfg, dict):
+        patch_h = int(patch_size_cfg.get("time", 1))
+        patch_w = int(patch_size_cfg.get("frequency", 16))
+    else:
+        patch_h = int(patch_size_cfg[0])
+        patch_w = int(patch_size_cfg[1])
+
+    encoder = AudioJEPAEncoder(patch_size=(patch_h, patch_w))
     model = AudioJEPACTCAudioModel(
         encoder=encoder,
         vocab_size=tokenizer.vocab_size,
-        temporal_adapter_mode=model_cfg.get("temporal_adapter_mode", "upsample_conv"),
-        upsample_factor=model_cfg.get("upsample_factor", 4),
+        temporal_adapter_mode=model_cfg.get("temporal_adapter_mode", "native_pooling"),
+        upsample_factor=model_cfg.get("upsample_factor", 1),
         pad_token_id=tokenizer.pad_token_id,
     )
 
@@ -64,8 +73,12 @@ def main() -> int:
     model.to(device)
 
     # Dataset & Dataloader
-    manifest_dir = Path(data_cfg.get("manifest_dir", "data_cache/porjai/manifests"))
-    manifest_path = manifest_dir / f"{args.split}.jsonl"
+    if args.manifest:
+        manifest_path = Path(args.manifest)
+    else:
+        manifest_dir = Path(data_cfg.get("manifest_dir", "data_cache/porjai/manifests"))
+        manifest_path = manifest_dir / f"{args.split}.jsonl"
+
     if not manifest_path.is_file():
         logger.error("Manifest not found: %s", manifest_path)
         return 1
@@ -89,24 +102,33 @@ def main() -> int:
     )
 
     evaluator = ASREvaluator(model, tokenizer, device=device)
-    logger.info("Running evaluation on %s split (%d samples)...", args.split, len(dataset))
+    logger.info("Running evaluation on %s (%d samples)...", manifest_path.name, len(dataset))
     results = evaluator.evaluate(dataloader, output_dir=output_dir, prefix=args.split)
 
     metrics = results["metrics"]
-    print("=" * 60)
+    predictions = results.get("predictions", [])
+
+    print("=" * 70)
     print(f"EVALUATION RESULTS ({args.split.upper()} SPLIT)")
-    print("=" * 60)
+    print("=" * 70)
     print(f"CER:  {metrics['cer']*100:.2f}%")
     print(f"WER:  {metrics['wer']*100:.2f}%")
     print(f"Loss: {metrics.get('loss', 0.0):.4f}")
     print(f"Total Reference Characters: {metrics.get('total_ref_chars', 0)}")
     print(f"Total Reference Words:      {metrics.get('total_ref_words', 0)}")
     print(f"Results saved to:           {output_dir}")
-    print("=" * 60)
+    print("-" * 70)
+    print("Sample Model Predictions:")
+    for i, pred in enumerate(predictions[:3]):
+        print(f"  [{i+1}] Ref:  {pred.get('reference', '')}")
+        print(f"      Hyp:  {pred.get('hypothesis', '')}")
+    print("=" * 70)
     return 0
 
 
 if __name__ == "__main__":
     code = main()
     import os
+    sys.stdout.flush()
+    sys.stderr.flush()
     os._exit(code)

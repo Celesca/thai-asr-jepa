@@ -43,10 +43,15 @@ def main() -> int:
     save_config(config, output_dir / "resolved_config.yaml")
 
     # Datasets
-    manifest_dir = Path(data_cfg.get("manifest_dir", "data_cache/porjai/manifests"))
-    ssl_manifest = manifest_dir / "train.jsonl"
+    manifest_override = data_cfg.get("manifest_path")
+    if manifest_override:
+        ssl_manifest = Path(manifest_override)
+    else:
+        manifest_dir = Path(data_cfg.get("manifest_dir", "data_cache/porjai/manifests"))
+        ssl_manifest = manifest_dir / "train.jsonl"
+
     if not ssl_manifest.is_file():
-        logger.error("Train manifest not found: %s. Run prepare_data first!", ssl_manifest)
+        logger.error("SSL train manifest not found: %s. Run prepare_data first!", ssl_manifest)
         return 1
 
     mel_transform = AudioJEPAMelSpec(
@@ -60,10 +65,23 @@ def main() -> int:
         mel_spec_transform=mel_transform,
     )
 
+    patch_size_cfg = model_cfg.get("patch_size", {"time": 1, "frequency": 16})
+    if isinstance(patch_size_cfg, dict):
+        patch_h = int(patch_size_cfg.get("time", 1))
+        patch_w = int(patch_size_cfg.get("frequency", 16))
+    else:
+        patch_h = int(patch_size_cfg[0])
+        patch_w = int(patch_size_cfg[1])
+
+    grid_h = 256 // patch_h
+    grid_w = 128 // patch_w
+    masking_mode = model_cfg.get("masking_mode", "temporal")
+
     collator = SSLMaskCollator(
-        grid_size=(16, 8),
-        enc_mask_scale=tuple(model_cfg.get("enc_mask_scale", (0.2, 0.8))),
-        pred_mask_scale=tuple(model_cfg.get("pred_mask_scale", (0.15, 0.3))),
+        grid_size=(grid_h, grid_w),
+        enc_mask_scale=tuple(model_cfg.get("enc_mask_scale", (0.2, 0.7))),
+        pred_mask_scale=tuple(model_cfg.get("pred_mask_scale", (0.1, 0.25))),
+        masking_mode=masking_mode,
     )
 
     batch_size = train_cfg.get("batch_size", 4)
@@ -75,13 +93,14 @@ def main() -> int:
         num_workers=train_cfg.get("num_workers", 2),
     )
 
-    # Initialize encoder from pretrained checkpoint
+    # Initialize encoder using transfer learning
     ckpt_source = model_cfg.get("pretrained_checkpoint", "ltuncay/Audio-JEPA")
-    try:
-        encoder = AudioJEPAEncoder.from_pretrained(ckpt_source)
-    except Exception as e:
-        logger.warning("Could not download checkpoint (%s); initializing scratch encoder.", e)
-        encoder = AudioJEPAEncoder()
+    encoder, report = AudioJEPAEncoder.from_pretrained_transfer(
+        model_name_or_path=ckpt_source,
+        patch_size=(patch_h, patch_w),
+    )
+    report.save(output_dir / "checkpoint_loading_report.json")
+    logger.info("Pretrained checkpoint transferred: %.2f%% weights initialized.", report.loaded_percentage)
 
     ssl_module = AudioJEPASSLModule(
         encoder=encoder,
@@ -124,4 +143,6 @@ def main() -> int:
 if __name__ == "__main__":
     code = main()
     import os
+    sys.stdout.flush()
+    sys.stderr.flush()
     os._exit(code)
