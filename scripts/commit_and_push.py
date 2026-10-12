@@ -1,9 +1,21 @@
 #!/usr/bin/env python3
-"""Stage all files, commit to improve/thai-audio-jepa-asr, and push to origin."""
+"""Stage all files, commit to improve/thai-audio-jepa-asr, and push without blocking."""
 
 import os
 import sys
 from pathlib import Path
+
+# Disable interactive stdin prompts
+os.environ["GIT_TERMINAL_PROMPT"] = "0"
+
+import builtins
+import getpass
+
+def no_prompt(*args, **kwargs):
+    raise RuntimeError("Authentication required: interactive prompt requested but not available in non-interactive environment")
+
+builtins.input = no_prompt
+getpass.getpass = no_prompt
 
 # Add .venv site-packages
 venv_site = Path(".venv/lib/python3.12/site-packages")
@@ -13,15 +25,20 @@ if venv_site.exists():
 from dulwich.repo import Repo
 from dulwich import porcelain
 
+log_lines = []
+
+def log(msg):
+    print(msg, flush=True)
+    log_lines.append(str(msg))
+
 repo_path = Path.cwd()
 repo = Repo(str(repo_path))
 
 branch_name = "improve/thai-audio-jepa-asr"
 branch_ref = b"refs/heads/" + branch_name.encode()
 
-# Verify HEAD points to this branch
 current_head = repo.refs.read_ref(b"HEAD")
-print(f"Current symbolic HEAD: {current_head.decode()}", flush=True)
+log(f"Current symbolic HEAD: {current_head.decode()}")
 
 # Collect all project files to stage
 files_to_stage = []
@@ -39,7 +56,7 @@ for folder in ["bash", "configs", "docs", "src", "tests", "scripts"]:
                     rel_f = os.path.relpath(os.path.join(root, f), repo_path)
                     files_to_stage.append(rel_f)
 
-print(f"Staging {len(files_to_stage)} files on branch {branch_name}...", flush=True)
+log(f"Staging {len(files_to_stage)} files on branch {branch_name}...")
 porcelain.add(repo, files_to_stage)
 
 # Commit
@@ -56,16 +73,15 @@ try:
         committer="Celesca <celesca@example.com>",
     )
     commit_sha_str = commit_sha.decode() if isinstance(commit_sha, bytes) else commit_sha
-    print(f"Created commit on {branch_name}: {commit_sha_str}", flush=True)
+    log(f"Created commit on {branch_name}: {commit_sha_str}")
     repo.refs[branch_ref] = commit_sha.encode() if isinstance(commit_sha, str) else commit_sha
 except Exception as e:
-    print(f"Commit note: {e}", flush=True)
+    log(f"Commit note: {e}")
 
-print(f"Branch ref {branch_name} now at: {repo.refs[branch_ref].decode()}", flush=True)
+log(f"Branch ref {branch_name} now at: {repo.refs[branch_ref].decode()}")
 
-# Attempt to push to remote
 remote_url = "https://github.com/Celesca/thai-asr-jepa"
-print(f"\nAttempting push to {remote_url} (branch {branch_name})...", flush=True)
+log(f"\nAttempting push to {remote_url} (branch {branch_name})...")
 
 try:
     porcelain.push(
@@ -73,6 +89,9 @@ try:
         remote_location=remote_url,
         refspecs=f"refs/heads/{branch_name}:refs/heads/{branch_name}".encode(),
     )
-    print("Push succeeded successfully!", flush=True)
+    log("Push succeeded successfully!")
 except Exception as e:
-    print(f"Push result/status: {type(e).__name__}: {e}", flush=True)
+    log(f"Push result: {type(e).__name__}: {e}")
+
+with open("scripts/push_result.txt", "w", encoding="utf-8") as f:
+    f.write("\n".join(log_lines) + "\n")
