@@ -76,9 +76,15 @@ def prepare_porjai_dataset(
     if normalizer is None:
         normalizer = ThaiTextNormalizer()
 
-    logger.info("Loading dataset %s (streaming=%s)...", DATASET_NAME, streaming)
+    raw_dir = Path("data_cache/raw_porjai")
+    local_parquets = list(raw_dir.glob("*.parquet")) + list(raw_dir.glob("**/*.parquet")) if raw_dir.is_dir() else []
+    if local_parquets:
+        logger.info("Found %d local parquet file(s) in %s. Loading from local disk...", len(local_parquets), raw_dir)
+        ds = datasets.load_dataset("parquet", data_files=[str(p) for p in sorted(local_parquets)], split="train")
+    else:
+        logger.info("Loading dataset %s (streaming=%s)...", DATASET_NAME, streaming)
+        ds = datasets.load_dataset(DATASET_NAME, split="train", streaming=streaming)
     # Load dataset with decode=False on audio to avoid system torchcodec/ffmpeg errors
-    ds = datasets.load_dataset(DATASET_NAME, split="train", streaming=streaming)
     ds = ds.cast_column("audio", datasets.Audio(decode=False))
 
     splits: Dict[str, List[Dict[str, Any]]] = {"train": [], "val": [], "test": []}

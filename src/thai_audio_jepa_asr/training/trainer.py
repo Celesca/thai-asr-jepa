@@ -103,9 +103,21 @@ class ASRTrainer:
                 spectrograms = batch["spectrograms"].to(self.device)
                 targets = batch["targets"].to(self.device)
                 target_lengths = batch["target_lengths"].to(self.device)
+                valid_time_tokens = batch.get("valid_time_tokens")
+                if valid_time_tokens is not None:
+                    valid_time_tokens = valid_time_tokens.to(self.device)
+                padding_mask = batch.get("padding_mask")
+                if padding_mask is not None:
+                    padding_mask = padding_mask.to(self.device)
 
                 self.optimizer.zero_grad()
-                out = self.model(spectrograms, targets=targets, target_lengths=target_lengths)
+                out = self.model(
+                    spectrograms,
+                    targets=targets,
+                    target_lengths=target_lengths,
+                    valid_time_tokens=valid_time_tokens,
+                    padding_mask=padding_mask,
+                )
                 loss = out["loss"]
 
                 if torch.isnan(loss) or torch.isinf(loss):
@@ -145,7 +157,7 @@ class ASRTrainer:
 
             # Validation evaluation
             val_results = None
-            if self.val_loader is not None and (epoch + 1) % self.eval_interval == 0:
+            if self.val_loader is not None and ((epoch + 1) % self.eval_interval == 0 or (epoch + 1) == num_epochs):
                 logger.info("Evaluating on validation partition...")
                 val_eval = self.evaluator.evaluate(
                     self.val_loader,

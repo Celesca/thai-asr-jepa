@@ -1,16 +1,10 @@
-"""Thai Continued Self-Supervised Adaptation of Audio-JEPA.
-
-Implements the masked latent prediction objective from Audio-JEPA:
-- Context Encoder: processes unmasked context patches
-- Target Encoder: EMA copy of encoder, processes full spectrogram to produce target representations
-- Predictor: lightweight ViT predicting target patch embeddings from context embeddings + positional tokens
-- Loss: Normalized MSE loss on target patches
-"""
+"""Thai Continued Self-Supervised Adaptation of Audio-JEPA with Representation Diagnostics."""
 
 from __future__ import annotations
 
 import copy
 import logging
+import math
 from typing import Any, Dict, List, Optional, Tuple
 
 import torch
@@ -36,9 +30,40 @@ def norm_mse_loss(pred: torch.Tensor, target: torch.Tensor, norm_pix_loss: bool 
     # L2 normalize feature vectors
     target_norm = F.normalize(target, dim=-1, p=2)
     pred_norm = F.normalize(pred, dim=-1, p=2)
-    # Cosine distance formulation of MSE
+    # Cosine distance formulation of MSE: 2 - 2 * cos_sim
     loss = 2.0 - 2.0 * (target_norm * pred_norm).sum(dim=-1)
     return loss.mean()
+
+
+def compute_representation_diagnostics(features: torch.Tensor) -> Dict[str, float]:
+    """Compute representation health statistics over latent features.
+
+    Args:
+        features: Tensor of shape [B, N, D] from teacher or student.
+
+    Returns:
+        Dictionary with:
+            - feature_variance: Mean variance across embedding dimension.
+            - inter_utterance_similarity: Mean cosine similarity between different utterances.
+            - norm_mean: Mean L2 norm of representations.
+    """
+    B, N, D = features.shape
+    feat_var = float(features.var(dim=-1).mean().item())
+    norm_mean = float(features.norm(dim=-1, p=2).mean().item())
+
+    inter_sim = 0.0
+    if B > 1:
+        # Utterance-level mean embedding
+        u_emb = F.normalize(features.mean(dim=1), dim=-1, p=2)  # [B, D]
+        sim_mat = torch.mm(u_emb, u_emb.t())  # [B, B]
+        mask = ~torch.eye(B, dtype=torch.bool, device=sim_mat.device)
+        inter_sim = float(sim_mat[mask].mean().item())
+
+    return {
+        "feature_variance": round(feat_var, 4),
+        "inter_utterance_similarity": round(inter_sim, 4),
+        "norm_mean": round(norm_mean, 4),
+    }
 
 
 class VisionTransformerPredictor(nn.Module):
@@ -92,7 +117,6 @@ class VisionTransformerPredictor(nn.Module):
 
         # Add positional embedding to context tokens
         x_pos_embed = self.predictor_pos_embed.repeat(B, 1, 1)
-        # Apply context masks to positional embeddings
         all_pos = []
         for m in context_masks:
             mask_keep = m.unsqueeze(-1).repeat(1, 1, x.size(-1))
@@ -111,8 +135,6 @@ class VisionTransformerPredictor(nn.Module):
         # Mask tokens with target positional embeddings
         pred_tokens = self.mask_token.repeat(target_pos.size(0), target_pos.size(1), 1) + target_pos
 
-        # Concat context tokens and mask prediction tokens
-        # Repeat context tokens for each prediction mask if counts differ
         if target_pos.size(0) != x.size(0):
             repeat_factor = target_pos.size(0) // x.size(0)
             x = x.repeat(repeat_factor, 1, 1)
@@ -123,7 +145,6 @@ class VisionTransformerPredictor(nn.Module):
             x_full = blk(x_full)
 
         x_full = self.predictor_norm(x_full)
-        # Only take the prediction tokens portion
         preds = x_full[:, N_ctxt:]
         preds = self.predictor_proj(preds)
         return preds
@@ -138,15 +159,21 @@ class AudioJEPASSLModule(nn.Module):
         predictor_depth: int = 6,
         predictor_embed_dim: int = 384,
         ema_tau: float = 0.996,
+        ema_tau_end: float = 1.0,
+        use_ema_schedule: bool = False,
         norm_pix_loss: bool = True,
     ) -> None:
         super().__init__()
-        self.encoder = encoder  # Online / context encoder
-        self.target_encoder = copy.deepcopy(encoder)  # EMA target encoder
+        self.encoder = encoder  # Online / context student encoder
+
+        # Target teacher encoder initialized with identical adapted weights
+        self.target_encoder = copy.deepcopy(encoder)
         for p in self.target_encoder.parameters():
             p.requires_grad = False
 
         self.ema_tau = ema_tau
+        self.ema_tau_end = ema_tau_end
+        self.use_ema_schedule = use_ema_schedule
         self.norm_pix_loss = norm_pix_loss
 
         self.predictor = VisionTransformerPredictor(
@@ -157,9 +184,17 @@ class AudioJEPASSLModule(nn.Module):
             depth=predictor_depth,
         )
 
+    def get_current_ema_tau(self, step: int, total_steps: int) -> float:
+        """Calculate current EMA tau using cosine schedule if enabled."""
+        if not self.use_ema_schedule or total_steps <= 1:
+            return self.ema_tau
+        progress = min(1.0, max(0.0, step / float(total_steps)))
+        # Cosine ramp from ema_tau to ema_tau_end
+        return self.ema_tau_end - (self.ema_tau_end - self.ema_tau) * 0.5 * (1.0 + math.cos(math.pi * progress))
+
     @torch.no_grad()
     def update_target_encoder(self, tau: Optional[float] = None) -> None:
-        """Update target encoder via Exponential Moving Average (EMA)."""
+        """Update target teacher encoder strictly via Exponential Moving Average (EMA)."""
         current_tau = self.ema_tau if tau is None else tau
         for p_online, p_target in zip(self.encoder.parameters(), self.target_encoder.parameters()):
             p_target.data.mul_(current_tau).add_(p_online.data, alpha=1.0 - current_tau)
@@ -169,25 +204,30 @@ class AudioJEPASSLModule(nn.Module):
         spectrograms: torch.Tensor,
         context_masks: List[torch.Tensor],
         prediction_masks: List[torch.Tensor],
-    ) -> Dict[str, torch.Tensor]:
+        padding_mask: Optional[torch.Tensor] = None,
+    ) -> Dict[str, Any]:
         """Perform one masked latent prediction training step.
 
         Args:
-            spectrograms: Tensor of shape [B, 1, 256, 128].
+            spectrograms: Tensor of shape [B, 1, H, W].
             context_masks: List of index tensors indicating context patches.
             prediction_masks: List of index tensors indicating target patches.
+            padding_mask: Optional boolean padding mask [B, num_patches].
 
         Returns:
-            Dictionary containing 'loss', 'pred', 'target'.
+            Dictionary containing 'loss' and 'representation_stats'.
         """
         # 1. Forward pass online encoder with context masks
-        h_context = self.encoder(spectrograms, context_masks=context_masks)
+        h_context = self.encoder(spectrograms, context_masks=context_masks, padding_mask=padding_mask)
 
         # 2. Forward pass target encoder without masks to get full representation
         with torch.no_grad():
-            h_target_full = self.target_encoder(spectrograms, context_masks=None)
+            h_target_full = self.target_encoder(spectrograms, context_masks=None, padding_mask=padding_mask)
 
-        # 3. Predict each target mask separately to support dynamically sampled block sizes
+        # Representation health diagnostics
+        rep_stats = compute_representation_diagnostics(h_target_full)
+
+        # 3. Predict each target mask separately
         total_loss = 0.0
         for m in prediction_masks:
             mask_keep = m.unsqueeze(-1).repeat(1, 1, h_target_full.size(-1))
@@ -196,6 +236,8 @@ class AudioJEPASSLModule(nn.Module):
             total_loss = total_loss + norm_mse_loss(z_pred_m, h_target_m, norm_pix_loss=self.norm_pix_loss)
 
         loss = total_loss / max(1, len(prediction_masks))
+
         return {
             "loss": loss,
+            "representation_stats": rep_stats,
         }

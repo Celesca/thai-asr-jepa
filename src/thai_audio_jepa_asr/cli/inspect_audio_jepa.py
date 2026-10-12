@@ -69,24 +69,22 @@ def main() -> int:
         patch_size=(1, 16),
     )
 
+    rep = report.to_dict()
     print("\n" + "=" * 80)
     print("CHECKPOINT LOADING REPORT")
     print("=" * 80)
-    print(f"Loaded Parameters Count:      {report['loaded_params_count']:,}")
-    print(f"Missing Parameters Count:     {report['missing_params_count']:,}")
-    print(f"Unexpected Parameters Count:  {report['unexpected_params_count']:,}")
-    print(f"Shape Mismatched Count:       {report['shape_mismatched_count']:,}")
-    print(f"Shape Mismatches Details:     {report['shape_mismatches']}")
-    print(f"Total Model Parameters:       {report['total_model_parameters']:,}")
-    print(f"Loaded Weight Ratio:          {report['loaded_weight_ratio'] * 100:.2f}%")
+    print(f"Loaded Parameters Count:      {report.loaded_parameters_count:,}")
+    print(f"Missing Parameters Count:     {len(report.missing_parameter_names):,}")
+    print(f"Unexpected Parameters Count:  {len(report.unexpected_parameter_names):,}")
+    print(f"Shape Mismatched Count:       {len(report.shape_mismatched_parameters):,}")
+    print(f"Shape Mismatches Details:     {report.shape_mismatched_parameters}")
+    print(f"Total Model Parameters:       {report.total_model_parameters:,}")
+    print(f"Loaded Weight Ratio:          {report.loaded_percentage:.2f}%")
     print("=" * 80)
 
     # Save loading report
-    out_path = Path(args.output_json)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(report, f, indent=2)
-    print(f"\nLoading report saved successfully to: {out_path}\n")
+    report.save(args.output_json)
+    print(f"\nLoading report saved successfully to: {args.output_json}\n")
 
     sys.stdout.flush()
     sys.stderr.flush()

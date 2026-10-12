@@ -1,0 +1,38 @@
+experiment:
+  name: "exp_C_ssl_pretrain"
+  seed: 42
+  output_dir: "outputs/runs/exp_C_ssl_pretrain"
+
+data:
+  manifest_dir: "data_cache/porjai/manifests"
+  sample_rate: 32000
+  clip_length_s: 10.0
+  frontend: "original"
+  max_duration_s: 10.0
+
+model:
+  pretrained_checkpoint: "ltuncay/Audio-JEPA"
+  embed_dim: 768
+  patch_size:
+    time: 1
+    frequency: 16
+  predictor_depth: 6
+  predictor_embed_dim: 384
+  masking_mode: "short_span"
+  span_duration_ms: 300.0
+  mask_ratio: 0.50
+  ema_tau: 0.996
+  ema_tau_end: 1.0
+  use_ema_schedule: true
+  norm_pix_loss: true
+
+training:
+  epochs: 8
+  batch_size: 8
+  lr: 1.0e-4
+  weight_decay: 1.0e-2
+  warmup_ratio: 0.1
+  grad_clip_norm: 1.0
+  save_interval_epochs: 1
+  device: "cuda"
+  num_workers: 2

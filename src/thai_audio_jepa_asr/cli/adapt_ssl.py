@@ -54,34 +54,51 @@ def main() -> int:
         logger.error("SSL train manifest not found: %s. Run prepare_data first!", ssl_manifest)
         return 1
 
+    frontend_name = data_cfg.get("frontend", "original")
     mel_transform = AudioJEPAMelSpec(
+        frontend_type=frontend_name,
         sr=data_cfg.get("sample_rate", 32000),
         clip_length_s=data_cfg.get("clip_length_s", 10.0),
-        target_time_bins=data_cfg.get("target_time_bins", 256),
+        target_time_bins=data_cfg.get("target_time_bins", None),
+    )
+    logger.info(
+        "Configured SSL frontend '%s': token_rate=%.2f fps, output_interval=%.2f ms, max_tokens=%d",
+        mel_transform.cfg.name,
+        mel_transform.cfg.temporal_token_rate,
+        mel_transform.cfg.effective_output_interval_ms,
+        mel_transform.cfg.compute_max_time_tokens(),
     )
 
     dataset = ThaiAudioSSLDataset(
         manifest_path=ssl_manifest,
         mel_spec_transform=mel_transform,
+        max_duration_s=float(data_cfg.get("max_duration_s", 10.0)),
     )
 
-    patch_size_cfg = model_cfg.get("patch_size", {"time": 1, "frequency": 16})
-    if isinstance(patch_size_cfg, dict):
-        patch_h = int(patch_size_cfg.get("time", 1))
-        patch_w = int(patch_size_cfg.get("frequency", 16))
+    patch_size_cfg = model_cfg.get("patch_size", None)
+    if patch_size_cfg is not None:
+        if isinstance(patch_size_cfg, dict):
+            patch_h = int(patch_size_cfg.get("time", mel_transform.cfg.patch_time))
+            patch_w = int(patch_size_cfg.get("frequency", mel_transform.cfg.patch_freq))
+        else:
+            patch_h = int(patch_size_cfg[0])
+            patch_w = int(patch_size_cfg[1])
     else:
-        patch_h = int(patch_size_cfg[0])
-        patch_w = int(patch_size_cfg[1])
+        patch_h = mel_transform.cfg.patch_time
+        patch_w = mel_transform.cfg.patch_freq
 
-    grid_h = 256 // patch_h
+    grid_h = mel_transform.target_time_bins // patch_h
     grid_w = 128 // patch_w
-    masking_mode = model_cfg.get("masking_mode", "temporal")
+    masking_mode = model_cfg.get("masking_mode", "short_span")
 
     collator = SSLMaskCollator(
         grid_size=(grid_h, grid_w),
+        masking_mode=masking_mode,
+        span_duration_ms=float(model_cfg.get("span_duration_ms", 300.0)),
+        token_interval_ms=mel_transform.cfg.effective_output_interval_ms,
+        mask_ratio=float(model_cfg.get("mask_ratio", 0.50)),
         enc_mask_scale=tuple(model_cfg.get("enc_mask_scale", (0.2, 0.7))),
         pred_mask_scale=tuple(model_cfg.get("pred_mask_scale", (0.1, 0.25))),
-        masking_mode=masking_mode,
     )
 
     batch_size = train_cfg.get("batch_size", 4)
@@ -93,20 +110,28 @@ def main() -> int:
         num_workers=train_cfg.get("num_workers", 2),
     )
 
-    # Initialize encoder using transfer learning
+    # Initialize encoder using transfer learning or scratch
     ckpt_source = model_cfg.get("pretrained_checkpoint", "ltuncay/Audio-JEPA")
-    encoder, report = AudioJEPAEncoder.from_pretrained_transfer(
-        model_name_or_path=ckpt_source,
-        patch_size=(patch_h, patch_w),
-    )
-    report.save(output_dir / "checkpoint_loading_report.json")
-    logger.info("Pretrained checkpoint transferred: %.2f%% weights initialized.", report.loaded_percentage)
+    if ckpt_source in ("scratch", "none", None):
+        logger.info("Initializing SSL encoder from scratch (random initialization) with patch_size=%s", (patch_h, patch_w))
+        encoder = AudioJEPAEncoder(patch_size=(patch_h, patch_w), input_size=(mel_transform.target_time_bins, 128))
+        report = None
+    else:
+        encoder, report = AudioJEPAEncoder.from_pretrained_transfer(
+            model_name_or_path=ckpt_source,
+            patch_size=(patch_h, patch_w),
+            input_size=(mel_transform.target_time_bins, 128),
+        )
+        report.save(output_dir / "checkpoint_loading_report.json")
+        logger.info("Pretrained checkpoint transferred: %.2f%% weights initialized.", report.loaded_percentage)
 
     ssl_module = AudioJEPASSLModule(
         encoder=encoder,
         predictor_depth=model_cfg.get("predictor_depth", 6),
         predictor_embed_dim=model_cfg.get("predictor_embed_dim", 384),
         ema_tau=float(model_cfg.get("ema_tau", 0.996)),
+        ema_tau_end=float(model_cfg.get("ema_tau_end", 1.0)),
+        use_ema_schedule=bool(model_cfg.get("use_ema_schedule", False)),
         norm_pix_loss=model_cfg.get("norm_pix_loss", True),
     )
 

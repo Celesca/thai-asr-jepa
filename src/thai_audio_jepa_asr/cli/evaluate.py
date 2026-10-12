@@ -83,10 +83,12 @@ def main() -> int:
         logger.error("Manifest not found: %s", manifest_path)
         return 1
 
+    frontend_name = data_cfg.get("frontend", "original")
     mel_transform = AudioJEPAMelSpec(
+        frontend_type=frontend_name,
         sr=data_cfg.get("sample_rate", 32000),
         clip_length_s=data_cfg.get("clip_length_s", 10.0),
-        target_time_bins=data_cfg.get("target_time_bins", 256),
+        target_time_bins=data_cfg.get("target_time_bins", None),
     )
 
     dataset = ThaiSpeechASRDataset(
@@ -94,11 +96,15 @@ def main() -> int:
         tokenizer=tokenizer,
         mel_spec_transform=mel_transform,
     )
+    collator = ASRDataCollator(
+        pad_token_id=tokenizer.pad_token_id,
+        grid_w=128 // mel_transform.cfg.patch_freq,
+    )
     dataloader = DataLoader(
         dataset,
         batch_size=eval_cfg.get("batch_size", 4),
         shuffle=False,
-        collate_fn=ASRDataCollator(pad_token_id=tokenizer.pad_token_id),
+        collate_fn=collator,
     )
 
     evaluator = ASREvaluator(model, tokenizer, device=device)

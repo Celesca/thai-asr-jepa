@@ -33,7 +33,14 @@ class CheckpointLoadingReport:
     loaded_parameter_names: List[str]
     missing_parameter_names: List[str]
     unexpected_parameter_names: List[str]
+    reinitialized_parameter_names: List[str]
     shape_mismatched_parameters: List[Dict[str, Any]]
+    denominator_description: str = "Total target model parameters"
+    interpretation_note: str = (
+        "Parameter transfer percentage indicates weight tensor reuse only. "
+        "It does NOT guarantee retained ASR capability, as the model was pretrained on general audio "
+        "rather than speech recognition."
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -329,7 +336,13 @@ class AudioJEPAEncoder(nn.Module):
             x = x.unsqueeze(1)
 
         x = self.patch_embed(x)
-        x = x + self.pos_embed
+        if x.shape[1] <= self.pos_embed.shape[1]:
+            x = x + self.pos_embed[:, : x.shape[1]]
+        else:
+            raise ValueError(
+                f"Input patch tokens ({x.shape[1]}) exceed maximum positional embedding capacity ({self.pos_embed.shape[1]}). "
+                f"Increase input_size or reduce audio duration."
+            )
 
         if context_masks is not None:
             if isinstance(context_masks, list):
@@ -342,11 +355,17 @@ class AudioJEPAEncoder(nn.Module):
                 mask_keep = context_masks.unsqueeze(-1).repeat(1, 1, x.size(-1))
                 x = torch.gather(x, dim=1, index=mask_keep)
 
-        # Convert boolean padding mask to additive attention mask if provided
+        # Convert boolean padding mask to additive float attention mask for PyTorch SDPA
+        # When context_masks is provided, context tokens already exclude padding.
         attn_mask = None
-        if padding_mask is not None:
-            # Shape for SDPA: [B, 1, 1, N]
-            attn_mask = padding_mask.unsqueeze(1).unsqueeze(2)
+        if padding_mask is not None and context_masks is None:
+            # Shape for SDPA: [B, 1, 1, N], with 0.0 for valid tokens and -10000.0 for padding tokens
+            attn_mask = torch.zeros(
+                (padding_mask.shape[0], 1, 1, padding_mask.shape[1]),
+                dtype=x.dtype,
+                device=x.device,
+            )
+            attn_mask.masked_fill_(padding_mask.unsqueeze(1).unsqueeze(2), -10000.0)
 
         for blk in self.blocks:
             x = blk(x, attn_mask=attn_mask)
@@ -438,6 +457,8 @@ class AudioJEPAEncoder(nn.Module):
         loaded_param_count = sum(compatible_sd[k].numel() for k in compatible_sd if k in target_sd)
         loaded_pct = (loaded_param_count / max(1, total_params)) * 100.0
 
+        reinitialized_names = [item["name"] for item in shape_mismatched]
+
         report = CheckpointLoadingReport(
             checkpoint_source=str(model_name_or_path),
             total_model_parameters=total_params,
@@ -446,6 +467,7 @@ class AudioJEPAEncoder(nn.Module):
             loaded_parameter_names=loaded_names,
             missing_parameter_names=missing_names,
             unexpected_parameter_names=unexpected_names,
+            reinitialized_parameter_names=reinitialized_names,
             shape_mismatched_parameters=shape_mismatched,
         )
 

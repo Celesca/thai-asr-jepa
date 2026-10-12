@@ -64,17 +64,31 @@ class ASREvaluator:
             if target_lengths is not None:
                 target_lengths = target_lengths.to(self.device)
 
-            out = self.model(spectrograms, targets=targets, target_lengths=target_lengths)
+            valid_time_tokens = batch.get("valid_time_tokens")
+            if valid_time_tokens is not None:
+                valid_time_tokens = valid_time_tokens.to(self.device)
+
+            padding_mask = batch.get("padding_mask")
+            if padding_mask is not None:
+                padding_mask = padding_mask.to(self.device)
+
+            out = self.model(
+                spectrograms,
+                targets=targets,
+                target_lengths=target_lengths,
+                valid_time_tokens=valid_time_tokens,
+                padding_mask=padding_mask,
+            )
 
             if "loss" in out and out["loss"] is not None:
                 total_loss += out["loss"].item()
                 num_batches += 1
 
-            # Decode greedy predictions
-            # logits: [B, T, V]
+            # Decode greedy predictions only over valid time tokens
             best_tokens = out["logits"].argmax(dim=-1)  # [B, T]
             for i in range(len(best_tokens)):
-                pred_text = self.tokenizer.decode_ctc(best_tokens[i])
+                v_len = int(valid_time_tokens[i].item()) if valid_time_tokens is not None else best_tokens.shape[1]
+                pred_text = self.tokenizer.decode_ctc(best_tokens[i][:v_len])
                 all_preds.append(pred_text)
 
             all_refs.extend(batch["texts"])

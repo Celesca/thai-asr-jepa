@@ -55,11 +55,20 @@ def main() -> int:
         tokenizer = ThaiCharTokenizer()
         tokenizer.save(vocab_path)
 
-    # Initialize Mel-Spectrogram transform
+    # Initialize Mel-Spectrogram transform with configured speech frontend
+    frontend_name = data_cfg.get("frontend", "original")
     mel_transform = AudioJEPAMelSpec(
+        frontend_type=frontend_name,
         sr=data_cfg.get("sample_rate", 32000),
         clip_length_s=data_cfg.get("clip_length_s", 10.0),
-        target_time_bins=data_cfg.get("target_time_bins", 256),
+        target_time_bins=data_cfg.get("target_time_bins", None),
+    )
+    logger.info(
+        "Configured frontend '%s': token_rate=%.2f fps, output_interval=%.2f ms, max_tokens=%d",
+        mel_transform.cfg.name,
+        mel_transform.cfg.temporal_token_rate,
+        mel_transform.cfg.effective_output_interval_ms,
+        mel_transform.cfg.compute_max_time_tokens(),
     )
 
     # Datasets
@@ -72,28 +81,39 @@ def main() -> int:
         logger.error("Train manifest not found: %s. Run prepare_data first!", train_manifest)
         return 1
 
-    budget_ratio = data_cfg.get("budget_ratio", 1.0)
+    budget_ratio = data_cfg.get("budget_ratio", None)
+    budget_hours = data_cfg.get("budget_hours", None)
+    max_duration_s = float(data_cfg.get("max_duration_s", 10.0))
+
     train_dataset = ThaiSpeechASRDataset(
         train_manifest,
         tokenizer=tokenizer,
         mel_spec_transform=mel_transform,
         budget_ratio=budget_ratio,
+        budget_hours=budget_hours,
         subsample_seed=seed,
+        max_duration_s=max_duration_s,
     )
     val_dataset = ThaiSpeechASRDataset(
         val_manifest,
         tokenizer=tokenizer,
         mel_spec_transform=mel_transform,
+        max_duration_s=max_duration_s,
     ) if val_manifest.is_file() else None
 
     test_dataset = ThaiSpeechASRDataset(
         test_manifest,
         tokenizer=tokenizer,
         mel_spec_transform=mel_transform,
+        max_duration_s=max_duration_s,
     ) if test_manifest.is_file() else None
 
     batch_size = args.batch_size or train_cfg.get("batch_size", 4)
-    collator = ASRDataCollator(pad_token_id=tokenizer.pad_token_id)
+    collator = ASRDataCollator(
+        pad_token_id=tokenizer.pad_token_id,
+        grid_w=128 // mel_transform.cfg.patch_freq,
+        patch_time=mel_transform.cfg.patch_time,
+    )
 
     train_loader = DataLoader(
         train_dataset,
@@ -116,14 +136,18 @@ def main() -> int:
         collate_fn=collator,
     ) if test_dataset else None
 
-    # Build model with asymmetric or baseline patch size
-    patch_size_cfg = model_cfg.get("patch_size", {"time": 1, "frequency": 16})
-    if isinstance(patch_size_cfg, dict):
-        patch_h = int(patch_size_cfg.get("time", 1))
-        patch_w = int(patch_size_cfg.get("frequency", 16))
+    # Patch size from frontend config or model config
+    patch_size_cfg = model_cfg.get("patch_size", None)
+    if patch_size_cfg is not None:
+        if isinstance(patch_size_cfg, dict):
+            patch_h = int(patch_size_cfg.get("time", mel_transform.cfg.patch_time))
+            patch_w = int(patch_size_cfg.get("frequency", mel_transform.cfg.patch_freq))
+        else:
+            patch_h = int(patch_size_cfg[0])
+            patch_w = int(patch_size_cfg[1])
     else:
-        patch_h = int(patch_size_cfg[0])
-        patch_w = int(patch_size_cfg[1])
+        patch_h = mel_transform.cfg.patch_time
+        patch_w = mel_transform.cfg.patch_freq
 
     ckpt_source = model_cfg.get("pretrained_checkpoint", "ltuncay/Audio-JEPA")
     adapted_weights = model_cfg.get("adapted_checkpoint", None)
@@ -133,6 +157,10 @@ def main() -> int:
         encoder = AudioJEPAEncoder(patch_size=(patch_h, patch_w))
         encoder_sd = torch.load(adapted_weights, map_location="cpu", weights_only=False)
         encoder.load_state_dict(encoder_sd, strict=False)
+        report = None
+    elif ckpt_source in ("scratch", "none", None):
+        logger.info("Initializing encoder from scratch (random initialization) with patch_size=%s", (patch_h, patch_w))
+        encoder = AudioJEPAEncoder(patch_size=(patch_h, patch_w))
         report = None
     else:
         logger.info("Initializing encoder via transfer learning from %s (patch_size=%s)", ckpt_source, (patch_h, patch_w))
@@ -148,9 +176,11 @@ def main() -> int:
         temporal_adapter_mode=model_cfg.get("temporal_adapter_mode", "native_pooling"),
         upsample_factor=model_cfg.get("upsample_factor", 1),
         freeze_encoder=model_cfg.get("freeze_encoder", False),
+        freeze_patch_embed=model_cfg.get("freeze_patch_embed", False),
         unfreeze_last_n_blocks=model_cfg.get("unfreeze_last_n_blocks", None),
         head_dropout=model_cfg.get("head_dropout", 0.1),
         pad_token_id=tokenizer.pad_token_id,
+        zero_infinity=model_cfg.get("zero_infinity", False),
         loading_report=report.to_dict() if report else None,
     )
 
@@ -161,8 +191,12 @@ def main() -> int:
     epochs = args.epochs or train_cfg.get("epochs", 15)
     optimizer = build_asr_optimizer(
         model,
-        encoder_lr=float(train_cfg.get("encoder_lr", 1e-4)),
-        head_lr=float(train_cfg.get("head_lr", 5e-4)),
+        encoder_lr=train_cfg.get("encoder_lr", None),
+        backbone_lr=train_cfg.get("backbone_lr", None),
+        patch_embed_lr=train_cfg.get("patch_embed_lr", None),
+        head_lr=float(train_cfg.get("head_lr", 3e-4)),
+        backbone_lr_ratio=float(train_cfg.get("backbone_lr_ratio", 0.1)),
+        patch_embed_lr_ratio=float(train_cfg.get("patch_embed_lr_ratio", 1.0)),
         weight_decay=float(train_cfg.get("weight_decay", 1e-2)),
     )
     total_steps = len(train_loader) * epochs

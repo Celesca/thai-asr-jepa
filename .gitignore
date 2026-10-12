@@ -26,7 +26,7 @@ wheels/
 
 # Virtual environments
 .env
-.venv
+.venv/
 env/
 venv/
 ENV/
@@ -39,7 +39,23 @@ data_cache/
 .pytest_cache/
 .uv_cache/
 
-# PyTorch checkpoints
+# PyTorch checkpoints and large model weights
 *.pt
 *.pth
 *.ckpt
+*.bin
+*.safetensors
+
+# Logs, scratch, and temporary files
+*.log
+scratch/
+branch_out.txt
+dulwich_install.txt
+git_check.txt
+git_status.txt
+
+# System & IDE files
+.DS_Store
+.idea/
+.vscode/
+.agents/

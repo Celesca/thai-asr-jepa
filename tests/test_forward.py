@@ -59,15 +59,29 @@ def test_ctc_model_forward_and_loss():
 
 def test_encoder_freezing_modes():
     encoder = AudioJEPAEncoder(embed_dim=192, depth=4, num_heads=3)
-    # Frozen mode
-    frozen_model = AudioJEPACTCAudioModel(
+    # Frozen mode with freeze_patch_embed=True (all frozen)
+    frozen_model_all = AudioJEPACTCAudioModel(
         encoder=encoder,
         vocab_size=50,
         freeze_encoder=True,
+        freeze_patch_embed=True,
     )
-    for p in frozen_model.encoder.parameters():
+    for p in frozen_model_all.encoder.parameters():
         assert not p.requires_grad
-    for p in frozen_model.ctc_head.parameters():
+    for p in frozen_model_all.ctc_head.parameters():
+        assert p.requires_grad
+
+    # Frozen backbone mode with freeze_patch_embed=False (patch_embed remains trainable)
+    encoder_fb = AudioJEPAEncoder(embed_dim=192, depth=4, num_heads=3)
+    frozen_backbone_model = AudioJEPACTCAudioModel(
+        encoder=encoder_fb,
+        vocab_size=50,
+        freeze_encoder=True,
+        freeze_patch_embed=False,
+    )
+    for p in frozen_backbone_model.encoder.blocks.parameters():
+        assert not p.requires_grad
+    for p in frozen_backbone_model.encoder.patch_embed.parameters():
         assert p.requires_grad
 
     # Partial unfreeze mode (last 1 block)

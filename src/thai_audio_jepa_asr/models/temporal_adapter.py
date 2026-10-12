@@ -98,6 +98,23 @@ def validate_ctc_feasibility(
     feasible_percentage = (num_feasible / total_samples) * 100.0
     violation_rate = float(num_violations / total_samples)
 
+    # Compute ratio distribution: T_valid / (U + R)
+    ratios = (input_lengths.float() / required_tensor.float().clamp(min=1.0)).cpu()
+    violations_detail: List[Dict[str, Any]] = []
+
+    if num_violations > 0:
+        for i in range(total_samples):
+            if bool(violations[i].item()):
+                t_val = int(input_lengths[i].item())
+                req_val = int(required_tensor[i].item())
+                violations_detail.append({
+                    "sample_idx": i,
+                    "t_valid": t_val,
+                    "required_min_length": req_val,
+                    "deficit": req_val - t_val,
+                    "reason": f"Output length {t_val} < required length {req_val} (U+R)",
+                })
+
     stats = {
         "is_feasible": (num_violations == 0),
         "total_samples": total_samples,
@@ -111,20 +128,33 @@ def validate_ctc_feasibility(
         "max_required_len": int(required_tensor.max().item()),
         "mean_input_len": float(input_lengths.float().mean().item()),
         "mean_required_len": float(required_tensor.float().mean().item()),
+        "ratio_distribution": {
+            "min": round(float(ratios.min().item()), 3),
+            "mean": round(float(ratios.mean().item()), 3),
+            "median": round(float(ratios.median().item()), 3),
+            "max": round(float(ratios.max().item()), 3),
+        },
+        "violations_detail": violations_detail,
     }
 
     if num_violations > 0:
         msg = (
             f"CTC Feasibility Warning: {num_feasible}/{total_samples} samples ({feasible_percentage:.1f}%) "
             f"feasible. {num_violations} violations! (T_out min: {stats['min_input_len']}, "
-            f"Required max: {stats['max_required_len']})"
+            f"Required max: {stats['max_required_len']}, T/(U+R) min: {stats['ratio_distribution']['min']})"
         )
         if raise_on_failure:
             raise ValueError(msg)
         else:
             logger.warning(msg)
     else:
-        logger.info("CTC Feasibility: 100%% (%d/%d samples feasible).", total_samples, total_samples)
+        logger.info(
+            "CTC Feasibility: 100%% (%d/%d samples feasible, T/(U+R) mean: %.2f, min: %.2f).",
+            total_samples,
+            total_samples,
+            stats["ratio_distribution"]["mean"],
+            stats["ratio_distribution"]["min"],
+        )
 
     return stats
 
@@ -166,11 +196,16 @@ class TemporalAdapter(nn.Module):
         else:
             self.upsampler = None
 
-    def forward(self, x: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+    def forward(
+        self,
+        x: torch.Tensor,
+        valid_lengths: Optional[torch.Tensor] = None,
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
         """Convert encoder patch representations into temporal sequence.
 
         Args:
             x: Tensor of shape [B, num_patches, embed_dim].
+            valid_lengths: Optional true sequence lengths [B] of valid temporal tokens.
 
         Returns:
             Tuple of (temporal_features: [B, T_out, embed_dim], lengths: [B]).
@@ -183,8 +218,12 @@ class TemporalAdapter(nn.Module):
         # Pool across frequency dimension: [B, grid_h, D]
         x_temporal = x_2d.mean(dim=2)
 
-        if self.mode in ("native_pooling", "unmodified") or self.upsampler is None:
+        if valid_lengths is not None:
+            lengths = valid_lengths.to(x.device)
+        else:
             lengths = torch.full((B,), self.grid_h, dtype=torch.long, device=x.device)
+
+        if self.mode in ("native_pooling", "unmodified") or self.upsampler is None:
             return x_temporal, lengths
 
         elif self.mode == "upsample_conv":
@@ -192,7 +231,7 @@ class TemporalAdapter(nn.Module):
             target_t = self.grid_h * self.upsample_factor
             x_interp = torch.nn.functional.interpolate(x_conv, size=target_t, mode="linear", align_corners=False)
             x_out = self.upsampler(x_interp).transpose(1, 2)
-            lengths = torch.full((B,), target_t, dtype=torch.long, device=x.device)
-            return x_out, lengths
+            out_lengths = lengths * self.upsample_factor
+            return x_out, out_lengths
 
         raise ValueError(f"Unknown TemporalAdapter mode: {self.mode}")

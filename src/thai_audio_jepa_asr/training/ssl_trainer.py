@@ -82,14 +82,25 @@ class SSLTrainer:
             epoch_batches = 0
             t0 = time.time()
 
+            total_steps = num_epochs * len(self.train_loader)
+
             for step, batch in enumerate(self.train_loader):
                 spectrograms = batch["spectrograms"].to(self.device)
                 context_masks = [m.to(self.device) for m in batch["context_masks"]]
                 prediction_masks = [m.to(self.device) for m in batch["prediction_masks"]]
+                padding_mask = batch.get("padding_mask")
+                if padding_mask is not None:
+                    padding_mask = padding_mask.to(self.device)
 
                 self.optimizer.zero_grad()
-                out = self.ssl_module(spectrograms, context_masks, prediction_masks)
+                out = self.ssl_module(
+                    spectrograms,
+                    context_masks=context_masks,
+                    prediction_masks=prediction_masks,
+                    padding_mask=padding_mask,
+                )
                 loss = out["loss"]
+                rep_stats = out.get("representation_stats", {})
 
                 if torch.isnan(loss) or torch.isinf(loss):
                     logger.warning("Step %d: NaN or Inf SSL loss encountered! Skipping batch.", global_step)
@@ -101,8 +112,9 @@ class SSLTrainer:
                     torch.nn.utils.clip_grad_norm_(self.ssl_module.parameters(), self.grad_clip_norm)
 
                 self.optimizer.step()
-                # Update target encoder via EMA
-                self.ssl_module.update_target_encoder()
+                # Update target encoder via scheduled EMA strictly after optimizer step
+                current_tau = self.ssl_module.get_current_ema_tau(global_step, total_steps)
+                self.ssl_module.update_target_encoder(tau=current_tau)
 
                 if self.lr_scheduler is not None:
                     self.lr_scheduler.step()
@@ -116,7 +128,21 @@ class SSLTrainer:
                     lr = self.optimizer.param_groups[0]["lr"]
                     self.writer.add_scalar("ssl/loss", loss_val, global_step)
                     self.writer.add_scalar("ssl/lr", lr, global_step)
-                    logger.info("SSL Epoch [%d/%d] Step [%d] Loss: %.4f LR: %.2e", epoch + 1, num_epochs, global_step, loss_val, lr)
+                    self.writer.add_scalar("ssl/ema_tau", current_tau, global_step)
+                    if rep_stats:
+                        self.writer.add_scalar("ssl/feature_variance", rep_stats.get("feature_variance", 0.0), global_step)
+                        self.writer.add_scalar("ssl/inter_utterance_similarity", rep_stats.get("inter_utterance_similarity", 0.0), global_step)
+                    logger.info(
+                        "SSL Epoch [%d/%d] Step [%d] Loss: %.4f LR: %.2e Tau: %.4f | FeatVar: %.3f InterSim: %.3f",
+                        epoch + 1,
+                        num_epochs,
+                        global_step,
+                        loss_val,
+                        lr,
+                        current_tau,
+                        rep_stats.get("feature_variance", 0.0),
+                        rep_stats.get("inter_utterance_similarity", 0.0),
+                    )
 
             avg_loss = epoch_loss / max(1, epoch_batches)
             epoch_duration = time.time() - t0
