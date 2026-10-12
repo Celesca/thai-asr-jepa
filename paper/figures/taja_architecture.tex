@@ -1,0 +1,52 @@
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}[
+ x=1cm,y=1cm, font=\small,
+ box/.style={draw=black!65,rounded corners=2pt,align=center,minimum height=0.82cm,text width=2.50cm,inner sep=5pt},
+ online/.style={box,fill=blue!7},
+ teacher/.style={box,fill=orange!12},
+ loss/.style={box,fill=green!9},
+ flow/.style={-{Stealth[length=2mm]},thick},
+ note/.style={font=\footnotesize,align=center}
+]
+\node[anchor=west,font=\bfseries] at (-1.45,0.75) {(a) Self-supervised Thai speech pretraining};
+\node[box] (audio) at (0,-0.25) {Unlabeled Thai audio\\16~kHz mono};
+\node[box] (mel) at (3.35,-0.25) {80-band log-Mel\\25~ms window / 10~ms hop};
+\node[online] (stem) at (6.7,-0.25) {Context projection stem\\2 frames $\rightarrow$ 1 token};
+\node[online] (enc) at (10.05,-0.25) {Context Transformer\\visible tokens only};
+\node[online] (pred) at (13.4,-0.25) {Predictor + mask tokens\\predict hidden time steps};
+\node[teacher] (tstem) at (6.7,-2.4) {Target projection stem\\complete token sequence};
+\node[teacher] (tenc) at (10.05,-2.4) {EMA target Transformer\\stop-gradient};
+\node[loss] (obj) at (13.4,-2.4) {Normalized latent loss\\masked positions only};
+\draw[flow] (audio)--(mel);
+\draw[flow] (mel)--(stem);
+\draw[flow] (stem)--(enc);
+\node[note] at (8.375,0.6) {Mask temporal spans};
+\draw[flow] (enc)--(pred);
+\draw[flow] (mel.south) |- (tstem.west);
+\draw[flow] (tstem)--(tenc);
+\draw[flow] (tenc)--(obj);
+\draw[flow] (pred)--(obj);
+\draw[flow,dashed] (stem)--node[right,note]{EMA weights}(tstem);
+\draw[flow,dashed] (enc)--node[right,note]{EMA weights}(tenc);
+\node[note,anchor=west] at (-1.45,-3.3) {Gradients update the context stem, context encoder, and predictor; the target branch is updated only by EMA.};
+\draw[black!25] (-1.45,-3.8)--(14.9,-3.8);
+\node[anchor=west,font=\bfseries] at (-1.45,-4.35) {(b) Supervised adaptation and offline inference};
+\node[box] (input) at (0,-5.25) {Thai audio\\same log-Mel frontend};
+\node[online] (asr) at (3.35,-5.25) {Retained context stem\\+ Transformer};
+\node[online] (ctc) at (6.7,-5.25) {20~ms features\\dropout + linear head};
+\node[box] (decode) at (10.05,-5.25) {CTC decoding\\merge repeats, drop blank};
+\node[box] (text) at (13.4,-5.25) {Thai transcript\\normalized characters};
+\node[loss] (ctcloss) at (6.7,-6.85) {CTC loss\\labeled training only};
+\node[box] (labels) at (3.35,-6.85) {Reference transcript\\code-point labels};
+\draw[flow] (input)--(asr);
+\draw[flow] (asr)--(ctc);
+\draw[flow] (ctc)--(decode);
+\draw[flow] (decode)--(text);
+\draw[flow] (ctc)--(ctcloss);
+\draw[flow] (labels)--(ctcloss);
+\node[note,text width=5.6cm] at (12,-6.85) {The predictor, target encoder, and training losses are absent during inference.};
+\end{tikzpicture}
+\caption{Proposed Audio-JEPA adaptation for Thai ASR. Solid arrows show data flow; dashed arrows show exponential moving-average (EMA) parameter updates. The full-frequency speech stem produces an ordered 20~ms sequence. Pretraining predicts hidden latent features; supervised CTC adaptation maps those features to text. All architecture and training choices shown are proposed, not measured results.}
+\label{fig:taja}
+\end{figure*}

@@ -1,0 +1,85 @@
+\section{Experimental Settings}
+\label{sec:experiments}
+
+\subsection{Corpora, Splits, and Label Budgets}
+We plan to use Common Voice Scripted Speech 27.0 for Thai, released in September 2026, for in-domain development \cite{cv27thai}. The release identifier is \url{cv-corpus-27.0-2026-09-11}. Its datasheet lists 33,014 training clips; usable training hours will be measured after filtering rather than inferred from the duration of the full collection. Access, license terms, and the downloaded archive checksum will be recorded before execution.
+
+The published train, development, and test manifests are the starting partitions. We will audit pseudonymous client identifiers and audio hashes, retaining held-out partitions and removing conflicting training records. Records with missing speaker identifiers will not enter the controlled training pool. Remaining development/test speaker conflicts will be resolved by retaining the test partition and removing conflicting development records. We will publish split-generation code and permitted record identifiers, rather than redistribute audio or transcript data; differences from the official splits will be documented.
+
+Training utterances must be decodable, have nonempty normalized transcripts for supervised use, and last 1--20~s. Duration filtering applies only to training; complete held-out utterances will be evaluated with length-aware batches. Exact duplicate audio will be removed, and duplicate transcripts across partitions will be quantified separately. Development and test audio are excluded from local self-supervised training, including when their transcripts would otherwise be hidden.
+
+The target unlabeled budget is 25~h of eligible Common Voice training audio with transcripts withheld. If the audited training split contains less, all eligible audio will be used and the measured duration reported; additional hours will not be assumed. A fixed seed of 2026 selects this pool once for all runs. Within it, nested labeled subsets of 1, 5, and 10~h will be selected by a seeded speaker-balanced ordering of whole utterances. The pool may therefore include labeled-subset audio, but self-supervised training will not read its transcripts. This fixed-pool design separates transcription budget from audio availability. Budgets that cannot be filled after filtering will be reported as unavailable.
+
+Each ordering will first cycle through speakers before selecting further utterances, limiting domination by prolific contributors. For each budget, selection stops before the next utterance exceeds the requested duration and the realized hours are reported. A separate, fixed 1~h development subset will be used for all model selection. Its transcribed hours will be reported in addition to the training-label budget: the ``1~h'' condition consequently uses approximately 2~h of labeled audio including validation. Three seeds, 13, 37, and 73, determine nested subsets and training randomness; methods share the same subset within each seed.
+
+The Thai \texttt{th\_th} test split of FLEURS will serve as a second-corpus test \cite{conneau2022fleurs}. Its training and validation splits will not be used. We will preserve its official test composition, apply the fixed normalization, and report overlap checks where identifiers permit them. Speaker disjointness across independently collected corpora cannot be guaranteed from unavailable metadata. FLEURS measures transfer between read-speech corpora; it does not establish conversational or dialect robustness. Actual utterance, speaker, and duration counts will be tabulated only after the manifests have been audited.
+
+\subsection{Comparison Systems}
+Table~\ref{tab:systems} defines the main comparisons. All CTC systems use the same labeled subsets, output inventory, validation data, and scoring rules. The scratch model is the essential architectural control: its difference from Thai JEPA estimates the contribution of self-supervised initialization, including its extra pretraining compute. This is not a compute-matched comparison.
+
+\begin{table}[t]
+\caption{Planned systems. All rows end in a newly trained CTC head. Conditional transfer rows require an obtainable official checkpoint.}
+\label{tab:systems}
+\centering\footnotesize
+\begin{tabularx}{\columnwidth}{@{}l X@{}}
+\toprule
+System & Initialization and purpose \\
+\midrule
+MFCC-CTC & 40 MFCCs plus first/second differences; three bidirectional LSTM layers, 256 units per direction. Conventional-feature baseline. \\
+Mel-CTC & 80 log-Mel inputs with the same LSTM stack. Frontend comparison with MFCC-CTC. \\
+Scratch & Proposed 20~ms stem and Transformer; random initialization; supervised CTC only. \\
+Thai JEPA & Same architecture; Thai-only JEPA pretraining, then CTC. Primary proposed system. \\
+Transfer & Audio-JEPA Transformer block initialization; new stem; CTC without Thai JEPA (conditional). \\
+Transfer+Thai & Same transferred initialization followed by Thai JEPA and CTC (conditional). \\
+XLS-R & \texttt{facebook/wav2vec2-xls-r-300m}; raw 16~kHz input, new CTC head, same labeled subsets \cite{babu2022xlsr,xlsrcheckpoint}. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The MFCC and Mel baselines use a stride-two temporal projection before the LSTM stack, yielding approximately 20~ms output spacing. Their frontend statistics are fitted on training audio. XLS-R retains its native waveform frontend. Its multilingual pretraining scale and parameter count differ from the proposed model, so it is a practical reference rather than evidence isolating the JEPA objective. We will report checkpoint provenance and possible upstream evaluation-data exposure separately; excluding local test audio cannot retroactively certify the pretraining data of a public model.
+
+\subsection{Optimization and Compute Protocol}
+Table~\ref{tab:settings} gives proposed starting settings, not optimized or measured results. Pretraining will use randomly selected 4~s crops, padded when shorter; repeated crops do not count as additional unique audio hours. CTC training uses complete utterances and never pairs a truncated waveform with an unmodified full transcript. Duration bucketing and gradient accumulation maintain the effective batch budget.
+
+\begin{table}[t]
+\caption{Proposed optimization settings for the main experiment.}
+\label{tab:settings}
+\centering\footnotesize
+\begin{tabularx}{\columnwidth}{@{}p{0.30\columnwidth} X@{}}
+\toprule
+Setting & Planned value \\
+\midrule
+JEPA updates & 50,000; save every 5,000; use final checkpoint unless the run fails stability checks \\
+JEPA batch & 32 crops of 4~s (128~s nominal audio/update), achieved by accumulation \\
+JEPA optimizer & AdamW, $(\beta_1,\beta_2)=(0.9,0.95)$, weight decay 0.05, peak learning rate $3\times10^{-4}$ \\
+JEPA schedule & 2,000-update linear warmup from $10^{-6}$; cosine decay to $10^{-6}$ \\
+CTC batch & Approximately 120~s unpadded audio per optimizer update \\
+CTC optimizer & AdamW, $(0.9,0.999)$, weight decay 0.01; encoder $10^{-5}$, new head $10^{-3}$ \\
+CTC schedule & Maximum 10,000 updates; 500-update warmup, then cosine decay; gradient clipping at norm 1.0 in both stages \\
+Fine-tuning & Freeze pretrained stem/encoder for 500 updates while training head; then unfreeze all parameters \\
+Model selection & Development CER every 250 updates; stop after 8 evaluations without improvement, after update 1,000 \\
+Regularization & Encoder and predictor dropout 0.1; CTC-head dropout 0.1; no speed perturbation or external noise in the primary experiment \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The scratch and LSTM systems train all layers from the first update with an initial peak rate of $3\times10^{-4}$; freezing a random encoder is not part of their schedule. For each system family, a pilot on the 5~h training condition will compare multipliers $\{0.5,1,2\}$ of its stated learning rates using seed 13. The selected multiplier is fixed across label budgets and all final seeds. Pilot costs count toward reported tuning compute. Conditional transfer runs share the same new-stem initialization within each seed. All completed runs, including instability or CTC alignment failures, will be retained in the experiment log.
+
+The planned hardware target is one CUDA GPU with at least 24~GB memory, using mixed precision and activation checkpointing where necessary. GPU feasibility and runtime have not been measured. Microbatch size will be chosen by a memory smoke test while preserving effective batch duration through accumulation. We will log the actual GPU model, peak allocated memory, precision, optimizer steps, audio processed, elapsed time, and GPU-hours separately for pretraining, tuning, and fine-tuning. PyTorch, audio processing, tokenizer, and decoder versions will be frozen in an environment lockfile before running experiments.
+
+\subsection{Ablations and Interpretation}
+Ablations will first use the 5~h condition and the same three seeds, changing one factor at a time: (i) 20 versus 40~ms token spacing, implemented with full-frequency two- versus four-frame projections and pretrained separately; (ii) random independent token masks versus five-token spans at the same 50\% coverage; (iii) a frozen encoder versus full CTC fine-tuning; and (iv) the primary JEPA objective versus the GMM auxiliary objective. The 40~ms condition will report its CTC-feasibility rate on the common data before model comparison. We will not discard different evaluation utterances for different models.
+
+For temporal-resolution comparisons, the number of optimizer updates and audio seconds per update will be held fixed, while memory and runtime are reported because token counts differ. The frozen-encoder condition trains the CTC head for the full supervised budget. Baseline comparisons answer whether JEPA pretraining is useful at all; the ablations determine whether any improvement depends on time resolution, mask geometry, or acoustic grounding. A falling pretraining loss alone will not be interpreted as an ASR improvement.
+
+\subsection{Evaluation and Reproducibility}
+Primary evaluation uses corpus-level character error rate (CER). After the shared normalization, whitespace is removed and Unicode code points, including Thai vowel and tone marks, are counted as characters. Secondary word error rate (WER) uses PyThaiNLP's \texttt{newmm} word segmentation with whitespace tokens disabled \cite{pythainlptokenize}. The package version and dictionary snapshot will be fixed, with no dictionary additions from held-out text. Segmentation is applied identically to references and hypotheses. For either unit type,
+\begin{equation}
+\mathrm{ER}=100\frac{N_{\mathrm{sub}}+N_{\mathrm{del}}+N_{\mathrm{ins}}}
+{N_{\mathrm{ref}}}.
+\end{equation}
+Counts are accumulated over the corpus rather than averaging utterance percentages. Greedy and beam-search results will be shown separately. Tone-mark substitutions/deletions, digit errors, and code-switched utterances will be inspected as descriptive error categories, without treating them as separately optimized test objectives.
+
+For each corpus and label budget, we will report mean and standard deviation over the three runs, plus per-run values. Pairwise CER differences against Scratch and XLS-R will use 2,000 paired bootstrap resamples: speakers where reliable speaker identifiers exist, otherwise utterances with that limitation stated. We will report within-run 95\% intervals separately from variation across seeds; three seeds are insufficient to characterize every source of uncertainty. Test sets will be evaluated only after selecting configurations and checkpoints on development data.
+
+Reproducibility artifacts will include split identifiers and hashes, realized audio/label hours, normalization and vocabulary files, architecture and optimizer configurations, transferred tensor lists, seeds, training curves, checkpoint hashes, decoding commands, and scoring scripts. Learning curves will plot CER/WER against labeled hours; resource tables will distinguish unique pretraining audio from repeatedly processed crops and distinguish trainable parameters from inference parameters. These experiments are intended to test label efficiency, not to claim a completed accuracy gain or universal compute advantage.
