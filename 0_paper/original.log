@@ -1,123 +1,604 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026/Homebrew) (preloaded format=pdflatex 2026.3.4)  22 SEP 2026 18:14
-entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
-**original.tex
-(./original.tex
-LaTeX2e <2025-11-01>
-L3 programming layer <2026-01-19>
+This is LuaTeX, Version 1.24.0 (TeX Live 2026/Homebrew)  (format=dvilualatex 2026.3.1)  22 SEP 2026 18:52
+ restricted system commands enabled.
+**\makeatletter\def\HCode{\futurelet\HCode\HChar}\def\HChar{\ifx"\HCode\def\HCo
+de"##1"{\Link##1}\expandafter\HCode\else\expandafter\Link\fi}\def\Link#1.a.b.c.
+{\let\HCode\documentstyle\def\documentstyle{\let\documentstyle\HCode\expandafte
+r\def\csname tex4ht\endcsname{#1,html}\def\HCode####1{\documentstyle[tex4ht,}\@
+ifnextchar[{\HCode}{\documentstyle[tex4ht]}}\RequirePackage[#1,html]{tex4ht}}\m
+akeatother\HCode xhtml,html,mathjax,charset=utf-8,html5.a.b.c.\input "\detokeni
+ze{original.tex}"
+Lua module: luaotfload 2024-12-03 v3.29 Lua based OpenType font support
+Lua module: lualibs 2023-07-13 v2.76 ConTeXt Lua standard libraries.
+Lua module: lualibs-extended 2023-07-13 v2.76 ConTeXt Lua libraries -- extended collection.
+luaotfload | load : FATAL ERROR
+luaotfload | load :   × Failed to load "fontloader" module "basics-gen".
+luaotfload | load :   × Error message:
+luaotfload | load :     × "...are/texmf-dist/tex/luatex/luaotfload/luaotfload-init.lua:301: system : no writeable cache path, quiting".
+Inserting `tracingstacklevels' in `input_level_string'.
 
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/tex4
+ht.sty
+version 2025-12-14-13:41
+Package: tex4ht 
+--------------------------------------
+--- Note --- for _ at preamble, use the command line option `early_'
+--------------------------------------
+--------------------------------------
+--- Note --- for ^ at preamble, use the command line option `early^'
+--------------------------------------
+\tmp:toks=\toks17
+) (./original.tex
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/usep
+ackage.4ht
+version 2025-08-27-10:30
+)
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/ieeetran/IEEE
 tran.cls
 Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
 -- See the "IEEEtran_HOWTO" manual for usage information.
 -- http://www.michaelshell.org/tex/ieeetran/
-\@IEEEtrantmpdimenA=\dimen148
-\@IEEEtrantmpdimenB=\dimen149
-\@IEEEtrantmpdimenC=\dimen150
-\@IEEEtrantmpcountA=\count275
-\@IEEEtrantmpcountB=\count276
-\@IEEEtrantmpcountC=\count277
-\@IEEEtrantmptoksA=\toks17
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 5
-03.
+\@IEEEtrantmpdimenA=\dimen147
+\@IEEEtrantmpdimenB=\dimen148
+\@IEEEtrantmpdimenC=\dimen149
+\@IEEEtrantmpcountA=\count273
+\@IEEEtrantmpcountB=\count274
+\@IEEEtrantmpcountC=\count275
+\@IEEEtrantmptoksA=\toks18
+LaTeX Font Info:    Trying to load font information for TU+ptm on input line 50
+3.
+LaTeX Font Info:    No file TUptm.fd. on input line 503.
 
-(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/psnfss/ot1ptm
-.fd
-File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
-)
+LaTeX Font Warning: Font shape `TU/ptm/m/n' undefined
+(Font)              using `TU/lmr/m/n' instead on input line 503.
+
+! Font \TU/lmr/m/n/10=[lmroman10-regular]:+tlig; at 10pt not loadable: metric da
+ta not found or bad.
+<to be read again> 
+relax 
+l.503 \normalfont
+               \selectfont
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/n/10=[lmroman10-regular]:+tlig; at 10pt not loadable: metric da
+ta not found or bad.
+<to be read again> 
+relax 
+l.503 \normalfont\selectfont
+                          
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
 -- Using 8.5in x 11in (letter) paper.
--- Using PDF output.
-\@IEEEnormalsizeunitybaselineskip=\dimen151
+-- Using DVI output.
+\@IEEEnormalsizeunitybaselineskip=\dimen150
 -- This is a 10 point document.
 LaTeX Encoding Info:    Redeclaring text command \textunderscore (encoding ?) o
 n input line 937.
-\CLASSINFOnormalsizebaselineskip=\dimen152
-\CLASSINFOnormalsizeunitybaselineskip=\dimen153
-\IEEEnormaljot=\dimen154
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+! Font \TU/ptm/m/n/9=[lmroman9-regular]:+tlig; at 9pt not loadable: metric data 
+not found or bad.
+<to be read again> 
+relax 
+l.963 \small
+          \normalsize % make \baselinestretch take affect
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+\CLASSINFOnormalsizebaselineskip=\dimen151
+\CLASSINFOnormalsizeunitybaselineskip=\dimen152
+\IEEEnormaljot=\dimen153
+! Font \TU/ptm/m/n/5=[lmroman5-regular]:+tlig; at 5pt not loadable: metric data 
+not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+LaTeX Font Warning: Font shape `TU/ptm/bx/n' undefined
+(Font)              using `TU/ptm/m/n' instead on input line 1090.
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+LaTeX Font Warning: Font shape `TU/ptm/m/it' undefined
+(Font)              using `TU/ptm/m/n' instead on input line 1090.
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+! Font \TU/ptm/m/it/5=[lmroman5-regular]:+tlig; at 5pt not loadable: metric data
+ not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <17> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <20> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+LaTeX Font Warning: Font shape `TU/ptm/bx/it' undefined
+(Font)              using `TU/ptm/bx/n' instead on input line 1090.
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+! Font \TU/ptm/bx/n/5=[lmroman5-regular]:+tlig; at 5pt not loadable: metric data
+ not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
 
-\IEEEquantizedlength=\dimen155
-\IEEEquantizedlengthdiff=\dimen156
-\IEEEquantizedtextheightdiff=\dimen157
-\IEEEilabelindentA=\dimen158
-\IEEEilabelindentB=\dimen159
-\IEEEilabelindent=\dimen160
-\IEEEelabelindent=\dimen161
-\IEEEdlabelindent=\dimen162
-\IEEElabelindent=\dimen163
-\IEEEiednormlabelsep=\dimen164
-\IEEEiedmathlabelsep=\dimen165
+! Font \TU/ptm/m/n/7=[lmroman7-regular]:+tlig; at 7pt not loadable: metric data 
+not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/n/7=[lmroman7-regular]:+tlig; at 7pt not loadable: metric data
+ not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/it/7=[lmroman7-regular]:+tlig; at 7pt not loadable: metric data
+ not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/it/7=[lmroman7-regular]:+tlig; at 7pt not loadable: metric dat
+a not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/n/8=[lmroman8-regular]:+tlig; at 8pt not loadable: metric data 
+not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/n/8=[lmroman8-regular]:+tlig; at 8pt not loadable: metric data
+ not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/it/8=[lmroman8-regular]:+tlig; at 8pt not loadable: metric data
+ not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/it/8=[lmroman8-regular]:+tlig; at 8pt not loadable: metric dat
+a not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/n/9=[lmroman9-regular]:+tlig; at 9pt not loadable: metric data
+ not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/it/9=[lmroman9-regular]:+tlig; at 9pt not loadable: metric data
+ not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/it/9=[lmroman9-regular]:+tlig; at 9pt not loadable: metric dat
+a not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/n/10=[lmroman10-regular]:+tlig; at 10pt not loadable: metric d
+ata not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/it/10=[lmroman10-regular]:+tlig; at 10pt not loadable: metric d
+ata not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/it/10=[lmroman10-regular]:+tlig; at 10pt not loadable: metric 
+data not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/n/11=[lmroman12-regular]:+tlig; at 11pt not loadable: metric da
+ta not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/n/11=[lmroman12-regular]:+tlig; at 11pt not loadable: metric d
+ata not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/it/11=[lmroman12-regular]:+tlig; at 11pt not loadable: metric d
+ata not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/it/11=[lmroman12-regular]:+tlig; at 11pt not loadable: metric 
+data not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/n/12=[lmroman12-regular]:+tlig; at 12pt not loadable: metric da
+ta not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/n/12=[lmroman12-regular]:+tlig; at 12pt not loadable: metric d
+ata not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/it/12=[lmroman12-regular]:+tlig; at 12pt not loadable: metric d
+ata not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/it/12=[lmroman12-regular]:+tlig; at 12pt not loadable: metric 
+data not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/n/17=[lmroman17-regular]:+tlig; at 17pt not loadable: metric da
+ta not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/n/17=[lmroman17-regular]:+tlig; at 17pt not loadable: metric d
+ata not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/it/17=[lmroman17-regular]:+tlig; at 17pt not loadable: metric d
+ata not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/it/17=[lmroman17-regular]:+tlig; at 17pt not loadable: metric 
+data not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/n/20=[lmroman17-regular]:+tlig; at 20pt not loadable: metric da
+ta not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/n/20=[lmroman17-regular]:+tlig; at 20pt not loadable: metric d
+ata not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/it/20=[lmroman17-regular]:+tlig; at 20pt not loadable: metric d
+ata not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/it/20=[lmroman17-regular]:+tlig; at 20pt not loadable: metric 
+data not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/n/24=[lmroman17-regular]:+tlig; at 24pt not loadable: metric da
+ta not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/n/24=[lmroman17-regular]:+tlig; at 24pt not loadable: metric d
+ata not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/m/it/24=[lmroman17-regular]:+tlig; at 24pt not loadable: metric d
+ata not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+! Font \TU/ptm/bx/it/24=[lmroman17-regular]:+tlig; at 24pt not loadable: metric 
+data not found or bad.
+<to be read again> 
+relax 
+l.1090 \@IEEEtunefonts
+                    
+I wasn't able to read the size data for this font,
+so I will ignore the font specification.
+[Wizards can fix TFM files using TFtoPL/PLtoTF.]
+You might try inserting a different font spec;
+e.g., type `I\font<same font id>=<substitute font name>'.
+
+\IEEEquantizedlength=\dimen154
+\IEEEquantizedlengthdiff=\dimen155
+\IEEEquantizedtextheightdiff=\dimen156
+Missing character: There is no g (U+0067) in font nullfont!
+Missing character: There is no T (U+0054) in font nullfont!
+Missing character: There is no g (U+0067) in font nullfont!
+Missing character: There is no T (U+0054) in font nullfont!
+Missing character: There is no T (U+0054) in font nullfont!
+Missing character: There is no g (U+0067) in font nullfont!
+Missing character: There is no T (U+0054) in font nullfont!
+Missing character: There is no T (U+0054) in font nullfont!
+Missing character: There is no g (U+0067) in font nullfont!
+Missing character: There is no T (U+0054) in font nullfont!
+Missing character: There is no g (U+0067) in font nullfont!
+Missing character: There is no T (U+0054) in font nullfont!
+Missing character: There is no g (U+0067) in font nullfont!
+Missing character: There is no T (U+0054) in font nullfont!
+\IEEEilabelindentA=\dimen157
+\IEEEilabelindentB=\dimen158
+\IEEEilabelindent=\dimen159
+\IEEEelabelindent=\dimen160
+\IEEEdlabelindent=\dimen161
+\IEEElabelindent=\dimen162
+\IEEEiednormlabelsep=\dimen163
+\IEEEiedmathlabelsep=\dimen164
 \IEEEiedtopsep=\skip49
-\c@section=\count278
-\c@subsection=\count279
-\c@subsubsection=\count280
-\c@paragraph=\count281
-\c@IEEEsubequation=\count282
+\c@section=\count276
+\c@subsection=\count277
+\c@subsubsection=\count278
+\c@paragraph=\count279
+\c@IEEEsubequation=\count280
 \abovecaptionskip=\skip50
 \belowcaptionskip=\skip51
-\c@figure=\count283
-\c@table=\count284
-\@IEEEeqnnumcols=\count285
-\@IEEEeqncolcnt=\count286
-\@IEEEsubeqnnumrollback=\count287
-\@IEEEquantizeheightA=\dimen166
-\@IEEEquantizeheightB=\dimen167
-\@IEEEquantizeheightC=\dimen168
-\@IEEEquantizeprevdepth=\dimen169
-\@IEEEquantizemultiple=\count288
+\c@figure=\count281
+\c@table=\count282
+\@IEEEeqnnumcols=\count283
+\@IEEEeqncolcnt=\count284
+\@IEEEsubeqnnumrollback=\count285
+\@IEEEquantizeheightA=\dimen165
+\@IEEEquantizeheightB=\dimen166
+\@IEEEquantizeheightC=\dimen167
+\@IEEEquantizeprevdepth=\dimen168
+\@IEEEquantizemultiple=\count286
 \@IEEEquantizeboxA=\box53
-\@IEEEtmpitemindent=\dimen170
-\IEEEPARstartletwidth=\dimen171
-\c@IEEEbiography=\count289
+\@IEEEtmpitemindent=\dimen169
+\IEEEPARstartletwidth=\dimen170
+\c@IEEEbiography=\count287
 \@IEEEtranrubishbin=\box54
 )
 ** ATTENTION: Overriding command lockouts (line 2).
@@ -131,7 +612,6 @@ Package: cite 2015/02/27  v 5.5
 th.sty
 Package: amsmath 2025/07/09 v2.17z AMS math features
 \@mathmargin=\skip52
-
 For additional information on amsmath, use the `?' option.
 
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/amsmath/amste
@@ -141,26 +621,26 @@ Package: amstext 2024/11/17 v2.01 AMS text
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/amsmath/amsge
 n.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks18
-\ex@=\dimen172
+\@emptytoks=\toks19
+\ex@=\dimen171
 ))
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/amsmath/amsbs
 y.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen173
+\pmbraise@=\dimen172
 )
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/amsmath/amsop
 n.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count290
-LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count291
-\leftroot@=\count292
+\inf@bad=\count288
+LaTeX Info: Redefining \frac on input line 235.
+\uproot@=\count289
+\leftroot@=\count290
 LaTeX Info: Redefining \overline on input line 398.
 LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count293
-\DOTSCASE@=\count294
+\classnum@=\count291
+\DOTSCASE@=\count292
 LaTeX Info: Redefining \ldots on input line 495.
 LaTeX Info: Redefining \dots on input line 498.
 LaTeX Info: Redefining \cdots on input line 619.
@@ -170,34 +650,34 @@ LaTeX Info: Redefining \big on input line 721.
 LaTeX Info: Redefining \Big on input line 722.
 LaTeX Info: Redefining \bigg on input line 723.
 LaTeX Info: Redefining \Bigg on input line 724.
-\big@size=\dimen174
+\big@size=\dimen173
 LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count295
+\macc@depth=\count293
 LaTeX Info: Redefining \bmod on input line 904.
 LaTeX Info: Redefining \pmod on input line 909.
 LaTeX Info: Redefining \smash on input line 939.
 LaTeX Info: Redefining \relbar on input line 969.
 LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count296
+\c@MaxMatrixCols=\count294
 \dotsspace@=\muskip17
-\c@parentequation=\count297
-\dspbrk@lvl=\count298
-\tag@help=\toks19
-\row@=\count299
-\column@=\count300
-\maxfields@=\count301
-\andhelp@=\toks20
-\eqnshift@=\dimen175
-\alignsep@=\dimen176
-\tagshift@=\dimen177
-\tagwidth@=\dimen178
-\totwidth@=\dimen179
-\lineht@=\dimen180
-\@envbody=\toks21
+\c@parentequation=\count295
+\dspbrk@lvl=\count296
+\tag@help=\toks20
+\row@=\count297
+\column@=\count298
+\maxfields@=\count299
+\andhelp@=\toks21
+\eqnshift@=\dimen174
+\alignsep@=\dimen175
+\tagshift@=\dimen176
+\tagwidth@=\dimen177
+\totwidth@=\dimen178
+\lineht@=\dimen179
+\@envbody=\toks22
 \multlinegap=\skip53
 \multlinetaggap=\skip54
-\mathdisplay@stack=\toks22
+\mathdisplay@stack=\toks23
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
 )
@@ -225,12 +705,12 @@ Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/graphics/keyv
 al.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks23
+\KV@toks@=\toks24
 )
-\c@ALC@unique=\count302
-\c@ALC@line=\count303
-\c@ALC@rem=\count304
-\c@ALC@depth=\count305
+\c@ALC@unique=\count300
+\c@ALC@line=\count301
+\c@ALC@rem=\count302
+\c@ALC@depth=\count303
 \ALC@tlm=\skip55
 \algorithmicindent=\skip56
 )
@@ -238,6 +718,10 @@ Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 hicx.sty
 Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
 
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/grap
+hics-hooks.4ht
+version 2022-08-17-14:25
+)
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/graphics/grap
 hics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
@@ -250,18 +734,22 @@ Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
 graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 106.
+Package graphics Info: Driver file: dvips.def on input line 106.
 
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/graphics-def/
-pdftex.def
-File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+dvips.def
+File: dvips.def 2025/01/21 v3.2a Graphics/color driver for dvips
 ))
-\Gin@req@height=\dimen181
-\Gin@req@width=\dimen182
+\Gin@req@height=\dimen180
+\Gin@req@width=\dimen181
 )
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/base/textcomp
 .sty
 Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/xcol
+or-hooks.4ht
+version 2020-10-17-13:53
 )
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/xcolor/xcolor
 .sty
@@ -271,12 +759,11 @@ Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
 color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package xcolor Info: Driver file: pdftex.def on input line 274.
+Package xcolor Info: Driver file: dvips.def on input line 274.
 
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/graphics/math
 color.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
 Package xcolor Info: Model `RGB' extended on input line 1365.
 Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
 Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
@@ -288,99 +775,1278 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/comment/comme
 nt.sty
 \CommentStream=\write3
- Excluding comment 'comment')
-(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/l3backend/l3b
-ackend-pdftex.def
-File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count306
-) (./original.aux)
-\openout1 = `original.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-
--- Lines per column: 56 (exact).
-
-(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/context/base/mkii/s
-upp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count307
-\scratchdimen=\dimen183
-\scratchbox=\box57
-\nofMPsegments=\count308
-\nofMParguments=\count309
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count310
-\MPscratchDim=\dimen184
-\MPnumerator=\count311
-\makeMPintoPDFobject=\count312
-\everyMPtoPDFconversion=\toks25
+Excluding comment 'comment')
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/booktabs/book
+tabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen182
+\lightrulewidth=\dimen183
+\cmidrulewidth=\dimen184
+\belowrulesep=\dimen185
+\belowbottomsep=\dimen186
+\aboverulesep=\dimen187
+\abovetopsep=\dimen188
+\cmidrulesep=\dimen189
+\cmidrulekern=\dimen190
+\defaultaddspace=\dimen191
+\@cmidla=\count304
+\@cmidlb=\count305
+\@aboverulesep=\dimen192
+\@belowrulesep=\dimen193
+\@thisruleclass=\count306
+\@lastruleclass=\count307
+\@thisrulewidth=\dimen194
 )
-(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/epstopdf-pkg/
-epstopdf-base.sty
-Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
-85.
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/tools/tabular
+x.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 
-(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/latexconfig/e
-pstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/tools/array.s
+ty
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
+\col@sep=\dimen195
+\ar@mcellbox=\box57
+\extrarowheight=\dimen196
+\NC@list=\toks25
+\extratabsurround=\skip57
+\backup@length=\skip58
+\ar@cellbox=\box58
+)
+\TX@col@width=\dimen197
+\TX@old@table=\dimen198
+\TX@old@col=\dimen199
+\TX@target=\dimen256
+\TX@delta=\dimen257
+\TX@cols=\count308
+\TX@ftn=\toks26
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/tikz
+-hooks.4ht
+version 2025-11-20-13:54
+*****************************
+TeX4ht info: Using dvisvgm4ht TikZ driver. Put \def \pgfsysdriver {driver-name}
+ to your document before use of TikZ if you want to another driver. Use tikz+ o
+ption if your TikZ pictures use patterns.
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/pgf/frontendl
+ayer/tikz.sty
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/pgf-
+hooks.4ht
+version 2024-01-15-14:00
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/pgf/basiclaye
+r/pgf.sty
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/pgf/utilities
+/pgfrcs.sty
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/utiliti
+es/pgfutil-common.tex
+\pgfutil@everybye=\toks27
+\pgfutil@tempdima=\dimen258
+\pgfutil@tempdimb=\dimen259
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/utiliti
+es/pgfutil-latex.def
+\pgfutil@abb=\box59
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/utiliti
+es/pgfrcs.code.tex
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/pgf.rev
+ision.tex)
+Package: pgfrcs 2025-08-29 v3.1.11a (3.1.11a)
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 28.
+Package: pgf 2025-08-29 v3.1.11a (3.1.11a)
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/pgf/basiclaye
+r/pgfcore.sty
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/pgf/systemlay
+er/pgfsys.sty
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/systeml
+ayer/pgfsys.code.tex
+Package: pgfsys 2025-08-29 v3.1.11a (3.1.11a)
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/utiliti
+es/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks28
+\pgfkeys@temptoks=\toks29
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/utiliti
+es/pgfkeyslibraryfiltered.code.tex
+\pgfkeys@tmptoks=\toks30
+))
+\pgf@x=\dimen260
+\pgf@y=\dimen261
+\pgf@xa=\dimen262
+\pgf@ya=\dimen263
+\pgf@xb=\dimen264
+\pgf@yb=\dimen265
+\pgf@xc=\dimen266
+\pgf@yc=\dimen267
+\pgf@xd=\dimen268
+\pgf@yd=\dimen269
+\w@pgf@writea=\write4
+\r@pgf@reada=\read2
+\c@pgf@counta=\count309
+\c@pgf@countb=\count310
+\c@pgf@countc=\count311
+\c@pgf@countd=\count312
+\t@pgf@toka=\toks31
+\t@pgf@tokb=\toks32
+\t@pgf@tokc=\toks33
+\pgf@sys@id@count=\count313
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/systeml
+ayer/pgf.cfg
+File: pgf.cfg 2025-08-29 v3.1.11a (3.1.11a)
+)
+Driver file for pgf: pgfsys-dvisvgm4ht.def
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/systeml
+ayer/pgfsys-dvisvgm4ht.def
+File: pgfsys-dvisvgm4ht.def 2025-08-29 v3.1.11a (3.1.11a)
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/systeml
+ayer/pgfsys-dvisvgm.def
+File: pgfsys-dvisvgm.def 2025-08-29 v3.1.11a (3.1.11a)
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/systeml
+ayer/pgfsys-common-svg.def
+File: pgfsys-common-svg.def 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@sys@svg@objectcount=\count314
+\pgf@sys@svg@scopecount=\count315
+\pgf@sys@svg@type@count=\count316
+\pgf@sys@svg@canvascount=\count317
+))))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/systeml
+ayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfsyssoftpath@smallbuffer@items=\count318
+\pgfsyssoftpath@bigbuffer@items=\count319
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/systeml
+ayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/xcol
+or-hooks.4ht
+version 2020-10-17-13:53
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcore.code.tex
+Package: pgfcore 2025-08-29 v3.1.11a (3.1.11a)
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmath.code.tex
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmathutil.code.tex)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmathparser.code.tex
+\pgfmath@dimen=\dimen270
+\pgfmath@count=\count320
+\pgfmath@box=\box60
+\pgfmath@toks=\toks34
+\pgfmath@stack@operand=\toks35
+\pgfmath@stack@operation=\toks36
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmathfunctions.code.tex)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmathfunctions.basic.code.tex)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmathfunctions.trigonometric.code.tex)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmathfunctions.random.code.tex)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmathfunctions.comparison.code.tex)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmathfunctions.base.code.tex)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmathfunctions.round.code.tex)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmathfunctions.misc.code.tex)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmathfunctions.integerarithmetics.code.tex)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmathcalc.code.tex)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count321
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fint.code.tex)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@picminx=\dimen271
+\pgf@picmaxx=\dimen272
+\pgf@picminy=\dimen273
+\pgf@picmaxy=\dimen274
+\pgf@pathminx=\dimen275
+\pgf@pathmaxx=\dimen276
+\pgf@pathminy=\dimen277
+\pgf@pathmaxy=\dimen278
+\pgf@xx=\dimen279
+\pgf@xy=\dimen280
+\pgf@yx=\dimen281
+\pgf@yy=\dimen282
+\pgf@zx=\dimen283
+\pgf@zy=\dimen284
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@path@lastx=\dimen285
+\pgf@path@lasty=\dimen286
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@shorten@end@additional=\dimen287
+\pgf@shorten@start@additional=\dimen288
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfpic=\box61
+\pgf@hbox=\box62
+\pgf@layerbox@main=\box63
+\pgf@picture@serial@count=\count322
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgflinewidth=\dimen289
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@pt@x=\dimen290
+\pgf@pt@y=\dimen291
+\pgf@pt@temp=\dimen292
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfarrowsep=\dimen293
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@max=\dimen294
+\pgf@sys@shading@range@num=\count323
+\pgf@shadingcount=\count324
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfexternal@startupbox=\box64
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/basicla
+yer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/modules
+/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfnodeparttextbox=\box65
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/modules
+/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/pgf/compatibi
+lity/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@nodesepstart=\dimen295
+\pgf@nodesepend=\dimen296
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/pgf/compatibi
+lity/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/pgf/utilities
+/pgffor.sty
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/pgf/utilities
+/pgfkeys.sty
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/utiliti
+es/pgfkeys.code.tex))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/pgf/math/pgfm
+ath.sty
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/math/pg
+fmath.code.tex))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/utiliti
+es/pgffor.code.tex
+Package: pgffor 2025-08-29 v3.1.11a (3.1.11a)
+\pgffor@iter=\dimen297
+\pgffor@skip=\dimen298
+\pgffor@stack=\toks37
+\pgffor@toks=\toks38
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/fronten
+dlayer/tikz/tikz.code.tex
+Package: tikz 2025-08-29 v3.1.11a (3.1.11a)
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/librari
+es/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@plot@mark@count=\count325
+\pgfplotmarksize=\dimen299
+)
+\tikz@lastx=\dimen300
+\tikz@lasty=\dimen301
+\tikz@lastxsaved=\dimen302
+\tikz@lastysaved=\dimen303
+\tikz@lastmovetox=\dimen304
+\tikz@lastmovetoy=\dimen305
+\tikzleveldistance=\dimen306
+\tikzsiblingdistance=\dimen307
+\tikz@figbox=\box66
+\tikz@figbox@bg=\box67
+\tikz@tempbox=\box68
+\tikz@tempbox@bg=\box69
+\tikztreelevel=\count326
+\tikznumberofchildren=\count327
+\tikznumberofcurrentchild=\count328
+\tikz@fig@count=\count329
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/modules
+/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfmatrixcurrentrow=\count330
+\pgfmatrixcurrentcolumn=\count331
+\pgf@matrix@numberofcolumns=\count332
+)
+\tikz@expandcount=\count333
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/fronten
+dlayer/tikz/libraries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))) (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/url/url.s
+ty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/librari
+es/pgflibraryarrows.meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfarrowinset=\dimen308
+\pgfarrowlength=\dimen309
+\pgfarrowwidth=\dimen310
+\pgfarrowlinewidth=\dimen311
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/fronten
+dlayer/tikz/libraries/tikzlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/pgf/fronten
+dlayer/tikz/libraries/tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/tex4
+ht.4ht
+version 2025-07-09-13:35
+--------------------------------------
+--- Note --- for additional information, use the command line option `info'
+--------------------------------------
+::::::::::::::::::::::::::::::::::::::::::
+ TeX4ht info is available in the log file 
+::::::::::::::::::::::::::::::::::::::::::
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/tex4
+ht.sty
+version 2025-12-14-13:41
+l.882 --- TeX4ht warning --- nonprimitive \everypar ---
+--- needs --- tex4ht original ---
+\tmp:cnt=\count334
+
+\openout15 = original.tmp
+(./original.tmp)
+\tmp:dim=\skip59
+(./original.xref)
+\:refout=\write5
+
+\openout5 = original.xref
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+--------------------------------------
+--- Note --- to remove the <?xml version=...?> processing instruction use the c
+ommand line option `no-VERSION'
+--------------------------------------
+--------------------------------------
+--- Note --- to remove the DOCTYPE declaration use the command line option `no-
+DOCTYPE'
+--------------------------------------
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+)
+--------------------------------------
+--- Note --- for marking of the base font, use the command line option `fonts+'
+
+--------------------------------------
+--------------------------------------
+--- Note --- for non active _, use the command line option `no_'
+--------------------------------------
+--------------------------------------
+--- Note --- for _ of catcode 13, use the command line option `_13'
+--------------------------------------
+--------------------------------------
+--- Note --- for non active ^, use the command line option `no^'
+--------------------------------------
+--------------------------------------
+--- Note --- for ^ of catcode 13, use the command line option `^13'
+--------------------------------------
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+--------------------------------------
+--- Note --- to ignore CSS font decoration, use the `NoFonts' command line opti
+on
+--------------------------------------
+--------------------------------------
+--- Note --- for jpg bitmaps of pictures, use the `jpg' command line option. (C
+haracter bitmaps are controled only by `g' records of tex4ht.env and `-g' switc
+hes of tex4ht.c) 
+--------------------------------------
+--------------------------------------
+--- Note --- for gif bitmaps of pictures, use the `gif' command line option. (C
+haracter bitmaps are controled only by `g' records of tex4ht.env and `-g' switc
+hes of tex4ht.c) 
+--------------------------------------
+--------------------------------------
+--- Note --- for content and toc in 2 frames, use the command line option `fram
+es'
+--------------------------------------
+--------------------------------------
+--- Note --- for content, toc, and footnotes in 3 frames, use the command line 
+option `frames-fn'
+--------------------------------------
+--------------------------------------
+--- Note --- for file extension name xht, use the command line option `xht'
+--------------------------------------
+TeX4ht package options: xhtml,html,mathjax,charset=utf-8,html5
+--------------------------------------
+--- Note --- To print a timestamp, use the command line option timestamp
+--------------------------------------
+--------------------------------------
+--- Note --- to ignore CSS code, use the command line option `-css
+--------------------------------------
+--------------------------------------
+--- Note --- for inline CSS code, use the command line option `css-in'
+--------------------------------------
+--------------------------------------
+--- Note --- for pop ups on mouse over, use the command line option `mouseover'
+
+--------------------------------------
+--------------------------------------
+--- Note --- for addressing images in a subdirectory, use the command line opti
+on `imgdir:.../'
+--------------------------------------
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+--------------------------------------
+--- Note --- To print a timestamp, use the command line option timestamp
+--------------------------------------
+--------------------------------------
+--- Note --- We use a default CSS style. Use the `nostyle' option if you want t
+o use custom a CSS design
+--------------------------------------
+)
+\:tokwrite=\toks39
+\:tokpage=\toks40
+--------------------------------------
+--- Note --- for back links to toc, use the command line option `sections+'
+--------------------------------------
+--------------------------------------
+--- Note --- for linear crosslinks of pages, use the command line option `next'
+
+--------------------------------------
+
+\openout15 = original.4ct
+\:tocout=\write6
+
+\openout6 = original.4tc
+(original.4tc)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/late
+x.4ht
+version 2025-12-04-13:51
+LaTeX Info: Redefining \_ on input line 180.
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/base/fontenc.
+sty
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 1
+16.
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/psnfss/ot1ptm
+.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/kastrup/bin
+hex.tex)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/base/tuenc.de
+f
+File: tuenc.def 2025/07/18 v2.1d Standard LaTeX file
+\@remove@tlig@@@=\luafunction31
+LaTeX Font Info:    Redeclaring font encoding OT1 on input line 105.
+LaTeX Encoding Info:    Redeclaring text command \textnonbreakinghyphen (encodi
+ng OT1) on input line 226.
+LaTeX Encoding Info:    Redeclaring text command \textfiguredash (encoding OT1)
+ on input line 228.
+LaTeX Encoding Info:    Redeclaring text command \texthorizontalbar (encoding O
+T1) on input line 230.
+LaTeX Encoding Info:    Redeclaring text command \` (encoding OT1) on input lin
+e 299.
+LaTeX Encoding Info:    Redeclaring text command \' (encoding OT1) on input lin
+e 300.
+LaTeX Encoding Info:    Redeclaring text command \^ (encoding OT1) on input lin
+e 301.
+LaTeX Encoding Info:    Redeclaring text command \~ (encoding OT1) on input lin
+e 302.
+LaTeX Encoding Info:    Redeclaring text command \= (encoding OT1) on input lin
+e 303.
+LaTeX Encoding Info:    Redeclaring text command \u (encoding OT1) on input lin
+e 304.
+LaTeX Encoding Info:    Redeclaring text command \. (encoding OT1) on input lin
+e 305.
+LaTeX Encoding Info:    Redeclaring text command \" (encoding OT1) on input lin
+e 306.
+LaTeX Encoding Info:    Redeclaring text command \r (encoding OT1) on input lin
+e 307.
+LaTeX Encoding Info:    Redeclaring text command \H (encoding OT1) on input lin
+e 308.
+LaTeX Encoding Info:    Redeclaring text command \v (encoding OT1) on input lin
+e 309.
+LaTeX Encoding Info:    Redeclaring text command \b (encoding OT1) on input lin
+e 310.
+LaTeX Encoding Info:    Redeclaring text command \d (encoding OT1) on input lin
+e 311.
+LaTeX Encoding Info:    Redeclaring text command \c (encoding OT1) on input lin
+e 312.
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/tuen
+c-luatex.4ht
+version 2018-08-30-15:28
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/luatex/luatexbase/l
+uatexbase.sty
+Package: luatexbase 2015/10/04 v1.3 luatexbase interface to LuaTeX 
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/luatex/ctablestack/
+ctablestack.sty
+Package: ctablestack 2015/10/01 v1.0 Catcode table stable support
+\@catcodetablestackcnt=\count335
+)
+\CatcodeTableOther=\catcodetable14
+\CatcodeTableExpl=\catcodetable15
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/lualatex/luacode/lu
+acode.sty
+Package: luacode 2012/01/23 v1.2a lua-in-tex helpers (mpg)
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/iftex/iflua
+tex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/iftex/iftex
+.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+\luacode@lines=\toks41
+\luacode@table@soft=\catcodetable16
+)
+Inserting `Char to entity' in `pre_linebreak_filter'.
+Inserting `hpack-char-to-entity' in `hpack_filter'.
+Inserting `hpack-char-to-entity' in `vpack_filter'.
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+LaTeX Info: Redefining \begin on input line 634.
+LaTeX Info: Redefining \end on input line 682.
+LaTeX Info: Redefining \, on input line 844.
+LaTeX Info: Redefining \; on input line 845.
+LaTeX Info: Redefining \! on input line 846.
+LaTeX Info: Redefining \: on input line 847.
+LaTeX Info: Redefining \> on input line 848.
+--------------------------------------
+--- Note --- for links into captions, instead of float heads, use the command l
+ine option `refcaption'
+--------------------------------------
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+--------------------------------------
+--- Note --- For mini tocs immediately aftter the header use the command line o
+ption `minitoc<'
+--------------------------------------
+--------------------------------------
+--- Note --- For full TOC on each page compatible with the collapsetoc DOM filt
+er, use the `fulltoc' command line option.
+--------------------------------------
+--------------------------------------
+--- Note --- for enumerated list elements with valued data, use the command lin
+e option `enumerate+'
+--------------------------------------
+--------------------------------------
+--- Note --- for enumerated list elements li's with value attributes, use the c
+ommand line option `enumerate-'
+--------------------------------------
+--------------------------------------
+--- Note --- for CSS2 code, use the command line option `css2'
+--------------------------------------
+--------------------------------------
+--- Note --- for pictorial tabular, use the command line option `pic-tabular'
+--------------------------------------
+--------------------------------------
+--- Note --- for bitmap fbox'es, use the command line option `pic-fbox'
+--------------------------------------
+--------------------------------------
+--- Note --- for minipage with width, use the command line option `minipage-wid
+th'
+--------------------------------------
+--------------------------------------
+--- Note --- for bitmap framebox'es, use the command line option `pic-framebox'
+
+--------------------------------------
+--------------------------------------
+--- Note --- for inline footnotes use command line option `fn-in'
+--------------------------------------
+--------------------------------------
+--- Note --- for tracing of latex font commands, use the command line option `f
+onts'
+--------------------------------------
+--------------------------------------
+--- Note --- for width specifications of tabular p entries, use the `p-width' c
+ommand line option or a configuration similar to \Configure{HColWidth}{\HCode{ 
+style="width:\HColWidth"}}
+--------------------------------------
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+--------------------------------------
+--- Note --- for pictorial eqnarray, use the command line option `pic-eqnarray'
+
+--------------------------------------
+--------------------------------------
+--- Note --- for pictorial array, use the command line option `pic-array'
+--------------------------------------
+--------------------------------------
+--- Note --- for pictorial $...$ environments, use the command line option `pic
+-m' (not recommended!!)
+--------------------------------------
+--------------------------------------
+--- Note --- for pictorial $...$ and $$...$$ environments with latex alt, use t
+he command line option `pic-m+' (not safe!!)
+--------------------------------------
+--------------------------------------
+--- Note --- for pictorial array, use the command line option `pic-array'
+--------------------------------------
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/math
+jax-latex-4ht.4ht
+version 2025-01-26-07:11
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/font
+math.4ht
+version 2022-10-25-13:59
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/IEEE
+tran.4ht
+version 2024-12-08-07:56
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/amsm
+ath.4ht
+version 2025-12-11-13:10
+\tmp:muskip=\muskip19
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/amst
+ext.4ht
+version 2009-05-21-09:32
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/amsb
+sy.4ht
+version 2009-05-21-09:32
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/amso
+pn.4ht
+version 2009-05-21-09:32
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/amss
+ymb.4ht
+version 2009-05-21-09:32
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/amsf
+onts.4ht
+version 2024-11-03-05:51
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/algo
+rithmic.4ht
+version 2009-05-21-09:32
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/ifth
+en.4ht
+version 2025-06-16-13:44
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/grap
+hicx.4ht
+version 2022-01-12-13:53
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/grap
+hics.4ht
+version 2024-03-07-13:56
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+--------------------------------------
+--- Note --- if included graphics are of degraded quality, try the command line
+ options `graphics-num' or `graphics-'. The `num' should provide the density of
+ pixels in the bitmaps (e.g., 110). 
+--------------------------------------
+--------------------------------------
+--- Note --- for setting image dimensions, try the option `Gin-dim'; to use per
+cents instead of units, use `Gin-perecent'; for key dimensions when bounding bo
+x is unavailable try `Gin-dim+'; neither is recommended
+--------------------------------------
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/dvip
+s.4ht
+version 2009-05-21-09:32
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/xcol
+or.4ht
+version 2025-06-05-13:26
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/colo
+r.4ht
+version 2025-06-05-13:26
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/colo
+r.4ht
+version 2025-06-05-13:26
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/book
+tabs.4ht
+version 2009-05-21-09:32
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/tabu
+larx.4ht
+version 2009-05-21-09:32
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/arra
+y.4ht
+version 2025-08-14-13:28
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+--------------------------------------
+--- Note --- for pictorial array, use the command line option `pic-array'
+--------------------------------------
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/pgf.
+4ht
+version 2009-05-21-09:32
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/url.
+4ht
+version 2025-07-11-09:25
+
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+--------------------------------------
+--- Note --- for URL encoding within href use the command line option `url-enc'
+
+--------------------------------------
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/unic
+ode.4ht
+version 2026-01-04-08:10
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+4-math.4ht
+version 2026-01-29-13:49
+)
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/generic/tex4ht/html
+5.4ht
+version 2026-01-18-07:06
+))
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/l3backend/l3b
+ackend-dvips.def
+File: l3backend-dvips.def 2025-10-09 L3 backend support: dvips
+\l__pdfannot_backend_content_box=\box70
+\l__pdfannot_backend_model_box=\box71
+\g__pdfannot_backend_int=\count336
+\g__pdfannot_backend_link_int=\count337
+\g__pdfannot_backend_link_sf_int=\count338
+) (./original.aux)
+\openout1 = original.aux
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+-- Lines per column: 56 (exact).
+--- file original.css ---
+[1
+
+
+] [2]
+l.30 --- TeX4ht warning --- \halign translated into linear text ---
+[3] [4] [5] [6] (./methodology.tex (./figures/taja_architecture.tex [7] [8
+
+]
+l. 3 Writing original.idv[1] (original0x.svg)
+LaTeX Font Info:    Trying to load font information for U+msa on input line 15.
 
 
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/amsfonts/umsa
 .fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 28.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 15.
 
 
 (/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/amsfonts/umsb
 .fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 1655) in paragraph at lines 59--60
- \OT1/ptm/m/it/10 1) Hand-crafted and Sta-tis-ti-cal Mod-els: [][] \OT1/ptm/m/n
-/10 Early speech-
- []
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 5
+0.
 
-[1{/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/map/pdftex/updm
-ap/pdftex.map}{/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/enc
-/dvips/base/8r.enc}
+(/opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/tex/latex/psnfss/ot1pcr
+.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+) [9
 
+]) [10
 
-]
-Underfull \hbox (badness 4621) in paragraph at lines 87--88
- \OT1/ptm/m/it/10 4) Rep-re-sen-ta-tion Pre-dic-tion: [][] \OT1/ptm/m/n/10 Repr
-esentation-prediction
- []
+]) (./experimental_settings.tex [11] [12] [13
 
+] [14
 
-Underfull \hbox (badness 1552) in paragraph at lines 99--100
-\OT1/ptm/m/n/10 re-quir-ing fine-grained speech dis-crim-i-na-tion. Its re-port
-ed
- []
+] [15
 
-[2]
-Underfull \hbox (badness 1721) in paragraph at lines 125--126
-[]\OT1/ptm/m/n/10 Thai-specific SSL adap-ta-tion is also demon-strated by
- []
+] [16
 
-[3] Excluding 'comment' comment. (./original.bbl)
+] [17
+
+]) Excluding 'comment' comment. (./original.bbl [18
+
+] [19] [20])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -392,30 +2058,23 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[4] (./original.aux)
+[21] (./original.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
- ) 
-Here is how much of TeX's memory you used:
- 4270 strings out of 467525
- 68263 string characters out of 5408440
- 501251 words of memory out of 5000000
- 33139 multiletter control sequences out of 15000+600000
- 664651 words of font info for 111 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 57i,8n,65p,1133b,278s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmmi10.pfb></opt/homebrew/Cellar/texlive/20260301/share/texmf-dist/fo
-nts/type1/urw/times/utmb8a.pfb></opt/homebrew/Cellar/texlive/20260301/share/tex
-mf-dist/fonts/type1/urw/times/utmbi8a.pfb></opt/homebrew/Cellar/texlive/2026030
-1/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></opt/homebrew/Cellar/texli
-ve/20260301/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on original.pdf (4 pages, 90292 bytes).
-PDF statistics:
- 43 PDF objects out of 1000 (max. 8388607)
- 26 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+)
+
+Here is how much of LuaTeX's memory you used:
+ 21796 strings out of 476071
+ 100000,953878 words of node,token memory allocated
+ 2388 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 2 glue, 384 kern, 59 glue_spec, 1 write nodes
+   avail lists: 2:33,3:1120,4:39,5:459,6:78,7:10742,8:70,9:516,10:38,11:946
+ 42965 multiletter control sequences out of 65536+600000
+ 137 fonts using 5684263 bytes
+ 92i,10n,107p,1739b,1032s stack positions out of 10000i,1000n,20000p,200000b,200000s
+Output written on original.dvi (21 pages, 167828 bytes).

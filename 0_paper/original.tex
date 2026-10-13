@@ -10,6 +10,11 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{comment}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{url}
+\usetikzlibrary{arrows.meta,positioning,calc}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -25,13 +30,11 @@ Bangkok, Thailand}
 \maketitle
 
 \begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
+Thai automatic speech recognition (ASR) is constrained by the limited availability of transcribed speech. Self-supervised speech encoders can reduce this dependence by learning from unlabeled audio, but Audio-JEPA has so far been evaluated mainly as a general-audio representation learner rather than as a transcription system. This paper proposes an adaptation of Audio-JEPA for low-resource Thai ASR. The proposed system replaces coarse spectrogram patches with a high-resolution Thai speech frontend, learns masked latent representations using a context encoder, an exponential-moving-average target encoder, and a predictor, and then fine-tunes the retained encoder with a character-level connectionist temporal classification head. We define controlled experiments using fixed Thai audio pools and 1-, 5-, and 10-hour transcription budgets, with MFCC, Mel-spectrogram, scratch-trained, and multilingual self-supervised baselines. Evaluation reports Thai-normalized character error rate as the primary metric, word error rate with a fixed tokenizer, and separate greedy and beam-search decoding results. The study tests whether Thai speech JEPA pretraining improves label efficiency while making data, compute, and decoding conditions explicit.
 \end{abstract}
 
 \begin{IEEEkeywords}
-component, formatting, style, styling, insert.
+automatic speech recognition, Thai speech, self-supervised learning, Audio-JEPA, connectionist temporal classification, low-resource ASR
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -126,12 +129,8 @@ Thai-specific SSL adaptation is also demonstrated by XLSR-Thai, obtained through
 
 Overall, SSL has strong empirical support for reducing ASR transcription requirements, but its effectiveness depends on data, domain, and training configuration. Our proposed Thai evaluation will compare labeled-data budgets while reporting pretraining hours, model size, initialization, and computation separately. Speaker-disjoint test audio will be excluded from pretraining, and decoding conditions will be controlled where possible. We will report character error rate (CER) and WER with documented text normalization and Thai word segmentation. This design will test whether Audio-JEPA and speech-specific grounding improve Thai recognition under limited supervision.
 
-\section*{Acknowledgment}
-
-The preferred spelling of the word ``acknowledgment'' in America is without 
-an ``e'' after the ``g''. Avoid the stilted expression ``one of us (R. B. 
-G.) thanks $\ldots$''. Instead, try ``R. B. G. thanks$\ldots$''. Put sponsor 
-acknowledgments in the unnumbered footnote on the first page.
+\input{methodology}
+\input{experimental_settings}
 
 \begin{comment}
 \section*{References}
@@ -172,9 +171,5 @@ citation first, followed by the original foreign-language citation \cite{b6}.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
-
-\vspace{12pt}
-\color{red}
-IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
 
 \end{document}

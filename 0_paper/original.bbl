@@ -219,4 +219,43 @@ W.~Sirichotedumrong, A.~Na-Thalang, P.~Manakul, P.~Taveekitworachai,
   \url{https://arxiv.org/abs/2601.13044}
 \BIBentrySTDinterwordspacing
 
+\bibitem{audiojepacode}
+\BIBentryALTinterwordspacing
+L.~Tuncay, ``Audio-{JEPA}: Official implementation,'' GitHub repository,
+  accessed September 22, 2026. [Online]. Available:
+  \url{https://github.com/LudovicTuncay/Audio-JEPA}
+\BIBentrySTDinterwordspacing
+
+\bibitem{cv27thai}
+\BIBentryALTinterwordspacing
+{Mozilla Foundation}, ``Common voice scripted speech 27.0---thai,'' Mozilla
+  Data Collective, 2026, release cv-corpus-27.0-2026-09-11; accessed September
+  22, 2026. [Online]. Available:
+  \url{https://mozilladatacollective.com/datasets/cmu5x5tj000f2nq0755h8qcy5}
+\BIBentrySTDinterwordspacing
+
+\bibitem{conneau2022fleurs}
+\BIBentryALTinterwordspacing
+A.~Conneau, M.~Ma, S.~Khanuja, Y.~Zhang, V.~Axelrod, S.~Dalmia, J.~Riesa,
+  C.~Rivera, and A.~Bapna, ``{FLEURS}: Few-shot learning evaluation of
+  universal representations of speech,'' \emph{arXiv preprint
+  arXiv:2205.12446}, 2022. [Online]. Available:
+  \url{https://arxiv.org/abs/2205.12446}
+\BIBentrySTDinterwordspacing
+
+\bibitem{xlsrcheckpoint}
+\BIBentryALTinterwordspacing
+{Meta AI}, ``{XLS-R}-300m model card,'' Hugging Face, accessed September 22,
+  2026. [Online]. Available:
+  \url{https://huggingface.co/facebook/wav2vec2-xls-r-300m}
+\BIBentrySTDinterwordspacing
+
+\bibitem{pythainlptokenize}
+\BIBentryALTinterwordspacing
+{PyThaiNLP Contributors}, ``{PyThaiNLP} tokenization api,'' Software
+  documentation, describes newmm and whitespace handling; experiment software
+  version will be pinned separately. [Online]. Available:
+  \url{https://pythainlp.org/docs/2.0/api/tokenize.html}
+\BIBentrySTDinterwordspacing
+
 \end{thebibliography}
