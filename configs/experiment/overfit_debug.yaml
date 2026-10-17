@@ -1,0 +1,44 @@
+experiment:
+  name: "overfit_debug"
+  seed: 42
+  output_dir: "outputs/runs/overfit_debug"
+
+data:
+  manifest_dir: "data_cache/porjai/manifests"
+  train_manifest: "data_cache/porjai/manifests/smoke_train.jsonl" # Small ~20 utterance pilot
+  val_manifest: "data_cache/porjai/manifests/smoke_train.jsonl"
+  vocab_path: "data_cache/porjai/vocab.json"
+  sample_rate: 32000
+  clip_length_s: 10.0
+  frontend: "original"
+  max_duration_s: 10.0
+  budget_ratio: 1.0
+
+model:
+  type: "audio_jepa"
+  pretrained_checkpoint: "scratch" # From scratch to test clean capacity and gradient flow
+  embed_dim: 384
+  depth: 4
+  num_heads: 6
+  patch_size:
+    time: 1
+    frequency: 16
+  temporal_adapter_mode: "native_pooling"
+  freeze_encoder: false
+  head_dropout: 0.0 # No dropout for overfitting verification
+  zero_infinity: false
+
+training:
+  epochs: 30
+  batch_size: 4
+  head_lr: 1.0e-3
+  backbone_lr: 5.0e-4
+  patch_embed_lr: 1.0e-3
+  weight_decay: 0.0 # No weight decay
+  warmup_ratio: 0.0
+  grad_clip_norm: 1.0
+  log_interval: 1
+  eval_interval: 1
+  early_stopping_patience: 20
+  device: "cuda"
+  num_workers: 0

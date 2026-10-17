@@ -1,0 +1,43 @@
+experiment:
+  name: "smoke_ctc"
+  seed: 42
+  output_dir: "outputs/runs/smoke_ctc"
+
+data:
+  manifest_dir: "data_cache/porjai/manifests"
+  train_manifest: "data_cache/porjai/manifests/smoke_train.jsonl"
+  val_manifest: "data_cache/porjai/manifests/smoke_val.jsonl"
+  vocab_path: "data_cache/porjai/vocab.json"
+  sample_rate: 32000
+  clip_length_s: 10.0
+  target_time_bins: 256
+  budget_ratio: 1.0
+
+model:
+  type: "audio_jepa"
+  pretrained_checkpoint: "ltuncay/Audio-JEPA"
+  embed_dim: 768
+  depth: 12
+  num_heads: 12
+  patch_size:
+    time: 1
+    frequency: 16
+  temporal_adapter_mode: "native_pooling"
+  upsample_factor: 1
+  freeze_encoder: false
+  unfreeze_last_n_blocks: null
+  head_dropout: 0.1
+
+training:
+  epochs: 1
+  batch_size: 2
+  encoder_lr: 1.0e-4
+  head_lr: 5.0e-4
+  weight_decay: 1.0e-2
+  warmup_ratio: 0.1
+  grad_clip_norm: 1.0
+  log_interval: 1
+  eval_interval: 1
+  early_stopping_patience: 3
+  device: "cuda"
+  num_workers: 0

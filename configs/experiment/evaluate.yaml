@@ -1,0 +1,21 @@
+evaluation:
+  checkpoint: "outputs/runs/smoke_ctc/checkpoints/best_checkpoint.pt"
+  output_dir: "outputs/evaluation"
+  batch_size: 4
+  device: "cuda"
+
+data:
+  manifest_dir: "data_cache/porjai/manifests"
+  vocab_path: "data_cache/porjai/vocab.json"
+  sample_rate: 32000
+  clip_length_s: 10.0
+  target_time_bins: 256
+
+model:
+  type: "audio_jepa"
+  embed_dim: 768
+  patch_size:
+    time: 1
+    frequency: 16
+  temporal_adapter_mode: "native_pooling"
+  upsample_factor: 1

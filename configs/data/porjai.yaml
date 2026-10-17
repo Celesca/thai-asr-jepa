@@ -1,0 +1,22 @@
+data:
+  dataset_name: "CMKL/Porjai-Thai-voice-dataset-central"
+  output_dir: "data_cache/porjai"
+  manifest_dir: "data_cache/porjai/manifests"
+  vocab_path: "data_cache/porjai/vocab.json"
+  sample_rate: 32000
+  clip_length_s: 10.0
+  target_time_bins: 256
+  train_ratio: 0.8
+  val_ratio: 0.1
+  test_ratio: 0.1
+  streaming: true
+  cache_audio: true
+  max_samples: 500  # Default to 500 for practical verification; set null for full dataset
+
+normalization:
+  unicode_form: "NFKC"
+  remove_punctuation: true
+  digits_policy: "thai_to_arabic"
+  collapse_whitespace: true
+  lowercase: true
+  remove_zero_width: true
