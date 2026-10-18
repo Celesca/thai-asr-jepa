@@ -28,14 +28,8 @@ Bangkok, Thailand}
 \maketitle
 
 \begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
+Automatic speech recognition for Thai is limited by the scarcity of transcribed speech. Self-supervised pretraining reduces this dependence, but evidence for low-resource recognition comes mainly from contrastive and discrete-unit models. Audio-JEPA learns audio representations by predicting the latent features of masked spectrogram regions, but it was developed for general audio classification, and its coarse patches give too few time steps for character-level transcription. We adapt Audio-JEPA to speech by replacing its square spectrogram patches with a full-frequency projection stem that produces one token every 20 milliseconds, and by masking short temporal spans instead of two-dimensional blocks. The adapted encoder is pretrained on unlabeled Thai speech from the Porjai corpus, either from random initialization or from the original Audio-JEPA weights, and is then fine-tuned with a connectionist temporal classification head. We design a controlled comparison that separates the effects of upstream Audio-JEPA weights, in-domain Thai pretraining, and supervised training alone, using labeled budgets of 1, 10, and 50 hours and the full training set, evaluated with character and word error rates.
 \end{abstract}
-
-\begin{IEEEkeywords}
-component, formatting, style, styling, insert.
-\end{IEEEkeywords}
 
 \section{Introduction}
 \label{sec:intro}
@@ -58,60 +52,20 @@ The rest of the paper is organized as follows. Section~\ref{sec:related} reviews
 \section{Related Work}
 \label{sec:related}
 
-\subsection{Evolution of Speech Representation Learning}
-
-Speech representation learning has evolved from fixed acoustic features, through supervised neural models, to models pretrained on unlabeled audio \cite{gales2008hmm,hinton2012dnn,baevski2020wav2vec2}.
-
-\subsubsection{Handcrafted and statistical models}
-Early speech recognition systems divided audio into short frames and extracted features with fixed mathematical transformations \cite{davis1980mfcc,hermansky1990plp,rabiner1989hmm,gales2008hmm}. MFCCs compress the short-time spectrum according to properties of human hearing, producing compact representations \cite{davis1980mfcc}. Perceptual linear prediction (PLP) incorporates further auditory characteristics, improving robustness across speakers and recording conditions \cite{hermansky1990plp}. Temporal dynamics were captured by appending differences between adjacent frames. These features were passed to statistical models: hidden Markov models (HMMs) represented the timing and sequence of speech \cite{rabiner1989hmm}, and Gaussian mixture models (GMMs) estimated acoustic likelihoods \cite{gales2008hmm}. Although computationally efficient, this pipeline separated feature extraction, acoustic modeling, and language modeling, which prevented joint optimization.
-
-\subsubsection{Supervised methods}
-Supervised neural methods learn directly from transcribed speech. Deep neural networks replaced the GMM acoustic model and substantially improved accuracy \cite{hinton2012dnn}. Convolutional neural networks captured local spectro-temporal patterns \cite{abdelhamid2014cnn}, and recurrent neural networks modeled long-range temporal context \cite{graves2013rnn}. Connectionist temporal classification (CTC) made it possible to train sequence models without frame-level alignments by summing over all alignments consistent with the transcript \cite{graves2006ctc}. Attention-based encoder--decoder models such as Listen, Attend and Spell map audio directly to characters \cite{chan2016las}, and the Conformer combines self-attention and convolution to model both global context and local detail \cite{gulati2020conformer}. These models simplified the pipeline and improved accuracy, but they still require large quantities of labeled audio.
-
-\subsubsection{Self-supervised methods}
-Self-supervised methods learn from audio without transcripts by deriving their training targets from the signal itself. Contrastive predictive coding (CPC) identifies the true future representation among negative candidates \cite{oord2018cpc}, while autoregressive predictive coding (APC) predicts future acoustic frames directly \cite{chung2020apc}. Later models, including wav2vec~2.0 \cite{baevski2020wav2vec2}, HuBERT \cite{hsu2021hubert}, WavLM \cite{chen2022wavlm}, and data2vec \cite{baevski2022data2vec}, mask parts of the input and learn from bidirectional context. Pretrained on unlabeled audio, these models can be adapted to downstream tasks with substantially less labeled data \cite{mohamed2022sslreview}.
+\subsection{Speech Representation Learning}
+Early ASR systems extracted fixed features such as MFCCs \cite{davis1980mfcc} and PLP \cite{hermansky1990plp} and modeled them with HMM--GMM systems \cite{rabiner1989hmm,gales2008hmm}, which kept feature extraction, acoustic modeling, and language modeling separate. Supervised neural models replaced these components: deep, convolutional, and recurrent networks improved acoustic modeling \cite{hinton2012dnn,abdelhamid2014cnn,graves2013rnn}, CTC removed the need for frame-level alignments \cite{graves2006ctc}, and attention-based and Conformer models further simplified and strengthened recognition \cite{chan2016las,gulati2020conformer}. All of these models, however, require large amounts of transcribed speech. Self-supervised learning (SSL) reduces this requirement by deriving training targets from unlabeled audio \cite{mohamed2022sslreview}.
 
 \subsection{Self-Supervised Learning Paradigms}
-Self-supervised speech methods can be grouped into four paradigms according to what they predict \cite{mohamed2022sslreview}.
+SSL methods for speech differ mainly in what they predict. \emph{Reconstruction} methods such as Mockingjay, DeCoAR, and TERA restore masked or corrupted input frames \cite{liu2020mockingjay,ling2020decoar,liu2021tera}. They are simple, but they spend capacity on noise and low-level acoustic detail. \emph{Contrastive} methods such as CPC and wav2vec~2.0 select the true latent target from distractors \cite{oord2018cpc,baevski2020wav2vec2}, which makes them sensitive to negative sampling and quantization choices. \emph{Discrete-unit} methods such as HuBERT and WavLM predict cluster assignments at masked positions \cite{hsu2021hubert,chen2022wavlm}, so their quality depends on the offline clustering. \emph{Representation-prediction} methods such as data2vec and JEPA regress continuous features produced by an EMA target encoder \cite{baevski2022data2vec,lecun2022path,assran2023ijepa}. They need no reconstruction, negatives, or clustering, and this is the paradigm we adopt.
 
-\subsubsection{Reconstruction}
-Reconstruction methods hide or corrupt parts of the input and train the model to restore them. Mockingjay masks acoustic frames and reconstructs them with a Transformer encoder \cite{liu2020mockingjay}. DeCoAR reconstructs frames from bidirectional context \cite{ling2020decoar}, and TERA alters the input along the time, frequency, and magnitude axes \cite{liu2021tera}. The objective is simple and requires neither negative samples nor clustering. However, the model must also spend capacity on background noise and low-level acoustic details that are irrelevant to recognition.
+\subsection{JEPA and Audio-JEPA}
+I-JEPA predicts the embeddings of masked image blocks from a visible context block \cite{assran2023ijepa}. It avoids both the augmentation biases of invariance-based methods and the pixel-level burden of generative methods. A-JEPA and the study of Riou et al.\ carried this idea to audio spectrograms and showed that the choice of masking and target regions strongly affects representation quality \cite{fei2023ajepa,riou2024audiojepa}. Audio-JEPA treats a Mel-spectrogram as an image of $16\times16$ patches and is pretrained on about 5{,}300 hours of AudioSet \cite{tuncay2025audiojepa}. It is competitive with wav2vec~2.0 and data2vec on several X-ARES tasks, but weaker on fine-grained speech tasks, and it has been evaluated only on classification-style tasks. Speech-specific JEPAs that add GMM-based soft targets report ASR gains \cite{ioannides2026gmmjepa,ioannides2026sjepa}, but they rely on tens of thousands of hours of English speech.
 
-\subsubsection{Contrastive learning}
-Contrastive methods train the model to pick out the correct latent target from a set of distractors. CPC applies this idea to future prediction \cite{oord2018cpc}. Wav2vec~2.0 masks the latent speech sequence and identifies the correct quantized representation for each masked position among distractors sampled from the same utterance \cite{baevski2020wav2vec2}. Predicting high-level latent targets is more useful than reconstructing raw input, but performance depends on the negative-sampling strategy, and the quantization codebook adds training complexity.
-
-\subsubsection{Discrete unit prediction}
-Discrete-unit methods convert continuous speech into categorical targets and train the model to predict them at masked positions. HuBERT obtains its targets by clustering acoustic features and later its own representations \cite{hsu2021hubert}. WavLM extends masked unit prediction with simulated noise and overlapping speech to improve robustness \cite{chen2022wavlm}. Categorical targets suit speech recognition well and avoid explicit negatives, but the learned representations depend on the quality of the offline clustering, and noisy pseudo-labels can limit them.
-
-\subsubsection{Representation prediction}
-Representation-prediction methods regress continuous feature vectors rather than reconstructing the input or predicting discrete labels. In data2vec, a student network predicts contextualized representations produced by an EMA teacher that observes the complete input \cite{baevski2022data2vec}. JEPAs \cite{lecun2022path,assran2023ijepa} use a context encoder and a predictor to estimate target-encoder representations of masked regions. This paradigm requires no input-reconstruction objective, no negative examples, and no externally generated clusters. It is the paradigm we adopt in this work.
-
-\subsection{Joint-Embedding Predictive Architectures}
-
-\subsubsection{From images to audio}
-Self-supervised image methods have mainly followed two families \cite{assran2023ijepa}. Invariance-based methods train an encoder to produce similar embeddings for multiple augmented views of the same input. They learn semantic features, but their hand-crafted augmentations introduce strong biases that may not transfer to other data distributions. Generative methods mask portions of the input and reconstruct the missing content, which requires less prior knowledge but tends to produce lower-level representations. I-JEPA combines the strengths of the two: from a visible context block, a predictor estimates the \emph{embeddings} of target blocks produced by an EMA target encoder \cite{assran2023ijepa}. Prediction in representation space encourages semantic features without the burden of reconstructing every pixel and without augmentation-specific priors. For speech, this suggests an encoder that captures phonetic and linguistic structure without having to reconstruct the waveform or spectrogram exactly.
-
-A-JEPA transferred this principle to audio spectrograms, using a curriculum that moves from random block masking to time--frequency-aware masking, and reported strong results on audio and speech classification benchmarks \cite{fei2023ajepa}. Riou et al.\ showed that the choice of context and target regions strongly affects audio representation quality, and that design choices successful for images do not necessarily transfer to audio \cite{riou2024audiojepa}.
-
-\subsubsection{Audio-JEPA}
-Audio-JEPA treats a Mel-spectrogram as an image. It splits the spectrogram into $16\times16$ patches, randomly masks patch regions, and uses a Vision Transformer context encoder and predictor to regress the target encoder's representations of the masked patches \cite{tuncay2025audiojepa}. Pretrained on approximately 5{,}300 hours of AudioSet, it achieved results comparable to wav2vec~2.0 and data2vec on several tasks of the X-ARES benchmark while using a smaller reported training budget. Its results are mixed, however: Audio-JEPA is stronger on several general-audio and music tasks but weaker on tasks that require fine-grained speech discrimination, and its evaluation uses frozen representations for classification-style tasks rather than transcription.
-
-\subsubsection{Speech-specific JEPA}
-Recent preprints investigate JEPAs designed specifically for speech. GMM-Anchored JEPA uses frozen soft posteriors from a GMM fitted on log-Mel features as auxiliary targets. The authors report representation collapse without such grounding in their setting, and improved ASR, emotion recognition, and slot filling with roughly 50{,}000 hours of pretraining speech \cite{ioannides2026gmmjepa}. S-JEPA predicts soft GMM posteriors through a Kullback--Leibler objective and reports the lowest WER among its evaluated SSL models below 90 million parameters under the SUPERB protocol \cite{ioannides2026sjepa}. These studies show that JEPA-style learning can serve ASR, but they rely on large English pretraining corpora and additional clustering targets, and they do not study low-resource or tonal languages.
-
-\subsection{Self-Supervised Learning for Low-Resource ASR}
-
-\subsubsection{Pretraining with limited transcripts}
-The standard workflow for low-resource ASR is to pretrain an encoder on a large amount of unlabeled audio, then fine-tune it with a small transcribed set and a recognition head such as CTC, a transducer, or an encoder--decoder \cite{mohamed2022sslreview}. Wav2vec~2.0 demonstrated this workflow at scale. With 53{,}000 hours of unlabeled audio, a Transformer language model, and only ten minutes of labeled data, it reached 4.8\%/8.2\% WER on LibriSpeech test-clean/test-other. With one hour of labels, it outperformed the previous state of the art trained on 100 hours \cite{baevski2020wav2vec2}. HuBERT matched or improved on wav2vec~2.0 across fine-tuning sets from ten minutes to 960 hours \cite{hsu2021hubert}. These results show strong label efficiency under large-scale pretraining, although model size, pretraining data, and decoding differ across studies.
-
-\subsubsection{Multilingual transfer}
-Cross-lingual pretraining extends these benefits to languages with little data. XLSR pretrains a single wav2vec-style model on many languages and significantly outperforms monolingual pretraining. It reported a 72\% relative phone error rate reduction on CommonVoice compared with the best previously known results and a 16\% relative WER improvement on BABEL compared with a comparable system \cite{conneau2021xlsr}. XLS-R scales this approach to 436{,}000 hours in 128 languages \cite{babu2022xlsr}, and the Massively Multilingual Speech project covers more than 1{,}100 languages for ASR \cite{pratap2023mms}. Large weakly supervised models such as Whisper are another route to multilingual ASR, but they rely on hundreds of thousands of hours of paired audio and text \cite{radford2023whisper}.
-
-\subsubsection{Thai ASR}
-For Thai, XLSR-Thai continues self-supervised pretraining on 36{,}000 hours of Thai speech \cite{shao2025xlsrthai}, and Typhoon ASR Real-time trains a FastConformer-Transducer with systematic text normalization for numbers, loanwords, and repetition markers \cite{sirichotedumrong2026typhoon}. The latter work shows that consistent transcript normalization matters for both training and evaluating Thai ASR. Public Thai speech corpora, including the Porjai corpus \cite{porjai}, now make controlled studies of label efficiency possible. Berrebbi et al.\ also show that self-supervised features can suffer under domain mismatch in low-resource recognition \cite{berrebbi2022spectral}, which motivates in-domain pretraining on Thai audio.
+\subsection{SSL for Low-Resource and Thai ASR}
+Pretraining on unlabeled audio followed by CTC fine-tuning on a small labeled set is the standard recipe for low-resource ASR. Wav2vec~2.0 reached 4.8\%/8.2\% WER on LibriSpeech test-clean/test-other with only ten minutes of labels, using 53{,}000 hours of unlabeled audio and a language model \cite{baevski2020wav2vec2}, and HuBERT matched or exceeded it across label budgets \cite{hsu2021hubert}. Multilingual pretraining (XLSR, XLS-R, MMS) extends these gains to languages with little data \cite{conneau2021xlsr,babu2022xlsr,pratap2023mms}, whereas Whisper relies on large-scale weak supervision \cite{radford2023whisper}. For Thai, XLSR-Thai continues pretraining on 36{,}000 hours of Thai speech \cite{shao2025xlsrthai}, and Typhoon ASR shows the importance of consistent Thai text normalization \cite{sirichotedumrong2026typhoon}. Public corpora such as Porjai \cite{porjai} now make controlled label-efficiency studies possible.
 
 \subsection{Research Gap}
-The literature establishes that self-supervised pretraining improves low-resource ASR, but this evidence comes almost entirely from contrastive and discrete-unit models such as wav2vec~2.0, HuBERT, WavLM, and XLS-R. Audio-JEPA provides efficient latent audio representation learning, yet it (i) was trained on general audio rather than speech, (ii) was evaluated on audio understanding and classification rather than transcription, (iii) uses a temporal resolution too coarse for CTC, and (iv) has not been studied for Thai. Speech-specific JEPAs address ASR but rely on large English corpora. To our knowledge, JEPA-style representation prediction has not been evaluated for low-resource Thai ASR. This work addresses that gap.
+Evidence that SSL improves low-resource ASR comes almost entirely from contrastive and discrete-unit models. Audio-JEPA learns audio representations efficiently, but it was trained on general audio, evaluated on classification, uses a temporal resolution too coarse for CTC, and has not been applied to Thai. To our knowledge, JEPA-style representation prediction has not been evaluated for low-resource Thai ASR.
 
 \input{methodology}
 
@@ -176,9 +130,5 @@ citation first, followed by the original foreign-language citation \cite{b6}.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
-
-\vspace{12pt}
-\color{red}
-IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
 
 \end{document}
