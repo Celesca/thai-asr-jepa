@@ -1,0 +1,42 @@
+experiment:
+  name: "exp_A_scratch_ctc"
+  seed: 42
+  output_dir: "outputs/runs/exp_A_scratch_ctc"
+
+data:
+  manifest_dir: "data_cache/porjai/manifests"
+  vocab_path: "data_cache/porjai/vocab.json"
+  sample_rate: 32000
+  clip_length_s: 10.0
+  frontend: "original"
+  max_duration_s: 10.0
+  budget_ratio: 1.0
+
+model:
+  type: "audio_jepa"
+  pretrained_checkpoint: "scratch" # Random initialization (Experiment A)
+  embed_dim: 768
+  depth: 12
+  num_heads: 12
+  patch_size:
+    time: 1
+    frequency: 16
+  temporal_adapter_mode: "native_pooling"
+  freeze_encoder: false
+  head_dropout: 0.1
+  zero_infinity: false
+
+training:
+  epochs: 15
+  batch_size: 8
+  head_lr: 3.0e-4
+  backbone_lr: 3.0e-4
+  patch_embed_lr: 3.0e-4
+  weight_decay: 1.0e-2
+  warmup_ratio: 0.1
+  grad_clip_norm: 1.0
+  log_interval: 10
+  eval_interval: 1
+  early_stopping_patience: 5
+  device: "cuda"
+  num_workers: 2

@@ -1,0 +1,34 @@
+experiment:
+  name: "audio_jepa_ctc_low_resource_10pct"
+  seed: 42
+  output_dir: "outputs/runs/low_resource_10"
+
+data:
+  manifest_dir: "data_cache/porjai/manifests"
+  vocab_path: "data_cache/porjai/vocab.json"
+  sample_rate: 32000
+  clip_length_s: 10.0
+  target_time_bins: 256
+  budget_ratio: 0.10
+
+model:
+  type: "audio_jepa"
+  pretrained_checkpoint: "ltuncay/Audio-JEPA"
+  embed_dim: 768
+  temporal_adapter_mode: "upsample_conv"
+  upsample_factor: 4
+  freeze_encoder: false
+  head_dropout: 0.1
+
+training:
+  epochs: 15
+  batch_size: 8
+  encoder_lr: 5.0e-5
+  head_lr: 3.0e-4
+  weight_decay: 1.0e-2
+  warmup_ratio: 0.1
+  grad_clip_norm: 1.0
+  log_interval: 5
+  eval_interval: 1
+  early_stopping_patience: 5
+  device: "cuda"

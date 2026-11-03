@@ -1,0 +1,63 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Outputs and caches
+outputs/*
+!outputs/.gitkeep
+data_cache/
+.cache/
+.pytest_cache/
+.uv_cache/
+
+# PyTorch checkpoints and large model weights
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+
+# Logs, scratch, and temporary files
+*.log
+scratch/
+branch_out.txt
+dulwich_install.txt
+git_check.txt
+git_status.txt
+scripts/push_result.txt
+
+# System & IDE files
+.DS_Store
+.idea/
+.vscode/
+.agents/
+.hf_cache/

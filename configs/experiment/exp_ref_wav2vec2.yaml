@@ -1,0 +1,33 @@
+experiment:
+  name: "exp_ref_wav2vec2_ctc"
+  seed: 42
+  output_dir: "outputs/runs/exp_ref_wav2vec2"
+
+data:
+  manifest_dir: "data_cache/porjai/manifests"
+  vocab_path: "data_cache/porjai/vocab.json"
+  sample_rate: 16000
+  clip_length_s: 10.0
+  max_duration_s: 10.0
+  budget_ratio: 1.0
+
+model:
+  type: "wav2vec2"
+  model_name: "facebook/wav2vec2-base"
+  embed_dim: 768
+  freeze_feature_extractor: true
+  head_dropout: 0.1
+  zero_infinity: false
+
+training:
+  epochs: 15
+  batch_size: 8
+  head_lr: 3.0e-4
+  encoder_lr: 5.0e-5
+  weight_decay: 1.0e-2
+  warmup_ratio: 0.1
+  grad_clip_norm: 1.0
+  log_interval: 10
+  eval_interval: 1
+  device: "cuda"
+  num_workers: 2

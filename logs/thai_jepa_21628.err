@@ -1,0 +1,678 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/src/thai_audio_jepa_asr/training/ssl_trainer.py:71: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  self.lr_scheduler.step()
+/storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/.venv/lib/python3.12/site-packages/torch/autograd/graph.py:1072: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:910.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+/storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/.venv/lib/python3.12/site-packages/torch/autograd/graph.py:1072: UserWarning: ctc_loss_backward_gpu does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/Context.cpp:186.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+/storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/.venv/lib/python3.12/site-packages/torch/autograd/graph.py:1072: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:910.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 11, Required max: 76, T/(U+R) min: 0.162)
+Step 15: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 42, Required max: 191, T/(U+R) min: 0.22)
+Step 96: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 24, Required max: 65, T/(U+R) min: 0.8)
+Step 116: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 66, Required max: 151, T/(U+R) min: 0.742)
+Step 158: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 79, Required max: 93, T/(U+R) min: 0.849)
+Step 239: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 163, T/(U+R) min: 0.19)
+Step 378: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 29, Required max: 96, T/(U+R) min: 0.58)
+Step 496: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 68, Required max: 100, T/(U+R) min: 0.81)
+Step 594: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 42, Required max: 79, T/(U+R) min: 0.84)
+Step 675: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 11, Required max: 179, T/(U+R) min: 0.061)
+Step 744: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 135, T/(U+R) min: 0.23)
+Step 780: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 46, Required max: 85, T/(U+R) min: 0.807)
+Step 852: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 161, T/(U+R) min: 0.23)
+Step 852: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 72, Required max: 183, T/(U+R) min: 0.552)
+Step 1002: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 66, Required max: 166, T/(U+R) min: 0.398)
+Step 1349: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 59, Required max: 101, T/(U+R) min: 0.584)
+Step 1411: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 111, T/(U+R) min: 0.416)
+Step 1426: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 53, Required max: 168, T/(U+R) min: 0.315)
+Step 1586: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 92, T/(U+R) min: 0.673)
+Step 1683: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 15, Required max: 83, T/(U+R) min: 0.19)
+Step 1702: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 94, Required max: 206, T/(U+R) min: 0.544)
+Step 1741: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 11, Required max: 101, T/(U+R) min: 0.115)
+Step 1832: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 72, Required max: 76, T/(U+R) min: 0.947)
+Step 1958: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 6/8 samples (75.0%) feasible. 2 violations! (T_out min: 64, Required max: 115, T/(U+R) min: 0.896)
+Step 1962: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 85, T/(U+R) min: 0.349)
+Step 1967: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 35, Required max: 181, T/(U+R) min: 0.193)
+Step 2034: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 44, Required max: 100, T/(U+R) min: 0.96)
+Step 2063: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 96, T/(U+R) min: 0.323)
+Step 2066: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 85, Required max: 184, T/(U+R) min: 0.908)
+Step 2110: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 42, Required max: 110, T/(U+R) min: 0.382)
+Step 2168: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 66, Required max: 166, T/(U+R) min: 0.464)
+Step 2446: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 83, T/(U+R) min: 0.488)
+Step 2520: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 77, Required max: 175, T/(U+R) min: 0.549)
+Step 2535: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 35, Required max: 77, T/(U+R) min: 0.66)
+Step 2591: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 24, Required max: 175, T/(U+R) min: 0.137)
+Step 2636: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 50, Required max: 145, T/(U+R) min: 0.876)
+Step 2648: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 82, T/(U+R) min: 0.477)
+Step 2686: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 112, T/(U+R) min: 0.211)
+Step 2754: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 79, Required max: 169, T/(U+R) min: 0.467)
+Step 2767: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 33, Required max: 179, T/(U+R) min: 0.184)
+Step 2834: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 76, Required max: 183, T/(U+R) min: 0.945)
+Step 3211: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 68, Required max: 86, T/(U+R) min: 0.883)
+Step 3264: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 96, T/(U+R) min: 0.297)
+Step 3332: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 35, Required max: 88, T/(U+R) min: 0.7)
+Step 3336: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 40, Required max: 150, T/(U+R) min: 0.267)
+Step 3482: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 19, Required max: 185, T/(U+R) min: 0.103)
+Step 3526: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 74, Required max: 249, T/(U+R) min: 0.88)
+Step 3616: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 29, Required max: 83, T/(U+R) min: 0.349)
+Step 3620: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 68, Required max: 131, T/(U+R) min: 0.901)
+Step 3644: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 13, Required max: 90, T/(U+R) min: 0.144)
+Step 3778: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 46, Required max: 156, T/(U+R) min: 0.968)
+Step 4176: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 181, T/(U+R) min: 0.856)
+Step 4283: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 59, Required max: 182, T/(U+R) min: 0.324)
+Step 4374: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 15, Required max: 92, T/(U+R) min: 0.652)
+Step 4388: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 88, Required max: 185, T/(U+R) min: 0.638)
+Step 4466: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 44, Required max: 80, T/(U+R) min: 0.55)
+Step 4567: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 35, Required max: 128, T/(U+R) min: 0.273)
+Step 4617: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 154, T/(U+R) min: 0.463)
+Step 4621: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 50, Required max: 191, T/(U+R) min: 0.88)
+Step 4718: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 96, Required max: 155, T/(U+R) min: 0.652)
+Step 4754: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 40, Required max: 84, T/(U+R) min: 0.833)
+Step 5107: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 40, Required max: 81, T/(U+R) min: 0.889)
+Step 5124: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 88, T/(U+R) min: 0.667)
+Step 5125: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 29, Required max: 83, T/(U+R) min: 0.592)
+Step 5127: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 13, Required max: 83, T/(U+R) min: 0.157)
+Step 5217: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 87, T/(U+R) min: 0.458)
+Step 5362: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 13, Required max: 103, T/(U+R) min: 0.351)
+Step 5629: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 42, Required max: 168, T/(U+R) min: 0.25)
+Step 5648: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 48, Required max: 83, T/(U+R) min: 0.578)
+Step 5650: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 201, T/(U+R) min: 0.463)
+Step 5691: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 44, Required max: 154, T/(U+R) min: 0.552)
+Step 5733: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 68, Required max: 156, T/(U+R) min: 0.872)
+Step 6153: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 24, Required max: 142, T/(U+R) min: 0.444)
+Step 6194: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 94, Required max: 230, T/(U+R) min: 0.791)
+Step 6300: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 97, T/(U+R) min: 0.426)
+Step 6371: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 57, Required max: 159, T/(U+R) min: 0.855)
+Step 6626: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 46, Required max: 153, T/(U+R) min: 0.346)
+Step 6872: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 18, Required max: 126, T/(U+R) min: 0.143)
+Step 6910: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 50, Required max: 279, T/(U+R) min: 0.86)
+Step 7093: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 13, Required max: 139, T/(U+R) min: 0.094)
+Step 7097: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 46, Required max: 190, T/(U+R) min: 0.242)
+Step 7103: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 15, Required max: 87, T/(U+R) min: 0.556)
+Step 7106: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 61, Required max: 184, T/(U+R) min: 0.489)
+Step 7218: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 90, Required max: 151, T/(U+R) min: 0.768)
+Step 7333: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 59, Required max: 83, T/(U+R) min: 0.797)
+Step 7602: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 74, Required max: 89, T/(U+R) min: 0.871)
+Step 7767: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 116, Required max: 168, T/(U+R) min: 0.69)
+Step 7846: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 99, Required max: 142, T/(U+R) min: 0.768)
+Step 8195: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 33, Required max: 92, T/(U+R) min: 0.717)
+Step 8301: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 84, T/(U+R) min: 0.4)
+Step 8304: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 96, T/(U+R) min: 0.385)
+Step 8309: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 48, Required max: 67, T/(U+R) min: 0.814)
+Step 8328: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 81, Required max: 114, T/(U+R) min: 0.807)
+Step 8342: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 26, Required max: 140, T/(U+R) min: 0.839)
+Step 8474: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 68, Required max: 225, T/(U+R) min: 0.556)
+Step 8603: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 19, Required max: 88, T/(U+R) min: 0.373)
+Step 8735: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 53, Required max: 172, T/(U+R) min: 0.802)
+Step 8807: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 59, Required max: 225, T/(U+R) min: 0.449)
+Step 8860: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 171, T/(U+R) min: 0.117)
+Step 8972: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 93, Required max: 148, T/(U+R) min: 0.946)
+Step 9005: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 50, Required max: 99, T/(U+R) min: 0.847)
+Step 9051: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 81, Required max: 198, T/(U+R) min: 0.773)
+Step 9118: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 50, Required max: 254, T/(U+R) min: 0.197)
+Step 9139: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 13, Required max: 109, T/(U+R) min: 0.119)
+Step 9318: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 61, Required max: 98, T/(U+R) min: 0.939)
+Step 9387: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 48, Required max: 146, T/(U+R) min: 0.329)
+Step 9450: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 107, Required max: 174, T/(U+R) min: 0.626)
+Step 9451: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 15, Required max: 119, T/(U+R) min: 0.126)
+Step 9452: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 115, T/(U+R) min: 0.771)
+Step 9541: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 55, Required max: 73, T/(U+R) min: 0.781)
+Step 9564: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 29, Required max: 72, T/(U+R) min: 0.906)
+Step 9594: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 24, Required max: 92, T/(U+R) min: 0.3)
+Step 9712: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 33, Required max: 103, T/(U+R) min: 0.868)
+Step 9833: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 26, Required max: 76, T/(U+R) min: 0.722)
+Step 9845: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 74, Required max: 171, T/(U+R) min: 0.433)
+Step 9981: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 55, Required max: 209, T/(U+R) min: 0.354)
+Step 10036: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 55, Required max: 185, T/(U+R) min: 0.297)
+Step 10065: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 138, T/(U+R) min: 0.225)
+Step 10082: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 99, Required max: 162, T/(U+R) min: 0.611)
+Step 10143: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 64, Required max: 163, T/(U+R) min: 0.859)
+Step 10255: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 50, Required max: 86, T/(U+R) min: 0.833)
+Step 10269: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 72, Required max: 99, T/(U+R) min: 0.911)
+Step 10449: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 89, T/(U+R) min: 0.262)
+Step 10510: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 74, Required max: 132, T/(U+R) min: 0.992)
+Step 10660: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 159, T/(U+R) min: 0.126)
+Step 10823: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 44, Required max: 136, T/(U+R) min: 0.957)
+Step 11390: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 61, Required max: 75, T/(U+R) min: 0.938)
+Step 11508: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 29, Required max: 88, T/(U+R) min: 0.518)
+Step 11581: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 90, Required max: 93, T/(U+R) min: 0.968)
+Step 11598: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 29, Required max: 133, T/(U+R) min: 0.218)
+Step 11607: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 187, T/(U+R) min: 0.198)
+Step 11635: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 59, Required max: 90, T/(U+R) min: 0.971)
+Step 11745: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 79, Required max: 111, T/(U+R) min: 0.712)
+Step 11803: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 77, Required max: 153, T/(U+R) min: 0.856)
+Step 11838: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 95, T/(U+R) min: 0.232)
+Step 11915: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 40, Required max: 158, T/(U+R) min: 0.253)
+Step 12012: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 90, T/(U+R) min: 0.244)
+Step 12018: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 127, T/(U+R) min: 0.216)
+Step 12088: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 64, Required max: 156, T/(U+R) min: 0.699)
+Step 12147: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 48, Required max: 99, T/(U+R) min: 0.972)
+Step 12149: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 94, T/(U+R) min: 0.323)
+Step 12173: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 18, Required max: 136, T/(U+R) min: 0.132)
+Step 12184: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 15, Required max: 160, T/(U+R) min: 0.094)
+Step 12193: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 61, Required max: 103, T/(U+R) min: 0.735)
+Step 12417: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 74, Required max: 165, T/(U+R) min: 0.448)
+Step 12650: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 105, Required max: 171, T/(U+R) min: 0.702)
+Step 12818: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 57, Required max: 174, T/(U+R) min: 0.828)
+Step 12912: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 103, T/(U+R) min: 0.194)
+Step 12913: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 24, Required max: 79, T/(U+R) min: 0.316)
+Step 13063: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 87, T/(U+R) min: 0.556)
+Step 13146: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 15, Required max: 77, T/(U+R) min: 0.484)
+Step 13180: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 24, Required max: 90, T/(U+R) min: 0.267)
+Step 13231: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 44, Required max: 139, T/(U+R) min: 0.633)
+Step 13337: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 57, Required max: 103, T/(U+R) min: 0.6)
+Step 13527: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 68, Required max: 125, T/(U+R) min: 0.768)
+Step 13572: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 11, Required max: 172, T/(U+R) min: 0.064)
+Step 13595: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 66, Required max: 179, T/(U+R) min: 0.369)
+Step 13614: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 77, Required max: 124, T/(U+R) min: 0.621)
+Step 13644: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 66, Required max: 90, T/(U+R) min: 0.93)
+Step 13651: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 127, T/(U+R) min: 0.173)
+Step 13652: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 186, T/(U+R) min: 0.108)
+Step 13718: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 18, Required max: 63, T/(U+R) min: 0.419)
+Step 13869: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 70, T/(U+R) min: 0.344)
+Step 14030: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 18, Required max: 71, T/(U+R) min: 0.818)
+Step 14123: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 48, Required max: 78, T/(U+R) min: 0.658)
+Step 14341: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 13, Required max: 82, T/(U+R) min: 0.169)
+Step 14408: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 24, Required max: 94, T/(U+R) min: 0.667)
+Step 14449: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 165, T/(U+R) min: 0.188)
+Step 14534: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 57, Required max: 100, T/(U+R) min: 0.57)
+Step 14551: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 29, Required max: 62, T/(U+R) min: 0.806)
+Step 14555: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 59, Required max: 91, T/(U+R) min: 0.648)
+Step 14590: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 69, Required max: 142, T/(U+R) min: 0.803)
+Step 14639: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 155, T/(U+R) min: 0.239)
+Step 14685: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 86, T/(U+R) min: 0.43)
+Step 14710: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 13, Required max: 150, T/(U+R) min: 0.087)
+Step 14822: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 79, Required max: 196, T/(U+R) min: 0.837)
+Step 14849: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 48, Required max: 150, T/(U+R) min: 0.32)
+Step 15353: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 26, Required max: 94, T/(U+R) min: 0.619)
+Step 15353: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 50, Required max: 93, T/(U+R) min: 0.926)
+Step 15629: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 50, Required max: 176, T/(U+R) min: 0.574)
+Step 15692: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 15, Required max: 88, T/(U+R) min: 0.517)
+Step 15832: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 57, Required max: 112, T/(U+R) min: 0.64)
+Step 15917: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 33, Required max: 120, T/(U+R) min: 0.275)
+Step 15934: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 85, Required max: 89, T/(U+R) min: 0.955)
+Step 16063: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 94, Required max: 192, T/(U+R) min: 0.776)
+Step 16105: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 11, Required max: 99, T/(U+R) min: 0.193)
+Step 16167: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 15, Required max: 133, T/(U+R) min: 0.113)
+Step 16226: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 53, Required max: 90, T/(U+R) min: 0.716)
+Step 16251: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 18, Required max: 226, T/(U+R) min: 0.36)
+Step 16254: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 40, Required max: 69, T/(U+R) min: 0.769)
+Step 16312: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 92, Required max: 109, T/(U+R) min: 0.927)
+Step 16323: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 77, Required max: 155, T/(U+R) min: 0.497)
+Step 16337: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 95, T/(U+R) min: 0.688)
+Step 16413: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 35, Required max: 92, T/(U+R) min: 0.461)
+Step 16434: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 26, Required max: 95, T/(U+R) min: 0.283)
+Step 16488: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 48, Required max: 186, T/(U+R) min: 0.258)
+Step 16488: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 57, Required max: 86, T/(U+R) min: 0.679)
+Step 16631: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 96, Required max: 181, T/(U+R) min: 0.591)
+Step 16743: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 44, Required max: 91, T/(U+R) min: 0.489)
+Step 16816: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 50, Required max: 93, T/(U+R) min: 0.794)
+Step 17205: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 142, T/(U+R) min: 0.261)
+Step 17220: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 11, Required max: 91, T/(U+R) min: 0.121)
+Step 17315: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 60, Required max: 184, T/(U+R) min: 0.522)
+Step 17320: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 92, Required max: 98, T/(U+R) min: 0.939)
+Step 17557: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 116, Required max: 151, T/(U+R) min: 0.768)
+Step 17741: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 40, Required max: 182, T/(U+R) min: 0.22)
+Step 17760: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 107, Required max: 179, T/(U+R) min: 0.844)
+Step 17766: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 73, T/(U+R) min: 0.508)
+Step 17783: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 36, Required max: 128, T/(U+R) min: 0.281)
+Step 17794: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 40, Required max: 174, T/(U+R) min: 0.23)
+Step 17903: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 46, Required max: 184, T/(U+R) min: 0.609)
+Step 18058: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 35, Required max: 124, T/(U+R) min: 0.444)
+Step 18079: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 64, Required max: 183, T/(U+R) min: 0.836)
+Step 18122: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 50, Required max: 179, T/(U+R) min: 0.464)
+Step 18381: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 79, Required max: 166, T/(U+R) min: 0.687)
+Step 18432: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 53, Required max: 85, T/(U+R) min: 0.646)
+Step 18452: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 63, T/(U+R) min: 0.587)
+Step 18471: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 53, Required max: 166, T/(U+R) min: 0.319)
+Step 18676: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 46, Required max: 186, T/(U+R) min: 0.414)
+Step 18721: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 68, Required max: 81, T/(U+R) min: 0.907)
+Step 18735: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 18, Required max: 80, T/(U+R) min: 0.305)
+Step 18829: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 95, Required max: 218, T/(U+R) min: 0.931)
+Step 18840: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 24, Required max: 86, T/(U+R) min: 0.511)
+Step 18886: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 88, Required max: 163, T/(U+R) min: 0.926)
+Step 18993: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 50, T/(U+R) min: 0.833)
+Step 19068: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 64, Required max: 243, T/(U+R) min: 0.872)
+Step 19074: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 46, Required max: 73, T/(U+R) min: 0.658)
+Step 19129: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 35, Required max: 125, T/(U+R) min: 0.28)
+Step 19143: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 11, Required max: 63, T/(U+R) min: 0.175)
+Step 19204: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 61, Required max: 89, T/(U+R) min: 0.685)
+Step 19208: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 96, T/(U+R) min: 0.468)
+Step 19244: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 48, Required max: 166, T/(U+R) min: 0.8)
+Step 19339: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 50, Required max: 85, T/(U+R) min: 0.909)
+Step 19355: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 57, Required max: 184, T/(U+R) min: 0.391)
+Step 19377: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 179, T/(U+R) min: 0.173)
+Step 19555: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 88, Required max: 162, T/(U+R) min: 0.543)
+Step 19696: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 33, Required max: 72, T/(U+R) min: 0.6)
+Step 19715: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 68, Required max: 188, T/(U+R) min: 0.92)
+Step 19729: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 15, Required max: 91, T/(U+R) min: 0.5)
+Step 19738: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 43, Required max: 151, T/(U+R) min: 0.318)
+Step 19749: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 74, Required max: 193, T/(U+R) min: 0.383)
+Step 19765: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 11, Required max: 186, T/(U+R) min: 0.059)
+Step 19865: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 26, Required max: 72, T/(U+R) min: 0.788)
+Step 19897: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 68, Required max: 170, T/(U+R) min: 0.4)
+Step 19914: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 42, Required max: 83, T/(U+R) min: 0.808)
+Step 19930: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 40, Required max: 99, T/(U+R) min: 0.404)
+Step 19967: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 72, T/(U+R) min: 0.841)
+Step 20221: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 50, Required max: 84, T/(U+R) min: 0.833)
+Step 20295: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 70, Required max: 184, T/(U+R) min: 0.854)
+Step 20367: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 89, T/(U+R) min: 0.507)
+Step 20374: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 168, T/(U+R) min: 0.119)
+Step 20553: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 55, Required max: 83, T/(U+R) min: 0.932)
+Step 20666: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 92, Required max: 180, T/(U+R) min: 0.994)
+Step 20708: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 72, T/(U+R) min: 0.569)
+Step 20709: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 50, Required max: 100, T/(U+R) min: 0.633)
+Step 20747: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 46, Required max: 95, T/(U+R) min: 0.852)
+Step 20781: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 83, Required max: 188, T/(U+R) min: 0.527)
+Step 20789: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 29, Required max: 150, T/(U+R) min: 0.193)
+Step 20850: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 98, T/(U+R) min: 0.481)
+Step 20893: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 57, Required max: 88, T/(U+R) min: 0.77)
+Step 20898: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 93, T/(U+R) min: 0.241)
+Step 20915: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 24, Required max: 176, T/(U+R) min: 0.136)
+Step 20984: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 48, Required max: 98, T/(U+R) min: 0.842)
+Step 21069: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 240, T/(U+R) min: 0.083)
+Step 21069: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 18, Required max: 133, T/(U+R) min: 0.135)
+Step 21128: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 90, Required max: 171, T/(U+R) min: 0.982)
+Step 21224: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 76, T/(U+R) min: 0.289)
+Step 21282: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 84, T/(U+R) min: 0.925)
+Step 21351: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 26, Required max: 61, T/(U+R) min: 0.473)
+Step 21445: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 85, Required max: 215, T/(U+R) min: 0.395)
+Step 21481: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 15, Required max: 177, T/(U+R) min: 0.221)
+Step 21567: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 119, T/(U+R) min: 0.597)
+Step 21572: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 15, Required max: 69, T/(U+R) min: 0.25)
+Step 21592: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 40, Required max: 100, T/(U+R) min: 0.767)
+Step 21628: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 64, Required max: 83, T/(U+R) min: 0.842)
+Step 21710: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 61, Required max: 179, T/(U+R) min: 0.743)
+Step 21811: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 101, Required max: 180, T/(U+R) min: 0.622)
+Step 21982: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 68, Required max: 93, T/(U+R) min: 0.796)
+Step 22063: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 15, Required max: 156, T/(U+R) min: 0.096)
+Step 22091: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 59, Required max: 165, T/(U+R) min: 0.915)
+Step 22196: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 64, Required max: 102, T/(U+R) min: 0.853)
+Step 22367: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 40, Required max: 141, T/(U+R) min: 0.702)
+Step 22446: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 77, Required max: 182, T/(U+R) min: 0.555)
+Step 22532: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 15, Required max: 76, T/(U+R) min: 0.882)
+Step 22594: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 75, T/(U+R) min: 0.674)
+Step 22799: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 57, Required max: 247, T/(U+R) min: 0.648)
+Step 22900: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 37, Required max: 180, T/(U+R) min: 0.206)
+Step 22947: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 13, Required max: 71, T/(U+R) min: 0.232)
+Step 22985: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 64, Required max: 184, T/(U+R) min: 0.902)
+Step 22985: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 35, Required max: 89, T/(U+R) min: 0.402)
+Step 23007: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 64, Required max: 90, T/(U+R) min: 0.933)
+Step 23102: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 96, Required max: 182, T/(U+R) min: 0.912)
+Step 23123: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 24, Required max: 153, T/(U+R) min: 0.157)
+Step 23123: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 42, Required max: 110, T/(U+R) min: 0.382)
+Step 23193: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 40, Required max: 186, T/(U+R) min: 0.526)
+Step 23205: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 48, Required max: 217, T/(U+R) min: 0.696)
+Step 23307: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 77, Required max: 177, T/(U+R) min: 0.655)
+Step 23563: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 42, Required max: 68, T/(U+R) min: 0.764)
+Step 23583: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 48, Required max: 79, T/(U+R) min: 0.937)
+Step 23592: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 79, Required max: 169, T/(U+R) min: 0.852)
+Step 23621: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 77, Required max: 95, T/(U+R) min: 0.819)
+Step 23851: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 64, Required max: 179, T/(U+R) min: 0.358)
+Step 23970: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 26, Required max: 148, T/(U+R) min: 0.325)
+Step 23983: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 81, Required max: 107, T/(U+R) min: 0.794)
+Step 24008: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 57, Required max: 70, T/(U+R) min: 0.95)
+Step 24182: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 69, T/(U+R) min: 0.939)
+Step 24276: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 64, Required max: 121, T/(U+R) min: 0.529)
+Step 24328: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 24, Required max: 86, T/(U+R) min: 0.308)
+Step 24332: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 88, T/(U+R) min: 0.889)
+Step 24426: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 116, T/(U+R) min: 0.204)
+Step 24440: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 18, Required max: 149, T/(U+R) min: 0.121)
+Step 24525: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 53, Required max: 89, T/(U+R) min: 0.791)
+Step 24731: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 11, Required max: 82, T/(U+R) min: 0.208)
+Step 24856: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 11, Required max: 67, T/(U+R) min: 0.458)
+Step 24985: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 13, Required max: 83, T/(U+R) min: 0.157)
+Step 25133: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 61, Required max: 85, T/(U+R) min: 0.762)
+Step 25141: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 76, T/(U+R) min: 0.484)
+Step 25171: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 74, Required max: 193, T/(U+R) min: 0.803)
+Step 25218: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 26, Required max: 71, T/(U+R) min: 0.553)
+Step 25238: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 72, Required max: 210, T/(U+R) min: 0.967)
+Step 25394: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 81, Required max: 218, T/(U+R) min: 0.624)
+Step 25447: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 61, Required max: 96, T/(U+R) min: 0.635)
+Step 25500: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 35, Required max: 109, T/(U+R) min: 0.565)
+Step 25644: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 26, Required max: 108, T/(U+R) min: 0.241)
+Step 25740: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 57, Required max: 169, T/(U+R) min: 0.893)
+Step 25838: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 22, Required max: 73, T/(U+R) min: 0.786)
+Step 25875: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 42, Required max: 104, T/(U+R) min: 0.404)
+Step 26033: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 20, Required max: 108, T/(U+R) min: 0.235)
+Step 26093: NaN or Inf loss encountered! Skipping batch.
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 46, Required max: 78, T/(U+R) min: 0.958)
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 61, Required max: 157, T/(U+R) min: 0.389)
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 35, Required max: 152, T/(U+R) min: 0.23)
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 31, Required max: 191, T/(U+R) min: 0.162)
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 33, Required max: 163, T/(U+R) min: 0.202)
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 66, Required max: 159, T/(U+R) min: 0.522)
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 66, Required max: 151, T/(U+R) min: 0.901)
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 57, Required max: 171, T/(U+R) min: 0.333)
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 88, Required max: 155, T/(U+R) min: 0.948)
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 11, Required max: 88, T/(U+R) min: 0.125)
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 35, Required max: 118, T/(U+R) min: 0.297)
+CTC Feasibility Warning: 7/8 samples (87.5%) feasible. 1 violations! (T_out min: 42, Required max: 155, T/(U+R) min: 0.271)
+slurmstepd-gpu08.slurm.cpe.kmutt.ac.th: error: *** JOB 21628 ON gpu08.slurm.cpe.kmutt.ac.th CANCELLED AT 2026-10-17T03:44:01 DUE TO TIME LIMIT ***

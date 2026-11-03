@@ -1,0 +1,93 @@
+=== Host ===
+Job executed on: gpu08.slurm.cpe.kmutt.ac.th
+Job started on: Wed Oct 14 12:45:34 PM +07 2026
+Mode: SMOKE TEST
+=== Python ===
+uv location: /storage/slurm/home/69070701619@cpe.kmutt.ac.th/.local/bin/uv
+Python version: Python 3.12.3
+=== GPU ===
+Failed to initialize NVML: Driver/library version mismatch
+NVML library version: 580.178
+WARNING: nvidia-smi failed on gpu08.slurm.cpe.kmutt.ac.th
+CUDA OK: NVIDIA L40
+=== Execution ===
+[PIPELINE] >>> Step 1: Download Data
+======================================================================
+ [Step 1] Download Porjai Thai Dataset
+ Repo ID:    CMKL/Porjai-Thai-voice-dataset-central
+ Target Dir: /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/data_cache/raw_porjai
+======================================================================
+[INFO] Data not found locally. Proceeding to download from Hugging Face Hub...
+--> Initiating snapshot download for 'CMKL/Porjai-Thai-voice-dataset-central' into '/storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/data_cache/raw_porjai'...
+--> Download successfully completed! Files stored at: /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/data_cache/raw_porjai
+======================================================================
+[SUCCESS] Step 1 finished. Data is ready in: /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/data_cache/raw_porjai
+======================================================================
+[PIPELINE] >>> Step 2: Prepare Data
+======================================================================
+ [Step 2] Prepare Porjai Thai Dataset Manifests
+ Config:      /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/configs/data/porjai.yaml
+ Max Samples: 500 (0 = all)
+ Output Dir:  /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/data_cache/porjai
+======================================================================
+[INFO] Running data preparation pipeline...
+[2026-10-14 12:46:46] [INFO] [prepare_data:39]: Preparing Porjai dataset: output_dir=/storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/data_cache/porjai, max_samples=500
+[2026-10-14 12:48:17] [INFO] [prepare_data:56]: Saved Thai character vocabulary (109 tokens) to: /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/data_cache/porjai/vocab.json
+[2026-10-14 12:48:17] [INFO] [prepare_data:58]: Data preparation completed successfully.
+======================================================================
+[SUCCESS] Step 2 finished. Manifests & vocab ready in: /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/data_cache/porjai
+======================================================================
+[PIPELINE] >>> Step 3: Thai SSL Pretraining
+======================================================================
+ [Step 3] Thai Audio-JEPA SSL Continued Pretraining
+ Config: /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/configs/experiment/smoke_ssl.yaml
+======================================================================
+[2026-10-14 12:48:51] [INFO] [adapt_ssl:64]: Configured SSL frontend 'original': token_rate=25.60 fps, output_interval=39.06 ms, max_tokens=254
+[2026-10-14 12:49:04] [INFO] [adapt_ssl:126]: Pretrained checkpoint transferred: 99.99% weights initialized.
+[2026-10-14 12:49:38] [INFO] [adapt_ssl:164]: Thai SSL Adaptation completed successfully. Final loss: 0.5103
+======================================================================
+[SUCCESS] Step 3 finished. Adapted encoder saved to output directory.
+======================================================================
+[PIPELINE] >>> Step 4: Supervised ASR Training
+======================================================================
+ [Step 4] Supervised Audio-JEPA + CTC Thai ASR Training
+ Config: /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/configs/experiment/smoke.yaml
+======================================================================
+[2026-10-14 12:49:48] [INFO] [train_asr:66]: Configured frontend 'original': token_rate=25.60 fps, output_interval=39.06 ms, max_tokens=254
+[2026-10-14 12:49:48] [INFO] [train_asr:166]: Initializing encoder via transfer learning from ltuncay/Audio-JEPA (patch_size=(1, 16))
+[2026-10-14 12:49:50] [INFO] [train_asr:188]: Model parameters: {'total_parameters': 86725741, 'trainable_parameters': 86725741, 'encoder_trainable': 86641920, 'backbone_trainable': 85054464, 'patch_embed_trainable': 13056, 'head_trainable': 83821}
+[2026-10-14 12:50:16] [INFO] [train_asr:225]: ASR training completed successfully. Best val CER: 1.0
+======================================================================
+[SUCCESS] Step 4 finished. ASR model training completed.
+======================================================================
+[PIPELINE] >>> Step 5: Evaluation
+======================================================================
+ [Step 5] Evaluate Thai ASR Model
+ Checkpoint: outputs/runs/smoke_ctc/checkpoints/best_checkpoint.pt
+ Split:      val
+ Config:     /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/configs/experiment/evaluate.yaml
+======================================================================
+[2026-10-14 12:50:20] [INFO] [evaluate:70]: Loading checkpoint from: outputs/runs/smoke_ctc/checkpoints/best_checkpoint.pt
+[2026-10-14 12:50:21] [INFO] [evaluate:111]: Running evaluation on val.jsonl (38 samples)...
+======================================================================
+EVALUATION RESULTS (VAL SPLIT)
+======================================================================
+CER:  100.00%
+WER:  100.00%
+Loss: 3.6756
+Total Reference Characters: 1534
+Total Reference Words:      307
+Results saved to:           outputs/runs/smoke_ctc/eval
+----------------------------------------------------------------------
+Sample Model Predictions:
+  [1] Ref:  เงียบ เรียบร้อย งอน แล้ว น่ารัก แบบนี้ หาไม่ ได้ แล้ว อ่ะ น่าสงสาร หมอ แพร
+      Hyp:  
+  [2] Ref:  เป็นเรื่อง ดี ที่ เขา เลิก มีอคติ กับ มนุษย์ เมื่อ ฮา เด ส สำรวจ จน พอใจ จึง เลิก จ้อง ในที่สุด
+      Hyp:  
+  [3] Ref:  คอนโทรล ภาพยนตร์
+      Hyp:  
+======================================================================
+======================================================================
+[SUCCESS] Step 5 finished. Evaluation metrics (CER/WER) generated.
+======================================================================
+Job finished on: Wed Oct 14 12:50:24 PM +07 2026 (Elapsed: 273s)

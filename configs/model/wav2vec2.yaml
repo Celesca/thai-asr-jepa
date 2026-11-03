@@ -1,0 +1,8 @@
+model:
+  type: "wav2vec2"
+  model_name: "facebook/wav2vec2-base"
+  embed_dim: 768
+  sample_rate: 16000
+  freeze_feature_extractor: true
+  temporal_adapter_mode: "identity"
+  head_dropout: 0.1

@@ -1,0 +1,62 @@
+\section{Methodology}
+\label{sec:method}
+
+\subsection{Research Design}
+We propose a two-stage recognizer, denoted TAJA-CTC: self-supervised representation learning from Thai speech, followed by supervised character prediction with connectionist temporal classification (CTC) \cite{graves2006ctc}. Figure~\ref{fig:taja} distinguishes the pretraining graph from the transcription path. This section specifies a proposed implementation; no training outcomes are claimed. The central hypothesis is that masked latent prediction improves label efficiency relative to an identical encoder trained only with CTC.
+
+Audio-JEPA uses an EMA target network and a predictor to learn from masked spectrogram patches \cite{tuncay2025audiojepa}. Its reported frontend has 256 time bins per 10-second clip and a patch width of 16 bins. Thus, we estimate only 16 temporal positions per clip, approximately 625~ms apart. Pooling across frequency would retain this coarse timing, while flattening frequency positions would not create additional acoustic time steps. We therefore replace the two-dimensional patch grid with full-frequency, short-duration speech tokens. This is an adaptation of the Audio-JEPA objective and Transformer backbone, rather than a reproduction of its original frontend.
+
+\input{figures/taja_architecture}
+
+\subsection{Acoustic Frontend and Temporal Encoder}
+Audio will be converted to mono at 16~kHz. We will compute 80 log-Mel bands using a 400-sample Hann window, 160-sample hop, 512-point FFT, and a 0--8~kHz Mel filterbank. Power values will be floored at $10^{-10}$ before taking the natural logarithm. Per-band mean and variance will be estimated on training audio only and reused for validation and testing.
+
+Let $X\in\mathbb{R}^{80\times F}$ denote the normalized features. A two-dimensional convolution with kernel and stride $(80,2)$ and 768 output channels will project each non-overlapping pair of frames into one full-frequency token. Equivalently, a learned affine map projects each 160-dimensional frame pair to 768 dimensions. An odd final frame will be zero-padded, giving $T=\lceil F/2\rceil$ tokens at a nominal 20~ms stride; batch padding beyond these valid tokens is excluded by length masks. This explicit frequency-to-feature projection preserves temporal order without averaging the utterance. The 25~ms analysis windows overlap locally; masking therefore removes token inputs, not every waveform sample contributing to neighboring windows.
+
+The context encoder contains 12 pre-layer-normalized Transformer blocks, width 768, 12 attention heads, and feed-forward width 3072. These dimensions permit transfer of compatible Audio-JEPA Transformer blocks. One-dimensional sinusoidal positions replace the original two-dimensional positions. There is no classification token or global temporal pooling. A padding mask excludes invalid time steps from self-attention and all losses. The model is bidirectional and intended for offline transcription; streaming latency is outside this experiment.
+
+\subsection{Thai Speech JEPA Pretraining}
+Write $P_\theta$ for the projection stem and $E_\theta$ for the context Transformer. A target copy $(P_{\bar\theta},E_{\bar\theta})$ starts with identical parameters. For each training crop, a temporal mask $M$ will cover approximately 50\% of valid tokens using non-overlapping spans of five tokens, corresponding to 100~ms. A final span may be shortened to meet the mask count. The context Transformer receives only visible tokens with their original positions. The target network receives the complete, uncorrupted sequence.
+
+The predictor projects context outputs to width 384, restores masked positions with learned mask tokens, adds their temporal positions, and processes the ordered sequence using six Transformer blocks with 12 heads and feed-forward width 1536. A final linear projection returns 768-dimensional predictions. Let $z_t$ be the target encoder's last-layer output and $\hat z_t$ the predictor output. Our primary objective is normalized latent regression:
+\begin{equation}
+\mathcal{L}_{\mathrm{J}}=
+\frac{1}{|M|d}\sum_{t\in M}
+\left\|\operatorname{LN}(\hat z_t)-
+\operatorname{sg}\!\left[\operatorname{LN}(z_t)\right]\right\|_2^2,
+\label{eq:jepa}
+\end{equation}
+where $d=768$, $\operatorname{sg}$ stops gradients, and $\operatorname{LN}$ standardizes each token across channels without learned affine parameters. Normalization and temporal-span masking are proposed speech adaptations; random-token masking is evaluated separately. Only the context branch and predictor receive gradients. After each optimizer update, both the target stem and target Transformer are updated by
+\begin{equation}
+\bar\theta\leftarrow\tau_s\bar\theta+(1-\tau_s)\theta,
+\qquad
+\tau_s=1-(1-0.996)\frac{1+\cos(\pi s/S)}{2},
+\end{equation}
+where $s$ is the update index and $S$ is the pretraining budget. Target dropout is disabled. Padded tokens are excluded from mask sampling and target statistics.
+
+EMA and normalization do not by themselves establish non-collapse. We will record per-channel standard deviations across unpadded target tokens, effective covariance rank, gradient norms, and held-out JEPA loss. Low regression loss accompanied by near-constant embeddings will be reported as a failed representation-learning run. The predeclared acoustic-grounding ablation below tests an additional stabilization mechanism; it is not silently substituted for the primary objective.
+
+\subsection{Initialization and Checkpoint Transfer}
+The primary experiment initializes the proposed architecture randomly and pretrains it on the fixed Thai audio pool. A separate transfer experiment will load compatible attention, feed-forward, and layer-normalization weights from an official Audio-JEPA checkpoint, if obtainable from the authors' implementation \cite{audiojepacode}. The new input stem and temporal positions are not loaded from the original patch embedding. The target is copied from the initialized context network, and the predictor is initialized afresh. A parameter-name and shape audit will record every loaded and skipped tensor. Because the public repository does not currently provide a usable checkpoint link, this transfer comparison is conditional; the from-scratch Thai JEPA experiment does not depend on its availability.
+
+\subsection{Supervised CTC Adaptation and Decoding}
+After pretraining, the context stem and encoder will be retained; the target branch and predictor will be removed. Unlike the original Audio-JEPA frozen-target evaluation, our downstream choice is the context encoder. A dropout layer with probability 0.1 and a linear classifier produce one distribution over $\mathcal{V}\cup\{\varnothing\}$ per time step, where $\varnothing$ is the CTC blank. For transcript $y$, training minimizes
+\begin{equation}
+\mathcal{L}_{\mathrm{CTC}}=-\log
+\sum_{\pi\in\mathcal{B}^{-1}(y)}
+\prod_{t=1}^{T}p(\pi_t\mid x).
+\end{equation}
+The CTC map $\mathcal{B}$ first merges consecutive identical path labels and then removes blanks \cite{graves2006ctc}. For a target of length $U$ with $R$ adjacent repeated label pairs, we require $T\ge U+R$. Invalid examples will be logged and counted; they will not be concealed by replacing infinite losses with zero. Any training exclusions will be applied to all comparison systems.
+
+Output units are Unicode code points, not word tokens or grapheme clusters. A fixed inventory will include assigned Thai letters, vowels, tone marks and orthographic symbols, ASCII letters and digits, Thai digits, one space token, and an unknown token. Its exact code-point list will be saved before inspecting held-out transcripts. Unsupported symbols map to the unknown token during training; their frequency is reported, and evaluation references retain their normalized characters so that unsupported characters still incur errors.
+
+Text will use Unicode NFC, lowercase Latin letters, and collapsed whitespace. Thai combining vowels and tone marks, numerals, abbreviations, and the repetition mark will be preserved. A versioned list will remove sentence punctuation; no context-dependent number verbalization or repetition expansion is assumed. The same rules apply to labels and decoded text. Primary decoding is greedy CTC. A secondary prefix beam search with beam width 50 and no language model will isolate search effects. No external text or pretrained language model enters the principal results.
+
+\subsection{Optional Acoustic-Grounding Ablation}
+Motivated by speech JEPA work using soft clustering anchors \cite{ioannides2026gmmjepa}, we will fit a 100-component diagonal-covariance Gaussian mixture model (GMM) to at most one million normalized training log-Mel frames, sampled with a fixed seed. Adjacent-frame posterior averages provide $q_t$ on the 20~ms grid. An auxiliary linear head on the predictor outputs $r_t$, and training uses
+\begin{equation}
+\mathcal{L}=\mathcal{L}_{\mathrm{J}}+
+\lambda_s\frac{1}{|M|}\sum_{t\in M}
+D_{\mathrm{KL}}(q_t\|r_t),
+\end{equation}
+with $\lambda_s=0.1\max(0,1-2s/S)$. The GMM uses no transcripts or held-out audio and stays fixed. This is our specified auxiliary variant, not an exact reproduction of GMM-JEPA or S-JEPA. Its head is discarded before CTC adaptation.

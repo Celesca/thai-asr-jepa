@@ -1,0 +1,40 @@
+=== Host ===
+Job executed on: gpu08.slurm.cpe.kmutt.ac.th
+Job started on: Thu Oct 15 11:32:10 AM +07 2026
+Mode: FULL RUN
+=== Python ===
+uv location: /storage/slurm/home/69070701619@cpe.kmutt.ac.th/.local/bin/uv
+Python version: Python 3.12.3
+=== GPU ===
+Thu Oct 15 11:32:13 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40                     Off |   00000000:00:11.0 Off |                    0 |
+| N/A   32C    P8             27W /  300W |      14MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            1874      G   /usr/lib/xorg/Xorg                        4MiB |
++-----------------------------------------------------------------------------------------+
+CUDA OK: NVIDIA L40
+=== Execution ===
+[PIPELINE] >>> Skipping Step 1 (Download Data)
+[PIPELINE] >>> Skipping Step 2 (Prepare Data)
+[PIPELINE] >>> Step 3: Thai SSL Pretraining
+======================================================================
+ [Step 3] Thai Audio-JEPA SSL Continued Pretraining
+ Config: configs/experiment/exp_C_ssl_pretrain.yaml
+ Extra:  --resume outputs/runs/exp_C_ssl_pretrain/checkpoints/ssl_epoch_3.pt
+======================================================================
+[2026-10-15 11:33:01] [INFO] [adapt_ssl:64]: Configured SSL frontend 'original': token_rate=25.60 fps, output_interval=39.06 ms, max_tokens=254
+[2026-10-15 11:33:09] [INFO] [adapt_ssl:126]: Pretrained checkpoint transferred: 99.99% weights initialized.

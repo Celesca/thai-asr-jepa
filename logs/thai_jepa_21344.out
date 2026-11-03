@@ -1,0 +1,35 @@
+=== Host ===
+Job executed on: gpu08.slurm.cpe.kmutt.ac.th
+Job started on: Wed Oct 14 02:00:56 PM +07 2026
+Mode: FULL RUN
+=== Python ===
+uv location: /storage/slurm/home/69070701619@cpe.kmutt.ac.th/.local/bin/uv
+Python version: Python 3.12.3
+=== GPU ===
+Failed to initialize NVML: Driver/library version mismatch
+NVML library version: 580.178
+WARNING: nvidia-smi failed on gpu08.slurm.cpe.kmutt.ac.th
+CUDA OK: NVIDIA L40
+=== Execution ===
+[PIPELINE] >>> Skipping Step 1 (Download Data)
+[PIPELINE] >>> Step 2: Prepare Data
+======================================================================
+ [Step 2] Prepare Porjai Thai Dataset Manifests
+ Config:      /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/configs/data/porjai.yaml
+ Max Samples: 0 (0 = all)
+ Output Dir:  /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/data_cache/porjai
+======================================================================
+[INFO] Running data preparation pipeline...
+[2026-10-14 14:01:03] [INFO] [prepare_data:39]: Preparing Porjai dataset: output_dir=/storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/data_cache/porjai, max_samples=0
+[2026-10-14 14:51:47] [INFO] [prepare_data:56]: Saved Thai character vocabulary (109 tokens) to: /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/data_cache/porjai/vocab.json
+[2026-10-14 14:51:47] [INFO] [prepare_data:58]: Data preparation completed successfully.
+======================================================================
+[SUCCESS] Step 2 finished. Manifests & vocab ready in: /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/data_cache/porjai
+======================================================================
+[PIPELINE] >>> Step 3: Thai SSL Pretraining
+======================================================================
+ [Step 3] Thai Audio-JEPA SSL Continued Pretraining
+ Config: configs/experiment/exp_C_ssl_pretrain.yaml
+======================================================================
+[2026-10-14 14:51:53] [INFO] [adapt_ssl:64]: Configured SSL frontend 'original': token_rate=25.60 fps, output_interval=39.06 ms, max_tokens=254
+[2026-10-14 14:51:57] [INFO] [adapt_ssl:126]: Pretrained checkpoint transferred: 99.99% weights initialized.

@@ -1,0 +1,77 @@
+=== Host ===
+Job executed on: gpu08.slurm.cpe.kmutt.ac.th
+Job started on: Tue Oct 27 10:32:34 PM +07 2026
+Mode: FULL RUN
+=== Python ===
+uv location: /storage/slurm/home/69070701619@cpe.kmutt.ac.th/.local/bin/uv
+Python version: Python 3.12.3
+=== GPU ===
+Tue Oct 27 22:32:34 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40                     Off |   00000000:00:11.0 Off |                    0 |
+| N/A   29C    P8             35W /  300W |      14MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A            1874      G   /usr/lib/xorg/Xorg                        4MiB |
++-----------------------------------------------------------------------------------------+
+CUDA OK: NVIDIA L40
+=== Execution ===
+[PIPELINE] >>> Skipping Step 1 (Download Data)
+[PIPELINE] >>> Skipping Step 2 (Prepare Data)
+[PIPELINE] >>> Skipping Step 3 (Thai SSL Pretraining)
+[PIPELINE] >>> Step 4: Supervised ASR Training
+======================================================================
+ [Step 4] Supervised Audio-JEPA + CTC Thai ASR Training
+ Config: configs/experiment/exp_C_thai_ssl_ctc.yaml
+ Extra:  --resume outputs/runs/exp_C_thai_ssl_ctc/checkpoints/checkpoint_latest.pt
+======================================================================
+[2026-10-27 22:32:43] [INFO] [train_asr:66]: Configured frontend 'original': token_rate=25.60 fps, output_interval=39.06 ms, max_tokens=254
+[2026-10-27 22:32:45] [INFO] [train_asr:158]: Initializing encoder from Thai SSL adapted weights: outputs/runs/exp_C_ssl_pretrain/checkpoints/adapted_encoder.pt
+[2026-10-27 22:32:46] [INFO] [train_asr:192]: Model parameters: {'total_parameters': 86725741, 'trainable_parameters': 86725741, 'encoder_trainable': 86641920, 'backbone_trainable': 85054464, 'patch_embed_trainable': 13056, 'head_trainable': 83821}
+[2026-10-28 03:42:59] [INFO] [train_asr:229]: ASR training completed successfully. Best val CER: 0.2308
+======================================================================
+[SUCCESS] Step 4 finished. ASR model training completed.
+======================================================================
+[PIPELINE] >>> Step 5: Evaluation
+======================================================================
+ [Step 5] Evaluate Thai ASR Model
+ Checkpoint: outputs/runs/exp_C_thai_ssl_ctc/checkpoints/best_checkpoint.pt
+ Split:      val
+ Config:     /storage/slurm/home/69070701619@cpe.kmutt.ac.th/Audio-JEPATHAI/configs/experiment/evaluate.yaml
+======================================================================
+[2026-10-28 03:43:04] [INFO] [evaluate:70]: Loading checkpoint from: outputs/runs/exp_C_thai_ssl_ctc/checkpoints/best_checkpoint.pt
+[2026-10-28 03:43:05] [INFO] [evaluate:111]: Running evaluation on val.jsonl (26243 samples)...
+======================================================================
+EVALUATION RESULTS (VAL SPLIT)
+======================================================================
+CER:  23.08%
+WER:  77.44%
+Loss: inf
+Total Reference Characters: 1341111
+Total Reference Words:      264513
+Results saved to:           outputs/runs/exp_C_thai_ssl_ctc/eval
+----------------------------------------------------------------------
+Sample Model Predictions:
+  [1] Ref:  เงียบ เรียบร้อย งอน แล้ว น่ารัก แบบนี้ หาไม่ ได้ แล้ว อ่ะ น่าสงสาร หมอ แพร
+      Hyp:  
+  [2] Ref:  เป็นเรื่อง ดี ที่ เขา เลิก มีอคติ กับ มนุษย์ เมื่อ ฮา เด ส สำรวจ จน พอใจ จึง เลิก จ้อง ในที่สุด
+      Hyp:  
+  [3] Ref:  คอนโทรล ภาพยนตร์
+      Hyp:  
+======================================================================
+======================================================================
+[SUCCESS] Step 5 finished. Evaluation metrics (CER/WER) generated.
+======================================================================
+Job finished on: Wed Oct 28 03:58:41 AM +07 2026 (Elapsed: 19564s)
